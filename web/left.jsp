@@ -4,6 +4,7 @@
     Author     : FPTSHOP
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,10 +26,14 @@
                 Danh mục sản phẩm
             </div>
             <div class="aside-box">
-                <div class="aside-menu-item ">
-                    <a href="https://monatabluelight.com/shirt-pc7.html">Áo sơ mi (Shirt)</a>
-                </div>
-                <div class="aside-menu-item ">
+                
+                <c:forEach items="${listC}" var="o">
+                    <div class="aside-menu-item  ${((tag == o.categoryID )? "selected" : "")}">
+                        <a href="category?categoryID=${o.categoryID}">${o.categoryName}</a>
+                    </div>
+                </c:forEach>
+                
+<!--                <div class="aside-menu-item ">
                     <a href="https://monatabluelight.com/short-pants-pc10.html">Quần Shorts</a>
                 </div>
                 <div class="aside-menu-item ">
@@ -48,16 +53,19 @@
                 </div>
                 <div class="aside-menu-item ">
                     <a href="https://monatabluelight.com/phu-kien-pc3.html">Phụ kiện ( Vớ tất, Balo)</a>
-                </div>
+                </div>-->
             </div>
             <div class="aside-heading">
                 TRẠNG THÁI
             </div>
             <div class="aside-box">
-                <div class="aside-menu-item ">
-                    <a href="/san-pham.html?status=3">OUTLET SALE</a>
+                <c:forEach items="${listS}" var="o">
+                <div class="aside-menu-item  ${((tagForStatus ==  o.statusName)? "selected" : "")}">
+                    <a href="status?statusName=${o.statusName}">${o.statusName}</a>
                 </div>
-                <div class="aside-menu-item ">
+                </c:forEach>
+                
+<!--                <div class="aside-menu-item ">
                     <a href="/san-pham.html?status=2">Online Store</a>
                 </div>
                 <div class="aside-menu-item ">
@@ -74,7 +82,7 @@
                 </div>
                 <div class="aside-menu-item ">
                     <a href="/san-pham.html?status=7">Flash Sale</a>
-                </div>
+                </div>-->
             </div>
 
             <div class="aside-heading">

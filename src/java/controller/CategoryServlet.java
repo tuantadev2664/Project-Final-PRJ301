@@ -22,8 +22,8 @@ import model.Status;
  *
  * @author FPTSHOP
  */
-@WebServlet(name="ListServlet", urlPatterns={"/list"})
-public class ListServlet extends HttpServlet {
+@WebServlet(name="CategoryServlet", urlPatterns={"/category"})
+public class CategoryServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +40,10 @@ public class ListServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListServlet</title>");  
+            out.println("<title>Servlet CategoryServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CategoryServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,14 +60,17 @@ public class ListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String categoryID = request.getParameter("categoryID");
+        
         DAO dao = new DAO();
-        List<Product> list = dao.getAllProduct();
+        List<Product> list = dao.getAllProductByCategoryID(categoryID);
         List<Category> listC = dao.getAllCategory();
         List<Status> listS = dao.getAllStatus();
         
         request.setAttribute("listS", listS);
-        request.setAttribute("listP", list);
         request.setAttribute("listC", listC);
+        request.setAttribute("listP", list);
+        request.setAttribute("tag", categoryID);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     } 
 
