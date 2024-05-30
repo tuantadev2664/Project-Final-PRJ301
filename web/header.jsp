@@ -21,7 +21,7 @@
     </head>
     <body style="padding-top: 0px;">
         <div class="header-top">
-            <a class="logo" href="#"> <!--https://monatabluelight.com/-->
+            <a class="logo" href="listsample"> <!--https://monatabluelight.com/-->
                 <img src="images/Premium Vector _ Men's fashion store logo design template_vector illustration.jpg">
                 <span>®</span>
             </a>
@@ -61,11 +61,11 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
                                 <li class="menu-10   dropdown">
-                                    <a target="_self" href="#" title="Sản phẩm">Sản phẩm</a>
+                                    <a target="_self" href="list" title="Sản phẩm">Sản phẩm</a>
                                     <!--https://monatabluelight.com/san-pham.html-->
                                 </li>
                                 <li class="menu-11   dropdown">
-                                    <a target="_self" href="#" title="Sale off">Sale off</a>
+                                    <a target="_self" href="status?statusName=OUTLET%20SALE" title="Sale off">Sale off</a>
                                     <!--https://monatabluelight.com/san-pham.html?status=3-->
                                 </li>
                                 <li class="menu-13   dropdown">
@@ -167,7 +167,7 @@
                     <div class="slick-list draggable" style="height: 64px;">
                         <div class="slick-track" style="opacity: 1; width: 196px; transform: translate3d(0px, 0px, 0px);">
                             <div class="text-center slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 196px;">
-                                <a target="_self" href="#" tabindex="0">FREE SHIP ĐƠN HÀNG TỪ 600.000 VND</a>
+                                <a target="_self" href="list" tabindex="0">FREE SHIP ĐƠN HÀNG TỪ 600.000 VND</a>
                                 <!--https://monatabluelight.com//san-pham.html-->
                             </div>
                         </div>

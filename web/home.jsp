@@ -1,6 +1,6 @@
 <%-- 
-    Document   : product.jsp
-    Created on : May 29, 2024, 11:52:04 PM
+    Document   : Home.jsp
+    Created on : May 30, 2024, 10:35:58 AM
     Author     : FPTSHOP
 --%>
 
@@ -25,13 +25,11 @@
         </div>
         <div class="clr"></div>
         
-        <div id='content_tab'>
-            <div class="container products" >
-                <div class="row">
-                <jsp:include page="left.jsp"/>
-                <jsp:include page="list.jsp"/>
-                </div>
-            </div>
+        <div id='banner_tab'>
+            <jsp:include page="banner.jsp"/>
+            <jsp:include page="banner1.jsp"/>
+            <jsp:include page="banner2.jsp"/>
+            <jsp:include page="banner3.jsp"/>
         </div>
             
         <div id="footer_tab">

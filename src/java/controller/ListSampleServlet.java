@@ -14,16 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Category;
 import model.Product;
-import model.Status;
 
 /**
  *
  * @author FPTSHOP
  */
-@WebServlet(name="ListServlet", urlPatterns={"/list"})
-public class ListServlet extends HttpServlet {
+@WebServlet(name="ListSampleServlet", urlPatterns={"/listsample"})
+public class ListSampleServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +38,10 @@ public class ListServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListServlet</title>");  
+            out.println("<title>Servlet ListSampleServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ListSampleServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,16 +58,11 @@ public class ListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        
         DAO dao = new DAO();
-        List<Product> list = dao.getAllProduct();
-        List<Category> listC = dao.getAllCategory();
-        List<Status> listS = dao.getAllStatus();
-        
-        request.setAttribute("listS", listS);
+        List<Product> list = dao.getASampleProduct();
         request.setAttribute("listP", list);
-        request.setAttribute("listC", listC);
-        request.getRequestDispatcher("product.jsp").forward(request, response);
-        
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     } 
 
     /** 
@@ -82,6 +75,7 @@ public class ListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        
         processRequest(request, response);
     }
 

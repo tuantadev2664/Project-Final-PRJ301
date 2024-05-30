@@ -39,6 +39,8 @@
                 </div><!--end: .col-lg-3-->
                 </c:forEach>
             </div><!-- /.row-products-->
+            
+            
 <!--            <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item active">
