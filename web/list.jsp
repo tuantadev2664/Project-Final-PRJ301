@@ -15,6 +15,9 @@
         
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css">
+        
+        <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
+        
     </head>
     <body>
         <div class="col-lg-9">
@@ -26,7 +29,7 @@
                     <div class="product-item">
                         <a class="thumb" href="" title="${o.productName}">
                             <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                            <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(1)}" data-hover="${o.productImages.get(2)}" alt="Tee Tele Bear">
+                            <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${o.productImages.get(1)}" alt="${o.productName}">
                         </a>
                         <h4 class="heading"><a href="" title="${o.productName}">${o.productName}</a></h4>
                         <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->

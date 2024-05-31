@@ -36,6 +36,9 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
+                if(listImages.size() == 1){
+                    listImages.add(listImages.get(0));
+                }
                 list.add(new Product(rs.getString(1), 
                         rs.getString(2), 
                        rs.getString(3), 
@@ -65,6 +68,9 @@ public class DAO {
                 for(String string : data){
                     string = string.replaceAll("'", "");
                     listImages.add(string);
+                }
+                if(listImages.size() == 1){
+                    listImages.add(listImages.get(0));
                 }
                 list.add(new Product(rs.getString(1), 
                         rs.getString(2), 
@@ -116,6 +122,9 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
+                if(listImages.size() == 1){
+                    listImages.add(listImages.get(0));
+                }
                 list.add(new Product(rs.getString(1), 
                         rs.getString(2), 
                        rs.getString(3), 
@@ -166,6 +175,9 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
+                if(listImages.size() == 1){
+                    listImages.add(listImages.get(0));
+                }
                 list.add(new Product(rs.getString(1), 
                         rs.getString(2), 
                        rs.getString(3), 
@@ -183,9 +195,9 @@ public class DAO {
     public static void main(String[] args) {
        DAO dao = new DAO();
        int sum = 0;
-       for(Product product : dao.getAllProductByStatus("Available")){
+       for(Product product : dao.getAllProduct()){
            sum++;
-           System.out.println(product);
+           System.out.println(product.getProductImages().get(1));
        }
         
 //       for(Category category : dao.getAllCategory()){

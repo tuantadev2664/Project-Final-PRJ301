@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Home.jsp
-    Created on : May 30, 2024, 10:35:58 AM
+    Document   : detail
+    Created on : May 30, 2024, 4:08:10 PM
     Author     : FPTSHOP
 --%>
 
@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css">
         
-        
     </head>
     <body >
         <div id="header_tab">
@@ -26,17 +25,13 @@
         </div>
         <div class="clr"></div>
         
-        <div id='banner_tab'>
-            <jsp:include page="banner.jsp"/>
-            <jsp:include page="banner1.jsp"/>
-            <jsp:include page="banner2.jsp"/>
-            <jsp:include page="banner3.jsp"/>
+        <div id='Container product_tab'>
+            
         </div>
             
         <div id="footer_tab">
             <jsp:include page="footer.jsp"/>
         </div>
         <div class="clr"></div>
-        
     </body>
 </html>
