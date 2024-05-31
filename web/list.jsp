@@ -11,8 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="image/x-icon" href="images/Premium Vector _ Men's fashion store logo design template_vector illustration.jpg" rel="icon">
-        
-        
+
+
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css">
         
@@ -50,40 +50,17 @@
                 </div><!--end: .col-lg-3-->
                 </c:forEach>
             </div><!-- /.row-products-->
-            
-            
-<!--            <nav aria-label="Page navigation example">
+
+
+            <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item active">
-                        <font c="" title="Page 1" class="page-link">
-                        <span>1</span>
-                        </font>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" title="Page 2" href="/san-pham/page-2.html">
-                            <span>2</span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" title="Page 3" href="/san-pham/page-3.html">
-                            <span>3</span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" title="Page 4" href="/san-pham/page-4.html">
-                            <span>4</span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" title="Page 5" href="/san-pham/page-5.html">
-                            <span>5</span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" title="Page 6" href="/san-pham/page-6.html">
-                            <span>6</span>
-                        </a>
-                    </li>
+                    <c:forEach begin="1" end="${endP}" var="u">
+                        <li class="page-item ${tagH==u?"active":""}">
+                            <a class="page-link" href="list?index=${u}">
+                                ${u}
+                            </a>
+                        </li>
+                    </c:forEach>
                     <li class="page-item">
                         <b>..</b>
                     </li>
@@ -93,9 +70,9 @@
                         </a>
                     </li>
                 </ul>
-            </nav>    -->
+            </nav>    
         </div><!-- /.col-lg-9-->
-        
+
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/modules/products/assets/js/cat.js?v=1716981831"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/bootstrap.min.js?v=1716981831"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/library.js?v=1716981831"></script>
