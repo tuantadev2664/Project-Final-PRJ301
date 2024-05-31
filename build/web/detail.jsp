@@ -26,7 +26,7 @@
         <div class="clr"></div>
         
         <div id='Container product_tab'>
-            
+            <jsp:include page="product-detail.jsp"/>
         </div>
             
         <div id="footer_tab">

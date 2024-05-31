@@ -76,11 +76,11 @@
                         <swiper-slide > 
                             <div class="banner2-item">
                                 <div class="product-item">
-                                    <a class="thumb" href="" title="${o.productName}">
+                                    <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
                                         <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
                                         <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${o.productImages.get(1)}" alt="Tee Tele Bear">
                                     </a>
-                                    <h4 class="heading"><a href="" title="${o.productName}">${o.productName}</a></h4>
+                                    <h4 class="heading"><a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a></h4>
                                     <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
                                     <div class="info">${o.productStatus}</div>
                                     <div class="price">

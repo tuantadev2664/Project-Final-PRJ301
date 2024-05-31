@@ -14,16 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Category;
 import model.Product;
-import model.Status;
 
 /**
  *
  * @author FPTSHOP
  */
-@WebServlet(name="CategoryServlet", urlPatterns={"/category"})
-public class CategoryServlet extends HttpServlet {
+@WebServlet(name="DetailServlet", urlPatterns={"/detail"})
+public class DetailServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +38,10 @@ public class CategoryServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CategoryServlet</title>");  
+            out.println("<title>Servlet DetailServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CategoryServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DetailServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,46 +58,15 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String categoryID = request.getParameter("categoryID");
-        String statusName = request.getParameter("statusName");
-        
         DAO dao = new DAO();
-        List<Product> list = dao.getAllProductByCategoryID(categoryID);
-//        List<Product> list2 = dao.getAllProductByStatus(statusName);
-//        List<Product> list = null;
-//        if(list1.size()>list2.size() || list2.size()==0&&list1.size()!=0){
-//            for(Product p1: list1){
-//                for(Product p2: list2){
-//                    if(p1.getProductCode().equals(p2.getProductCode()))
-//                        list2.remove(p2);
-//                }
-//            }
-//            list.addAll(list1);
-//            list.addAll(list2);
-//            request.setAttribute("listP", list);
-//        }
-//        if(list2.size()>=list1.size() || list1.size()==0&&list2.size()!=0){
-//           for(Product p2: list2){
-//                for(Product p1: list1){
-//                    if(p2.getProductCode().equals(p1.getProductCode()))
-//                        list1.remove(p1);
-//                }
-//            }
-//           list.addAll(list2);
-//           list.addAll(list1);
-//           request.setAttribute("listP", list);
-//        }
-//        if(list2.size()==0&&list1.size()!=0)
+        String productCode = request.getParameter("productCode");
         
-        List<Category> listC = dao.getAllCategory();
-        List<Status> listS = dao.getAllStatus();
+        Product product = dao.getProductByProductCode(productCode);
+        List<Product> list = dao.getASampleProductByProductCode(productCode);
         
-        request.setAttribute("listS", listS);
-        request.setAttribute("listC", listC);
-        request.setAttribute("listP", list);
-        request.setAttribute("tag", categoryID);
-        request.getRequestDispatcher("product.jsp").forward(request, response);
-        
+        request.setAttribute("listP", product);
+        request.setAttribute("listP1", list);
+        request.getRequestDispatcher("detail.jsp").forward(request, response);
     } 
 
     /** 
