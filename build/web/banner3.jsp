@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="banner-about">
-        </div><div id="block-8" class="block-news block-news-default" style="float:;">
+        </div><div id="block-8" class="block-news block-news-default" style="float:">
             <div class="container">
                 <div class="block-heading">
                     <span class="heading">Tin tức nổi bật</span>
