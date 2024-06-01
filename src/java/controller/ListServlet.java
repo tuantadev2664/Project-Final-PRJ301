@@ -17,6 +17,7 @@ import java.util.List;
 import model.Category;
 import model.Product;
 import model.Status;
+import org.eclipse.jdt.internal.compiler.batch.Main;
 
 /**
  *
@@ -61,17 +62,27 @@ public class ListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         DAO dao = new DAO();
-        List<Product> list = dao.getAllProduct();
+        int total = dao.getNumberProduct();
+        int page = total/12;
+        if(total % 12 != 0){
+            page++;
+        }
+        String indexPage = request.getParameter("index");
+        if(indexPage==null){
+            indexPage="1";
+        }
+        int index = Integer.parseInt(indexPage);
+        List<Product> list = dao.pagingProducts(index);
         List<Category> listC = dao.getAllCategory();
         List<Status> listS = dao.getAllStatus();
-        
         request.setAttribute("listS", listS);
         request.setAttribute("listP", list);
         request.setAttribute("listC", listC);
+        request.setAttribute("endP", page);
+        request.setAttribute("tagH", index);
         request.getRequestDispatcher("product.jsp").forward(request, response);
         
     } 
-
     /** 
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
