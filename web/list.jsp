@@ -56,21 +56,30 @@
                 <ul class="pagination">
                     <c:forEach begin="1" end="${endP}" var="u">
                         <li class="page-item ${tagH==u?"active":""}">
-                            <a class="page-link" href="list?index=${u}">
-                                ${u}
-                            </a>
+                            <c:choose>
+                                <c:when test="${not empty param.categoryID}">
+                                    <a class="page-link" href="category?categoryID=${param.categoryID}&index=${u}">
+                                        ${u}
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="page-link" href="list?index=${u}">
+                                        ${u}
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
                         </li>
                     </c:forEach>
                     <li class="page-item">
                         <b>..</b>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" title="Next page" href="list?index=${tagH}">
+                        <a class="page-link" title="Next page" href="/san-pham/page-2.html">
                             →
                         </a>
                     </li>
                 </ul>
-            </nav>    
+            </nav>  
         </div><!-- /.col-lg-9-->
 
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/modules/products/assets/js/cat.js?v=1716981831"></script>
