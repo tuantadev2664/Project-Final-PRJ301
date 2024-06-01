@@ -83,7 +83,8 @@
                 <div class="col-lg-6">
                     
                     <h1 class="detail-name">
-                        ${listP.productName}                    
+                        ${listP.productName}
+                        <span>[${listP.productSale}]</span>
                     </h1>
                     
                     <div class="row code-status">
