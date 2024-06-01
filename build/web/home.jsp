@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css">
         
+        
     </head>
     <body >
         <div id="header_tab">
@@ -36,5 +37,6 @@
             <jsp:include page="footer.jsp"/>
         </div>
         <div class="clr"></div>
+        
     </body>
 </html>
