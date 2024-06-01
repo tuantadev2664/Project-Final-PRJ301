@@ -39,8 +39,29 @@ public class DAO {
         }
         return 0;
     }
+    
+    public int getNumberProductByCategory(String categoryID) {
+        String sql = "select count(*) from Product \n" +
+                "where categoryID = ?;";
+        int total;
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, categoryID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt(1);
+                return total;
+            }
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return 0;
+    }
 
-    public List<Product> getAllProduct() {
+    public List<Product> getAllProductByCategory() {
         List<Product> list = new ArrayList<>();
         String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImages  from Product order by productCode DESC";
         try {
@@ -150,6 +171,41 @@ public class DAO {
         }
         return list;
     }
+    
+    public  List<Product> pagingProductByCategory(String categoryID,int index){
+        List<Product> proList = new ArrayList<>();
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImages from Product\n" +
+"where categoryID = ? \n" +
+"order by productCode\n" +
+"offset ? rows fetch next 12 rows only;";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, categoryID);
+            st.setInt(2, (index-1)*12);
+            ResultSet rs = st.executeQuery();
+           while (rs.next()) {
+                String imagesString = rs.getString(6);
+                String[] data = imagesString.split(",");
+                List<String> listImages = new ArrayList<>();
+                for (String string : data) {
+                    string = string.replaceAll("'", "");
+                    listImages.add(string);
+                }
+                proList.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
+            }
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return proList;
+    }
 
     public List<Product> getAllProductByCategoryID(String categoryID) {
         List<Product> list = new ArrayList<>();
@@ -244,15 +300,15 @@ public class DAO {
 //           sum++;
 //           System.out.println(category);
 //       }
-        for (Product pro : dao.getAllProduct()) {
-            System.out.println(pro.toString());
-        }
-        System.out.println("------------");
-        List<Product> proList = dao.pagingProducts(8);
-        for (Product product : proList) {
-            System.out.println(product.toString());
-        }
-        System.out.println("sum = " + dao.getNumberProduct());
+//        for (Product pro : dao.getAllProduct()) {
+//            System.out.println(pro.toString());
+//        }
+//        System.out.println("------------");
+//        List<Product> proList = dao.pagingProducts(8);
+//        for (Product product : proList) {
+//            System.out.println(product.toString());
+//        }
+        System.out.println("sum = " + dao.getNumberProductByCategory("C01"));
     }
 
 }
