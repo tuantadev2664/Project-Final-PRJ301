@@ -13,10 +13,16 @@ import java.util.List;
 public class Product {
     private String productCode;
     private String productName;
+    private String productSale;
     private String productStatus;
     private String productPrice;
     private String productOldPrice;
+    private String productSize;
+    private List<String> productDescription;
+    private List<String> productColor;
+    private List<String> productImagesDetail;
     private List<String> productImages;
+    private String productInfo;
 
     public Product() {
     }
@@ -30,6 +36,70 @@ public class Product {
         this.productImages = productImages;
     }
 
+    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription, List<String> productColor, List<String> productImagesDetail, String productInfo) {
+        this.productCode = productCode;//1
+        this.productName = productName;//2
+        this.productSale = productSale;//3
+        this.productStatus = productStatus;//4
+        this.productPrice = productPrice;//5
+        this.productOldPrice = productOldPrice;//6
+        this.productSize = productSize;//7
+        this.productDescription = productDescription;//8
+        this.productColor = productColor;//9
+        this.productImagesDetail = productImagesDetail;//10
+        this.productInfo = productInfo;//11
+    }
+
+    public String getProductSale() {
+        return productSale;
+    }
+
+    public void setProductSale(String productSale) {
+        this.productSale = productSale;
+    }
+
+    public String getProductSize() {
+        return productSize;
+    }
+
+    public void setProductSize(String productSize) {
+        this.productSize = productSize;
+    }
+
+    public List<String> getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(List<String> productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public List<String> getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(List<String> productColor) {
+        this.productColor = productColor;
+    }
+
+    public List<String> getProductImagesDetail() {
+        return productImagesDetail;
+    }
+
+    public void setProductImagesDetail(List<String> productImagesDetail) {
+        this.productImagesDetail = productImagesDetail;
+    }
+
+    public String getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(String productInfo) {
+        this.productInfo = productInfo;
+    }
+    
+    
+    
     public String getProductCode() {
         return productCode;
     }
@@ -78,9 +148,13 @@ public class Product {
         this.productImages = productImages;
     }
 
+//    public String toString() {
+//        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productImages=" + productImages + '}';
+//    }
+
     @Override
     public String toString() {
-        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productImages=" + productImages + '}';
+        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productSale=" + productSale + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productSize=" + productSize + ", productDescription=" + productDescription + ", productColor=" + productColor + ", productImagesDetail=" + productImagesDetail + ", productImages=" + productImages + ", productInfo=" + productInfo + '}';
     }
     
     
