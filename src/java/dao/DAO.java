@@ -91,6 +91,7 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
+                //tuan fix chỗ này
                 if(listImages.size() == 1){
                     listImages.add(listImages.get(0));
                 }
