@@ -250,7 +250,7 @@ public class DAO {
         List<Product> proList = new ArrayList<>();
         String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImages from Product\n" +
 "where categoryID = ? \n" +
-"order by productCode\n" +
+"order by productCode DESC\n" +
 "offset ? rows fetch next 12 rows only;";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
@@ -327,7 +327,7 @@ public class DAO {
             st.setString(1, productCode);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                List<String> listDescription = handleString(rs.getString(8));
+                List<String> listDescription = handleStringDescription(rs.getString(8));
                 List<String> listColor = handleString(rs.getString(9));
                 List<String> listImages = handleString(rs.getString(10));
                 return new Product(rs.getString(1), 
@@ -406,6 +406,15 @@ public class DAO {
     
     public List<String> handleString(String imagesString){
         String[] data = imagesString.split(",");
+        List<String> listImages = new ArrayList<>();
+        for (String string : data) {
+            string = string.replaceAll("'", "");
+            listImages.add(string);
+        }
+       return listImages;
+    }
+    public List<String> handleStringDescription(String imagesString){
+        String[] data = imagesString.split(";");
         List<String> listImages = new ArrayList<>();
         for (String string : data) {
             string = string.replaceAll("'", "");
