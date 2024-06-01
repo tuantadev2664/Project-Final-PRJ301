@@ -31,20 +31,21 @@
             </div>                
             <div class="row row-products">
                 <c:forEach items="${listP}" var="o">
-                <div class="col-lg-4 col-md-4 col-6 col-6">
-                    <div class="product-item">
-                        <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
+                    <div class="col-lg-4 col-md-4 col-6 col-6">
+                        <div class="product-item">
+                            <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
+                                <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
+                                <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
+                            </a>
+                            <h4 class="heading">
+                                <a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a>
+                            </h4>
                             <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                            <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
-                        </a>
-                        <h4 class="heading">
-                            <a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a>
-                        </h4>
-                        <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                        <div class="info">${o.productStatus}</div>
-                        <div class="price" >
-                            &nbsp; ${o.productPrice} &nbsp;&nbsp;
-                            <span>${((o.productOldPrice != "N/A")? o.productOldPrice: "")} </span>
+                            <div class="info">${o.productStatus}</div>
+                            <div class="price" >
+                                &nbsp; ${o.productPrice} &nbsp;&nbsp;
+                                <span>${((o.productOldPrice != "N/A")? o.productOldPrice: "")} </span>
+                            </div>
                         </div>
                     </div><!--end: .col-lg-3-->
                 </c:forEach>
@@ -69,22 +70,14 @@
                             </c:choose>
                         </li>
                     </c:forEach>
-                    <c:choose>
-                        <c:when test="${not empty param.categoryID}">
-                            <li class="page-item">
-                                <a class="page-link" title="Next page" href="category?categoryID=${param.categoryID}&index=${tagH+1}">
-                                    →
-                                </a>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="page-item">
-                                <a class="page-link" title="Next page" href="/san-pham/page-2.html">
-                                    →
-                                </a>
-                            </li>
-                        </c:otherwise>
-                    </c:choose>
+                    <li class="page-item">
+                        <b>..</b>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" title="Next page" href="/san-pham/page-2.html">
+                            →
+                        </a>
+                    </li>
                 </ul>
             </nav>  
         </div><!-- /.col-lg-9-->

@@ -61,10 +61,10 @@ public class CategoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String categoryID = request.getParameter("categoryID");
-        String statusName = request.getParameter("statusName");
+//        String statusName = request.getParameter("statusName");
         
         DAO dao = new DAO();
-<<<<<<< HEAD
+
         int total = dao.getNumberProductByCategory(categoryID);
         int page = total/12;
         if(total % 12 != 0){
@@ -77,8 +77,7 @@ public class CategoryServlet extends HttpServlet {
         int index = Integer.parseInt(indexPage);
 //        List<Product> list = dao.pagingProducts(index);
         List<Product> list = dao.pagingProductByCategory(categoryID, index);
-=======
-        List<Product> list = dao.getAllProductByCategoryID(categoryID);
+        //List<Product> list = dao.getAllProductByCategoryID(categoryID);
 //        List<Product> list2 = dao.getAllProductByStatus(statusName);
 //        List<Product> list = null;
 //        if(list1.size()>list2.size() || list2.size()==0&&list1.size()!=0){
@@ -105,7 +104,6 @@ public class CategoryServlet extends HttpServlet {
 //        }
 //        if(list2.size()==0&&list1.size()!=0)
         
->>>>>>> 92db1ab1399ba33335c58df791b773963913d3f0
         List<Category> listC = dao.getAllCategory();
         List<Status> listS = dao.getAllStatus();
         
@@ -113,7 +111,7 @@ public class CategoryServlet extends HttpServlet {
         request.setAttribute("listC", listC);
         request.setAttribute("listP", list);
         request.setAttribute("endP", page);
-//        request.setAttribute("tag", categoryID);
+        request.setAttribute("tag", categoryID);
         request.setAttribute("tagH", index);
         request.getRequestDispatcher("product.jsp").forward(request, response);
         

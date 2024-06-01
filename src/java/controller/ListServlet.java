@@ -73,6 +73,7 @@ public class ListServlet extends HttpServlet {
         }
         int index = Integer.parseInt(indexPage);
         List<Product> list = dao.pagingProducts(index);
+//        List<Product> list = dao.getAllProduct();
         List<Category> listC = dao.getAllCategory();
         List<Status> listS = dao.getAllStatus();
         request.setAttribute("listS", listS);
