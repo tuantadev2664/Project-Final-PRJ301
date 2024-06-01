@@ -31,36 +31,21 @@
             </div>                
             <div class="row row-products">
                 <c:forEach items="${listP}" var="o">
-<<<<<<< HEAD
-                <div class="col-lg-4 col-md-4 col-6 col-6">
-                    <div class="product-item">
-                        <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
-                            <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                            <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
-                        </a>
-                        <h4 class="heading">
-                            <a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a>
-                        </h4>
-                        <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                        <div class="info">${o.productStatus}</div>
-                        <div class="price" >
-                            &nbsp; ${o.productPrice} &nbsp;&nbsp;
-                            <span>${((o.productOldPrice != "N/A")? o.productOldPrice: "")} </span>
-=======
                     <div class="col-lg-4 col-md-4 col-6 col-6">
                         <div class="product-item">
-                            <a class="thumb" href="" title="${o.productName}">
+                            <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
                                 <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                                <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(1)}" data-hover="${o.productImages.get(2)}" alt="Tee Tele Bear">
+                                <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
                             </a>
-                            <h4 class="heading"><a href="" title="${o.productName}">${o.productName}</a></h4>
+                            <h4 class="heading">
+                                <a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a>
+                            </h4>
                             <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
                             <div class="info">${o.productStatus}</div>
-                            <div class="price">
-                                ${o.productPrice} &nbsp;&nbsp;
-                                <span>${((o.productOldPrice != "N/A")? o.productOldPrice : "")} </span>
+                            <div class="price" >
+                                &nbsp; ${o.productPrice} &nbsp;&nbsp;
+                                <span>${((o.productOldPrice != "N/A")? o.productOldPrice: "")} </span>
                             </div>
->>>>>>> 4d2f0dc5eec0371035864b04a98d44ccbe1a115f
                         </div>
                     </div><!--end: .col-lg-3-->
                 </c:forEach>
@@ -80,7 +65,7 @@
                         <b>..</b>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" title="Next page" href="/san-pham/page-2.html">
+                        <a class="page-link" title="Next page" href="list?index=${tagH}">
                             →
                         </a>
                     </li>

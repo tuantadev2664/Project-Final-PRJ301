@@ -76,7 +76,7 @@ public class DAO {
     public  List<Product> pagingProducts(int index){
         List<Product> proList = new ArrayList<>();
         String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImages from Product\n" +
-"order by productCode\n" +
+"order by productCode DESC\n" +
 "offset ? rows fetch next 12 rows only;";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
@@ -90,6 +90,9 @@ public class DAO {
                 for (String string : data) {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
+                }
+                if(listImages.size() == 1){
+                    listImages.add(listImages.get(0));
                 }
                 proList.add(new Product(rs.getString(1),
                         rs.getString(2),
@@ -344,12 +347,12 @@ public class DAO {
     public static void main(String[] args) {
        DAO dao = new DAO();
        int sum = 0;
-       for(Product product : dao.getASampleProductByProductCode("MBL267")){
-           sum++;
-           System.out.println(product.getProductImages().get(1));
-       }
+//       for(Product product : dao.getASampleProductByProductCode("MBL267")){
+//           sum++;
+//           System.out.println(product.getProductImages().get(1));
+//       }
        
-        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
+//        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
         
 //        System.out.println(dao.getProductByProductCode("MBL267"));
         
@@ -357,15 +360,16 @@ public class DAO {
 //           sum++;
 //           System.out.println(category);
 //       }
-        for (Product pro : dao.getAllProduct()) {
-            System.out.println(pro.toString());
-        }
-        System.out.println("------------");
-        List<Product> proList = dao.pagingProducts(8);
+//        for (Product pro : dao.getAllProduct()) {
+//            System.out.println(pro.toString());
+//        }
+//        System.out.println("------------");
+        List<Product> proList = dao.pagingProducts(1);
         for (Product product : proList) {
             System.out.println(product.toString());
+            sum++;
         }
-        System.out.println("sum = " + dao.getNumberProduct());
+        System.out.println("sum = " + sum);
     }
 
 }
