@@ -15,6 +15,15 @@
         
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css">
+        
+        <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/jquery.fancybox.min.css?v=1717149127"> 
+        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/bootstrap.css?v=1717149127"> 
+        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1717149127"> 
+       
+
     </head>
     <body>
         <div class="col-lg-9">
@@ -24,21 +33,25 @@
                 <c:forEach items="${listP}" var="o">
                 <div class="col-lg-4 col-md-4 col-6 col-6">
                     <div class="product-item">
-                        <a class="thumb" href="" title="${o.productName}">
+                        <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
                             <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                            <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(1)}" data-hover="${o.productImages.get(2)}" alt="Tee Tele Bear">
+                            <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
                         </a>
-                        <h4 class="heading"><a href="" title="${o.productName}">${o.productName}</a></h4>
+                        <h4 class="heading">
+                            <a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a>
+                        </h4>
                         <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
                         <div class="info">${o.productStatus}</div>
-                        <div class="price">
-                            ${o.productPrice} &nbsp;&nbsp;
-                            <span>${((o.productOldPrice != "N/A")? o.productOldPrice : "")} </span>
+                        <div class="price" >
+                            &nbsp; ${o.productPrice} &nbsp;&nbsp;
+                            <span>${((o.productOldPrice != "N/A")? o.productOldPrice: "")} </span>
                         </div>
                     </div>
                 </div><!--end: .col-lg-3-->
                 </c:forEach>
             </div><!-- /.row-products-->
+            
+            
 <!--            <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item active">

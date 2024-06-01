@@ -61,9 +61,36 @@ public class CategoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String categoryID = request.getParameter("categoryID");
+        String statusName = request.getParameter("statusName");
         
         DAO dao = new DAO();
         List<Product> list = dao.getAllProductByCategoryID(categoryID);
+//        List<Product> list2 = dao.getAllProductByStatus(statusName);
+//        List<Product> list = null;
+//        if(list1.size()>list2.size() || list2.size()==0&&list1.size()!=0){
+//            for(Product p1: list1){
+//                for(Product p2: list2){
+//                    if(p1.getProductCode().equals(p2.getProductCode()))
+//                        list2.remove(p2);
+//                }
+//            }
+//            list.addAll(list1);
+//            list.addAll(list2);
+//            request.setAttribute("listP", list);
+//        }
+//        if(list2.size()>=list1.size() || list1.size()==0&&list2.size()!=0){
+//           for(Product p2: list2){
+//                for(Product p1: list1){
+//                    if(p2.getProductCode().equals(p1.getProductCode()))
+//                        list1.remove(p1);
+//                }
+//            }
+//           list.addAll(list2);
+//           list.addAll(list1);
+//           request.setAttribute("listP", list);
+//        }
+//        if(list2.size()==0&&list1.size()!=0)
+        
         List<Category> listC = dao.getAllCategory();
         List<Status> listS = dao.getAllStatus();
         
@@ -72,6 +99,7 @@ public class CategoryServlet extends HttpServlet {
         request.setAttribute("listP", list);
         request.setAttribute("tag", categoryID);
         request.getRequestDispatcher("product.jsp").forward(request, response);
+        
     } 
 
     /** 

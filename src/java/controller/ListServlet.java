@@ -69,6 +69,7 @@ public class ListServlet extends HttpServlet {
         request.setAttribute("listP", list);
         request.setAttribute("listC", listC);
         request.getRequestDispatcher("product.jsp").forward(request, response);
+        
     } 
 
     /** 
