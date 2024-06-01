@@ -35,8 +35,7 @@ public class LoginDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getString(7),
-                        rs.getDate(8)));
+                        rs.getDate(7)));
             }
             rs.close();
             connection.close();
@@ -70,21 +69,20 @@ public class LoginDAO {
         }
         return list;
     }
-    
-    
-    public List<Card> getUserCards(String idCard) {
+
+    public List<Card> getUserCards(String idAccount) {
         List<Card> list = new ArrayList<>();
         String sql = "select id, account_id, card_number, bank_name from Cards where account_id = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, idCard);
+            st.setString(1, idAccount);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 list.add(new Card(
-                        rs.getString(1), 
-                        idCard, 
-                        rs.getString(3), 
+                        rs.getString(1),
+                        idAccount,
+                        rs.getString(3),
                         rs.getString(4)));
             }
             rs.close();
