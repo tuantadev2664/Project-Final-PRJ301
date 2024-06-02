@@ -195,7 +195,8 @@
                         
                     </div>
                     
-                    <a class="btn-detail add2cart" href="javascript:void(0);" data-quick="0" data-id="267">Thêm vào giỏ hàng</a>
+                    <a class="btn-detail add2cart" href="NewServlet" data-quick="0" data-id="267">Thêm vào giỏ hàng</a>
+
                     
                     <div class="bound-btn-detail">
                         <a class="btn-detail add2cart" href="javascript:void(0);" data-quick="1" data-id="267">Mua ngay</a>

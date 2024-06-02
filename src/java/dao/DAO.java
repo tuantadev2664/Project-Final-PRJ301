@@ -372,5 +372,15 @@ public class DAO {
         }
         System.out.println("sum = " + sum);
     }
+    
+        public  Product search(String code) {
+        ArrayList<Product> list = (ArrayList<Product>) getAllProduct();
+        for (Product s : list) {
+            if (s.getProductCode().contains(code)) {
+                return s;
+            }
+        }
+        return null;
+    }
 
 }
