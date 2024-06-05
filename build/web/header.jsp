@@ -668,7 +668,8 @@
                             </a>
                         </li>
                         <li class="list-inline-item " >
-                            <a href="#">
+<!----------------------------------------------------------------------------------------------------------------------->                            
+                            <a href="ShowCart">
                                 <!--https://monatabluelight.com/gio-hang-->
                                 <i style='padding-top: 0px'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" viewBox="0 0 24 26">
@@ -680,7 +681,7 @@
                                     </svg>
                                 </i>
                                 <span class="cart-badge" style='padding-top: 0px'>
-                                    0                        
+                                    99+                       
                                 </span>
                             </a>
                         </li>

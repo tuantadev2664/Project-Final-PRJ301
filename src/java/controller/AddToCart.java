@@ -5,12 +5,16 @@
 
 package controller;
 
+import dao.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Product;
 
 /**
  *
@@ -30,15 +34,7 @@ public class AddToCart extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddToCart</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddToCart at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+          
         }
     } 
 
@@ -53,7 +49,32 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+                        DAO dao = new DAO();
+        List<Product> listProduct = dao.getAllProduct();
+        Cookie[] arrCookie = request.getCookies();
+        String txt = "";
+        
+        if (arrCookie != null) {
+            for (Cookie c : arrCookie) {
+                if (c.getName().equals("Cart")) {
+                    txt += c.getValue();
+                    c.setMaxAge(0);
+                }
+            }
+        }
+
+        String praw = request.getParameter("code");
+        String qraw = request.getParameter("quan");
+        if(txt.isEmpty()){
+            txt= praw+":"+qraw;
+        }
+        else{
+            txt+="/"+praw+":"+qraw;
+        }
+        Cookie c = new Cookie("Cart",txt);
+        c.setMaxAge(30*24*60*60);
+        response.addCookie(c);
+        request.getRequestDispatcher("detail?productCode=" + praw).forward(request, response);
     } 
 
     /** 

@@ -59,7 +59,7 @@
                             </li>
 
                         </c:forEach>
-                            
+                           
                         <c:forEach items="${listP.productImagesDetail}" var="o1" begin="10">
 
                             <li class="color-image color-636">
@@ -194,8 +194,9 @@
                         </div>
                         
                     </div>
-                    
-                    <a class="btn-detail add2cart" href="NewServlet" data-quick="0" data-id="267">Thêm vào giỏ hàng</a>
+                    <!--cai nay moi la chuan nhung k chay dc-->
+                    <a class="btn-detail add2cart" href="CartServlet?action=AddItem&code=${listP.productCode}" data-quick="0" data-id="267">Thêm vào giỏ hàng</a>
+                    <a class="btn btn-primary btn-sm" href="AddToCart?code=${listP.productCode}&quan=1" >Thêm vào giỏ hàng</a>
 
                     
                     <div class="bound-btn-detail">

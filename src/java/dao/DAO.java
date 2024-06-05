@@ -6,12 +6,15 @@ package dao;
 
 import com.sun.jdi.connect.spi.Connection;
 import context.DBContext;
+import jakarta.servlet.http.Cookie;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Cart;
 import model.Category;
+import model.Item;
 import model.Product;
 import model.Status;
 
