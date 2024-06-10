@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Category;
 import model.Product;
+import model.ProductColor;
 import model.Status;
 
 /**
@@ -63,7 +64,7 @@ public class DAO {
 
     public List<Product> getAllProductByCategory() {
         List<Product> list = new ArrayList<>();
-        String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImages  from Product order by productCode DESC";
+        String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge  from Product order by productCode DESC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -105,7 +106,7 @@ public class DAO {
     
     public  List<Product> pagingProducts(int index){
         List<Product> proList = new ArrayList<>();
-        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImages from Product\n" +
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
 "order by productCode DESC\n" +
 "offset ? rows fetch next 12 rows only;";
         try {
@@ -141,7 +142,7 @@ public class DAO {
     }
     public List<Product> getASampleProduct() {
         List<Product> list = new ArrayList<>();
-        String sql = "select top 8  productCode, productName, productStatus, productPrice, productOldPrice, productImages  from Product order by productCode DESC";
+        String sql = "select top 8  productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge  from Product order by productCode DESC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -174,7 +175,7 @@ public class DAO {
     
     public List<Product> getASampleProductByProductCode(String productCode){
         List<Product> list = new ArrayList<>();
-        String sql = "select top 8  productCode, productName, productStatus, productPrice, productOldPrice, productImages  from Product where categoryID = ? order by productCode DESC";
+        String sql = "select top 8  productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge  from Product where categoryID = ? order by productCode DESC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -248,7 +249,7 @@ public class DAO {
     
     public  List<Product> pagingProductByCategory(String categoryID,int index){
         List<Product> proList = new ArrayList<>();
-        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImages from Product\n" +
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
 "where categoryID = ? \n" +
 "order by productCode DESC\n" +
 "offset ? rows fetch next 12 rows only;";
@@ -286,7 +287,7 @@ public class DAO {
 
     public List<Product> getAllProductByCategoryID(String categoryID) {
         List<Product> list = new ArrayList<>();
-        String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImages  from Product where categoryID = ? order by productCode DESC";
+        String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge  from Product where categoryID = ? order by productCode DESC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -318,9 +319,32 @@ public class DAO {
         return list;
     }
     
+    public List<ProductColor> getProductColor(String productCode){
+        List<ProductColor> list = new ArrayList<>();
+        String sql = "select ProductColor.[ colorId], [ colorLink]\n"
+                + "from ProductColor\n"
+                + "join Color on ProductColor.[ colorId] = Color.[ colorId]\n"
+                + "where productCode = ?";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productCode);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+               list.add(new ProductColor(rs.getString(1), rs.getString(2)));
+            }
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return list;
+        
+    }
+    
     public Product getProductByProductCode(String productCode){
         
-        String sql = "select productCode, productName, productSale, productStatus, productPrice, productOldPrice, productSize, productDescription, productColor, productImagesDetail, productInfo from product where productCode = ?";
+        String sql = "select productCode, productName, productSale, productStatus, productPrice, productOldPrice, productSize, productDescription, productImagesOrigin, productInfo from product where productCode = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -328,8 +352,8 @@ public class DAO {
             ResultSet rs = st.executeQuery();
             while(rs.next()){
                 List<String> listDescription = handleStringDescription(rs.getString(8));
-                List<String> listColor = handleString(rs.getString(9));
-                List<String> listImages = handleString(rs.getString(10));
+                List<ProductColor> listColor = getProductColor(productCode);
+                List<String> listImages = handleString(rs.getString(9));
                 return new Product(rs.getString(1), 
                         rs.getString(2), 
                        rs.getString(3), 
@@ -338,9 +362,9 @@ public class DAO {
                      rs.getString(6),
                      rs.getString(7),
                         listDescription,
-                        listColor, 
+                        listColor,
                       listImages,
-                        rs.getString(11)
+                        rs.getString(10)
                 );
             }
             rs.close();
@@ -372,7 +396,7 @@ public class DAO {
 
     public List<Product> getAllProductByStatus(String statusName) {
         List<Product> list = new ArrayList<>();
-        String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImages  from Product where productStatus = ? order by productCode DESC";
+        String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge  from Product where productStatus = ? order by productCode DESC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -448,7 +472,13 @@ public class DAO {
 //            sum++;
 //        }
 //        System.out.println("sum = " + sum);
-        System.out.println(dao.getNumberProductByCategory("C01"));
+        //System.out.println(dao.getNumberProductByCategory("C01"));
+        System.out.println(dao.getProductByProductCode("MBL267"));
+//        System.out.println(dao.getProductByProductCode("MBL267").getProductColorList());
+        for (ProductColor productColor : dao.getProductByProductCode("MBL267").getProductColorList()){
+            System.out.println(productColor.getColorLinkString());
+        }
+        //System.out.println(dao.getProductColor("MBL267"));
     }
 
 }

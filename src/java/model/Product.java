@@ -19,24 +19,24 @@ public class Product {
     private String productOldPrice;
     private String productSize;
     private List<String> productDescription;
-    private List<String> productColor;
+    private List<ProductColor> productColorList;
     private List<String> productImagesDetail;
-    private List<String> productImages;
+    private List<String> productImagesLarge;
     private String productInfo;
 
     public Product() {
     }
 
-    public Product(String productCode, String productName, String productStatus, String productPrice, String productOldPrice, List<String> productImages) {
+    public Product(String productCode, String productName, String productStatus, String productPrice, String productOldPrice, List<String> productImagesLarge) {
         this.productCode = productCode;
         this.productName = productName;
         this.productStatus = productStatus;
         this.productPrice = productPrice;
         this.productOldPrice = productOldPrice;
-        this.productImages = productImages;
+        this.productImagesLarge = productImagesLarge;
     }
 
-    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription, List<String> productColor, List<String> productImagesDetail, String productInfo) {
+    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription,List<ProductColor> productColorList , List<String> productImagesDetail, String productInfo) {
         this.productCode = productCode;//1
         this.productName = productName;//2
         this.productSale = productSale;//3
@@ -45,7 +45,7 @@ public class Product {
         this.productOldPrice = productOldPrice;//6
         this.productSize = productSize;//7
         this.productDescription = productDescription;//8
-        this.productColor = productColor;//9
+        this.productColorList = productColorList;//9
         this.productImagesDetail = productImagesDetail;//10
         this.productInfo = productInfo;//11
     }
@@ -74,12 +74,12 @@ public class Product {
         this.productDescription = productDescription;
     }
 
-    public List<String> getProductColor() {
-        return productColor;
+    public List<ProductColor> getProductColorList() {
+        return productColorList;
     }
 
-    public void setProductColor(List<String> productColor) {
-        this.productColor = productColor;
+    public void setProductColorList(List<ProductColor> productColor) {
+        this.productColorList = productColor;
     }
 
     public List<String> getProductImagesDetail() {
@@ -140,12 +140,12 @@ public class Product {
         this.productOldPrice = productOldPrice;
     }
 
-    public List<String> getProductImages() {
-        return productImages;
+    public List<String> getProductImagesLarge() {
+        return productImagesLarge;
     }
 
-    public void setProductImages(List<String> productImages) {
-        this.productImages = productImages;
+    public void setProductImagesLarge(List<String> productImages) {
+        this.productImagesLarge = productImages;
     }
 
 //    public String toString() {
@@ -154,7 +154,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productSale=" + productSale + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productSize=" + productSize + ", productDescription=" + productDescription + ", productColor=" + productColor + ", productImagesDetail=" + productImagesDetail + ", productImages=" + productImages + ", productInfo=" + productInfo + '}';
+        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productSale=" + productSale + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productSize=" + productSize + ", productDescription=" + productDescription + ", productColor=" + productColorList + ", productImagesDetail=" + productImagesDetail + ", productImages=" + productImagesLarge + ", productInfo=" + productInfo + '}';
     }
     
     

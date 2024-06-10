@@ -33,6 +33,7 @@
 
     </head>
     <body>
+        
         <div class="container products">
             <div class="row">
                 <input type="hidden" name="product_id" data-quantity="0" id="product_id" value="267">
@@ -40,6 +41,8 @@
                     <a id="a-product-image" href="${listP.productImagesDetail.get(0)}" data-fancybox="gallery" class="gallery-item">
                         <img id="product-image" class="img-fluid" src="${listP.productImagesDetail.get(1)}">
                     </a>
+                    
+<!--                    
                     <ul class="images-thumb ">
                          <li data-color="0" class="color-image main-image">
                             <img class="img-responsive" src="${(listP.productImagesDetail.get(2)!=null)?listP.productImagesDetail.get(2):""}">
@@ -76,6 +79,7 @@
 
                         </c:forEach>
                     </ul>
+                        -->
                 </div><!-- /.col-lg-6-->
                 
                 
@@ -84,7 +88,7 @@
                     
                     <h1 class="detail-name">
                         ${listP.productName}
-                        <span>[${listP.productSale}]</span>
+                        <span>${listP.productSale}</span>
                     </h1>
                     
                     <div class="row code-status">
@@ -107,20 +111,15 @@
                     </div>
                     
                     <div class="detail-colors">
-                        <a href="javascript:void(0);" data-id="634" class="selected">
-                            <img src="${listP.productColor.get(0)}">
+                        <a href="javascript:void(0);" data-id="${listP.getProductColorList().get(0).getColorID()}" class="selected">
+                            <img src="${listP.getProductColorList().get(0).getColorLinkString()}">
                         </a>
-                         <%
-                                int i = 634;
-                            %>
-                        <c:forEach items="${listP.productColor}" var="o2" begin="1">
-                            <%
-                                i++;
-                            %>
-                            <a href="javascript:void(0);" data-id="<%= i %>" class="">
-                            <img src="${((o2 != null)? o2 : "")}">
+                        <c:forEach items="${listP.getProductColorList()}" var="o2" begin="1">
+                            <a href="javascript:void(0);" data-id="${o2.getColorID()}" class="">
+                            <img src="${((o2.getColorLinkString() != null)? o2.getColorLinkString() : "")}">
                         </a>
                         </c:forEach>
+                        
                     </div>
                     
                     <script type="text/javascript">
@@ -287,7 +286,7 @@
                             <div class="product-item">
                                 <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
                                     <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                                    <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
+                                    <img class="img-fluid" src="${o.productImagesLarge.get(0)}" data-src="${o.productImagesLarge.get(0)}" data-hover="${((o.productImagesLarge.get(1)!= null)?o.productImagesLarge.get(1): o.productImagesLarge.get(0))}" alt="${o.productName}">
                                 </a>
                                 <h4 class="heading">
                                     <a href="" title="${o.productName}">${o.productName}</a>
