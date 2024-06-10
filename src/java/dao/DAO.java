@@ -153,15 +153,15 @@ public class DAO {
     public static void main(String[] args) {
        DAO dao = new DAO();
        int sum = 0;
-       for(Product product : dao.getAllProductByStatus("Available")){
-           sum++;
-           System.out.println(product);
-       }
-        
-//       for(Category category : dao.getAllCategory()){
+//       for(Product product : dao.getAllProduct()){
 //           sum++;
-//           System.out.println(category);
+//           System.out.println(product);
 //       }
+        
+       for(Category category : dao.getAllCategory()){
+           sum++;
+           System.out.println(category);
+       }
         
         System.out.println("sum = " + sum);
     }
