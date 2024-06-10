@@ -29,6 +29,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/bootstrap.css?v=1717149127"> 
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1717149127"> 
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
 
     </head>
@@ -296,21 +297,34 @@
             
             <div class="products-other">
                 <div class="content-title">Sản phẩm đã xem</div>
-<!--            <div class="row">
-                    <div class="col-lg-3 col-6">        
-                        <div class="product-item">
-                            <a class="thumb" href="https://monatabluelight.com/tote-monat-blue-pd231.html" title="Tote Monat Blue">
-                                <img class="img-fluid" src="https://monatabluelight.com/images/products/2023/10/09/large/0_1696843929.jpg" data-src="https://monatabluelight.com/images/products/2023/10/09/large/0_1696843929.jpg" data-hover="" alt="Tote Monat Blue">
-                            </a>
-                            <h4 class="heading"><a href="https://monatabluelight.com/tote-monat-blue-pd231.html" title="Tote Monat Blue">Tote Monat Blue</a></h4>
-                            <div class="info">Available</div>
-                            <div class="price">
-                                250,000đ                                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="row">
+                    <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="3"
+                                      space-between="30" free-mode="true">
+                        <c:forEach items="${listP2}" var="o">
+                            <swiper-slide >
+                                <div class="banner2-item">        
+                                    <div class="product-item">
+                                        <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
+                                            <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
+                                            <img class="img-fluid" src="${o.productImagesLarge.get(0)}" data-src="${o.productImagesLarge.get(0)}" data-hover="${((o.productImagesLarge.get(1)!= null)?o.productImagesLarge.get(1): o.productImagesLarge.get(0))}" alt="${o.productName}">
+                                        </a>
+                                        <h4 class="heading">
+                                            <a href="" title="${o.productName}">${o.productName}</a>
+                                        </h4>
+                                        <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
+                                        <div class="info">${o.productStatus}</div>
+                                        <div class="price" >
+                                            &nbsp; ${o.productPrice} &nbsp;&nbsp;
+                                            <span>${((o.productOldPrice != "N/A")? o.productOldPrice: "")} </span>
+                                        </div>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                            </swiper-slide>
+                        </c:forEach>
 
-                </div>-->
+                    </swiper-container>
+                </div>
             </div>
             
         </div>
