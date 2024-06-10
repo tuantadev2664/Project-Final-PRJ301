@@ -307,21 +307,28 @@
             
             <div class="products-other">
                 <div class="content-title">Sản phẩm đã xem</div>
-<!--            <div class="row">
-                    <div class="col-lg-3 col-6">        
-                        <div class="product-item">
-                            <a class="thumb" href="https://monatabluelight.com/tote-monat-blue-pd231.html" title="Tote Monat Blue">
-                                <img class="img-fluid" src="https://monatabluelight.com/images/products/2023/10/09/large/0_1696843929.jpg" data-src="https://monatabluelight.com/images/products/2023/10/09/large/0_1696843929.jpg" data-hover="" alt="Tote Monat Blue">
-                            </a>
-                            <h4 class="heading"><a href="https://monatabluelight.com/tote-monat-blue-pd231.html" title="Tote Monat Blue">Tote Monat Blue</a></h4>
-                            <div class="info">Available</div>
-                            <div class="price">
-                                250,000đ                                                
+            <div class="row">
+                    <c:forEach items="${listP2}" var="o">
+                        <div class="col-lg-3 col-6">        
+                            <div class="product-item">
+                                <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
+                                    <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
+                                    <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
+                                </a>
+                                <h4 class="heading">
+                                    <a href="" title="${o.productName}">${o.productName}</a>
+                                </h4>
+                                <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
+                                <div class="info">${o.productStatus}</div>
+                                <div class="price" >
+                                    &nbsp; ${o.productPrice} &nbsp;&nbsp;
+                                    <span>${((o.productOldPrice != "N/A")? o.productOldPrice: "")} </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </c:forEach>
 
-                </div>-->
+                </div>
             </div>
             
         </div>

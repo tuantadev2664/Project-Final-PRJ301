@@ -13,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import model.Product;
 
@@ -60,12 +62,24 @@ public class DetailServlet extends HttpServlet {
     throws ServletException, IOException {
         DAO dao = new DAO();
         String productCode = request.getParameter("productCode");
+        List<String> listA;
+        HttpSession session = request.getSession();
+        if(session.getAttribute("productCodes") == null){
+            listA = new ArrayList<>();
+        } else {
+            listA = (List<String>)session.getAttribute("productCodes");
+        }
+        listA.add(productCode);
+        session.setAttribute("productCodes", listA);
+        List<Product> listP2 = dao.getAllProductByListProductCode(listA);
+        
         
         Product product = dao.getProductByProductCode(productCode);
-        List<Product> list = dao.getASampleProductByProductCode(productCode);
+        List<Product> listP1 = dao.getASampleProductByProductCode(productCode);
         
         request.setAttribute("listP", product);
-        request.setAttribute("listP1", list);
+        request.setAttribute("listP1", listP1);
+        request.setAttribute("listP2", listP2);
         request.getRequestDispatcher("detail.jsp").forward(request, response);
     } 
 

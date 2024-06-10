@@ -318,6 +318,42 @@ public class DAO {
         return list;
     }
     
+    public List<Product> getAllProductByListProductCode(List<String> listProductCode) {
+        List<Product> list = new ArrayList<>();
+        for (String string1 : listProductCode) {
+            String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImages  from Product where productCode = ? order by productCode DESC";
+            try {
+                java.sql.Connection connection = new DBContext().getConnect();
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setString(1, string1);
+                ResultSet rs = st.executeQuery();
+                if (rs.next()) {
+                    String imagesString = rs.getString(6);
+                    String[] data = imagesString.split(",");
+                    List<String> listImages = new ArrayList<>();
+                    for (String string : data) {
+                        string = string.replaceAll("'", "");
+                        listImages.add(string);
+                    }
+                    if (listImages.size() == 1) {
+                        listImages.add(listImages.get(0));
+                    }
+                    list.add(new Product(rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            listImages));
+                }
+                rs.close();
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("e");
+            }
+        }
+        return list;
+    }
+    
     public Product getProductByProductCode(String productCode){
         
         String sql = "select productCode, productName, productSale, productStatus, productPrice, productOldPrice, productSize, productDescription, productColor, productImagesDetail, productInfo from product where productCode = ?";
@@ -448,7 +484,13 @@ public class DAO {
 //            sum++;
 //        }
 //        System.out.println("sum = " + sum);
-        System.out.println(dao.getNumberProductByCategory("C01"));
+          //System.out.println(dao.getNumberProductByCategory("C01"));
+          List<String> list = new ArrayList<>();
+          list.add("MBL267");
+          list.add("MBL266");
+          for(Product product : dao.getAllProductByListProductCode(list)){
+              System.out.println(product);
+        }
     }
 
 }
