@@ -14,6 +14,7 @@ import java.util.List;
 import model.Category;
 import model.Product;
 import model.ProductColor;
+import model.ProductImgDetail;
 import model.Status;
 
 /**
@@ -331,7 +332,8 @@ public class DAO {
             st.setString(1, productCode);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-               list.add(new ProductColor(rs.getString(1), rs.getString(2)));
+               double db_colorid = Double.parseDouble(rs.getString(1));
+               list.add(new ProductColor((""+(int)db_colorid) , rs.getString(2)));
             }
             rs.close();
             connection.close();
@@ -354,6 +356,7 @@ public class DAO {
                 List<String> listDescription = handleStringDescription(rs.getString(8));
                 List<ProductColor> listColor = getProductColor(productCode);
                 List<String> listImages = handleString(rs.getString(9));
+                List<ProductImgDetail> listImgDetails = getProductImgDetails(productCode);
                 return new Product(rs.getString(1), 
                         rs.getString(2), 
                        rs.getString(3), 
@@ -364,7 +367,8 @@ public class DAO {
                         listDescription,
                         listColor,
                       listImages,
-                        rs.getString(10)
+                        rs.getString(10),
+                        listImgDetails
                 );
             }
             rs.close();
@@ -373,6 +377,34 @@ public class DAO {
             System.out.println("e");
         }
         return null;
+    }
+    
+    
+    public List<ProductImgDetail> getProductImgDetails(String productCode){
+        List<ProductColor> listColor = getProductColor(productCode);
+        List<ProductImgDetail> listImgDetails = new ArrayList<>();
+        for(ProductColor productColor : listColor){
+            List<String> listImg = new ArrayList<>();
+            String sql = "select  [ imgDetailColor]\n"
+                    + "from ProductImgDetail\n"
+                    + "where productCode = ? and [ colorId] = ?";
+            try {
+                java.sql.Connection connection = new DBContext().getConnect();
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setString(1, productCode);
+                st.setString(2, productColor.getColorID());
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    listImg.add(rs.getString(1));
+                }
+                rs.close();
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("e");
+            }
+            listImgDetails.add(new ProductImgDetail(productColor.getColorID(), listImg));
+        }
+        return listImgDetails;
     }
     
     public List<Status> getAllStatus(){
@@ -475,10 +507,16 @@ public class DAO {
         //System.out.println(dao.getNumberProductByCategory("C01"));
 //        System.out.println(dao.getProductByProductCode("MBL267"));
 //        System.out.println(dao.getProductByProductCode("MBL267").getProductColorList());
-        for (ProductColor productColor : dao.getProductByProductCode("MBL267").getProductColorList()){
-            System.out.println(productColor.getColorID() + ":  "+ productColor.getColorLinkString());
-        }
+//        for (ProductColor productColor : dao.getProductByProductCode("MBL267").getProductColorList()){
+//            System.out.println(productColor.getColorID() + ":  "+ productColor.getColorLinkString());
+//        }
        //System.out.println(dao.getProductColor("MBL267"));
+       for(ProductImgDetail productImgDetail : dao.getProductImgDetails("MBL259")){
+           System.out.println(productImgDetail.getColorID());
+           for(String str : productImgDetail.getImgDetailColor()){
+               System.out.println(str);
+           }
+       }
     }
 
 }

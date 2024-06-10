@@ -42,44 +42,31 @@
                         <img id="product-image" class="img-fluid" src="${listP.productImagesOrigin.get(1)}">
                     </a>
                     
-<!--                    
+                    
                     <ul class="images-thumb ">
                          <li data-color="0" class="color-image main-image">
                             <img class="img-responsive" src="${(listP.productImagesOrigin.get(2)!=null)?listP.productImagesOrigin.get(2):""}">
                         </li>
-                        <c:forEach items="${listP.productImagesOrigin}" var="o1" begin="3" end="7">
-
-                            <li class="first-color color-image color-634">
-                                <img class="img-responsive" src="${o1}">
-                            </li>
-
+                        
+                        <c:forEach items="${listP.productImgDetails}" var="o1" begin="0" end="0">
+                            <c:set var="id" value="${o1.getColorID()}"/>
+                            <c:forEach items="${o1.getImgDetailColor()}" var="o2">
+                                <li class="first-color color-image color-${id}">
+                                    <img class="img-responsive" src="${o2}">
+                                </li>
+                            </c:forEach>
                         </c:forEach>
-
-                        <c:forEach items="${listP.productImagesOrigin}" var="o1" begin="8" >
-
-                            <li class="color-image color-635">
-                                <img class="img-responsive" src="${o1}">
-                            </li>
-
-                        </c:forEach>
-                            
-                        <c:forEach items="${listP.productImagesOrigin}" var="o1" begin="10">
-
-                            <li class="color-image color-636">
-                                <img class="img-responsive" src="${o1}">
-                            </li>
-
-                        </c:forEach>
-                         
-                        <c:forEach items="${listP.productImagesOrigin}" var="o1" begin="12">
-
-                            <li class="color-image color-637">
-                                <img class="img-responsive" src="${o1}">
-                            </li>
-
+                        
+                        <c:forEach items="${listP.productImgDetails}" var="o1" begin="1">
+                            <c:set var="id" value="${o1.getColorID()}"/>
+                            <c:forEach items="${o1.getImgDetailColor()}" var="o2">
+                                <li class="color-image color-${id}">
+                                    <img class="img-responsive" src="${o2}">
+                                </li>
+                            </c:forEach>
                         </c:forEach>
                     </ul>
-                        -->
+                        
                 </div><!-- /.col-lg-6-->
                 
                 

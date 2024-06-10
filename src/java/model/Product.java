@@ -23,6 +23,7 @@ public class Product {
     private List<String> productImagesOrigin;
     private List<String> productImagesLarge;
     private String productInfo;
+    private List<ProductImgDetail> productImgDetails;
 
     public Product() {
     }
@@ -36,7 +37,8 @@ public class Product {
         this.productImagesLarge = productImagesLarge;
     }
 
-    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription,List<ProductColor> productColorList , List<String> productImagesOrigin, String productInfo) {
+
+    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription,List<ProductColor> productColorList , List<String> productImagesOrigin, String productInfo, List<ProductImgDetail> productImgDetails) {
         this.productCode = productCode;//1
         this.productName = productName;//2
         this.productSale = productSale;//3
@@ -48,8 +50,9 @@ public class Product {
         this.productColorList = productColorList;//9
         this.productImagesOrigin = productImagesOrigin;//10
         this.productInfo = productInfo;//11
+        this.productImgDetails = productImgDetails;
     }
-
+    
     public String getProductSale() {
         return productSale;
     }
@@ -147,6 +150,16 @@ public class Product {
     public void setProductImagesLarge(List<String> productImages) {
         this.productImagesLarge = productImages;
     }
+
+    public List<ProductImgDetail> getProductImgDetails() {
+        return productImgDetails;
+    }
+
+    public void setProductImgDetails(List<ProductImgDetail> productImgDetails) {
+        this.productImgDetails = productImgDetails;
+    }
+    
+    
 
 //    public String toString() {
 //        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productImages=" + productImages + '}';
