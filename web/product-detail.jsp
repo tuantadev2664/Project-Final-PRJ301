@@ -88,11 +88,10 @@
                     
                     <h1 class="detail-name">
                         ${listP.productName}
-<<<<<<< HEAD
+
                         <span>${listP.productSale}</span>
-=======
-                        <span>[${listP.productSale}]</span>
->>>>>>> ebffe755b6b8a8400ed0850fbffe1b609c1b0321
+
+                       
                     </h1>
                     
                     <div class="row code-status">
