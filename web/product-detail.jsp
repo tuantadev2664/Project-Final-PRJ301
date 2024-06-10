@@ -38,16 +38,16 @@
             <div class="row">
                 <input type="hidden" name="product_id" data-quantity="0" id="product_id" value="267">
                 <div class="col-lg-6 product-thumbs">
-                    <a id="a-product-image" href="${listP.productImagesDetail.get(0)}" data-fancybox="gallery" class="gallery-item">
-                        <img id="product-image" class="img-fluid" src="${listP.productImagesDetail.get(1)}">
+                    <a id="a-product-image" href="${listP.productImagesOrigin.get(0)}" data-fancybox="gallery" class="gallery-item">
+                        <img id="product-image" class="img-fluid" src="${listP.productImagesOrigin.get(1)}">
                     </a>
                     
 <!--                    
                     <ul class="images-thumb ">
                          <li data-color="0" class="color-image main-image">
-                            <img class="img-responsive" src="${(listP.productImagesDetail.get(2)!=null)?listP.productImagesDetail.get(2):""}">
+                            <img class="img-responsive" src="${(listP.productImagesOrigin.get(2)!=null)?listP.productImagesOrigin.get(2):""}">
                         </li>
-                        <c:forEach items="${listP.productImagesDetail}" var="o1" begin="3" end="7">
+                        <c:forEach items="${listP.productImagesOrigin}" var="o1" begin="3" end="7">
 
                             <li class="first-color color-image color-634">
                                 <img class="img-responsive" src="${o1}">
@@ -55,7 +55,7 @@
 
                         </c:forEach>
 
-                        <c:forEach items="${listP.productImagesDetail}" var="o1" begin="8" >
+                        <c:forEach items="${listP.productImagesOrigin}" var="o1" begin="8" >
 
                             <li class="color-image color-635">
                                 <img class="img-responsive" src="${o1}">
@@ -63,7 +63,7 @@
 
                         </c:forEach>
                             
-                        <c:forEach items="${listP.productImagesDetail}" var="o1" begin="10">
+                        <c:forEach items="${listP.productImagesOrigin}" var="o1" begin="10">
 
                             <li class="color-image color-636">
                                 <img class="img-responsive" src="${o1}">
@@ -71,7 +71,7 @@
 
                         </c:forEach>
                          
-                        <c:forEach items="${listP.productImagesDetail}" var="o1" begin="12">
+                        <c:forEach items="${listP.productImagesOrigin}" var="o1" begin="12">
 
                             <li class="color-image color-637">
                                 <img class="img-responsive" src="${o1}">
@@ -114,10 +114,10 @@
                     </div>
                     
                     <div class="detail-colors">
-                        <a href="javascript:void(0);" data-id="${listP.getProductColorList().get(0).getColorID()}" class="selected">
-                            <img src="${listP.getProductColorList().get(0).getColorLinkString()}">
+                        <a href="javascript:void(0);" data-id="${listP.productColorList.get(0).getColorID()}" class="selected">
+                            <img src="${listP.productColorList.get(0).getColorLinkString()}">
                         </a>
-                        <c:forEach items="${listP.getProductColorList()}" var="o2" begin="1">
+                        <c:forEach items="${listP.productColorList}" var="o2" begin="1">
                             <a href="javascript:void(0);" data-id="${o2.getColorID()}" class="">
                             <img src="${((o2.getColorLinkString() != null)? o2.getColorLinkString() : "")}">
                         </a>

@@ -14,9 +14,9 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <img id="product-image" class="img-fluid" src="${listP.productImagesDetail.get(1)}">
-         <img src="${listP.getProductColorList().get(0).getColorLinkString()}">
-          <img src="${listP.getProductColorList().get(1).getColorLinkString()}">
+        <img id="product-image" class="img-fluid" src="${listP.productImagesOrigin.get(1)}">
+         <img src="${listP.productColorList.get(0).getColorLinkString()}">
+          <img src="${listP.productColorList.get(1).getColorLinkString()}">
           
           <h1 class="detail-name">
                         ${listP.productName}

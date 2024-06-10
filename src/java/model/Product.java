@@ -20,7 +20,7 @@ public class Product {
     private String productSize;
     private List<String> productDescription;
     private List<ProductColor> productColorList;
-    private List<String> productImagesDetail;
+    private List<String> productImagesOrigin;
     private List<String> productImagesLarge;
     private String productInfo;
 
@@ -36,7 +36,7 @@ public class Product {
         this.productImagesLarge = productImagesLarge;
     }
 
-    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription,List<ProductColor> productColorList , List<String> productImagesDetail, String productInfo) {
+    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription,List<ProductColor> productColorList , List<String> productImagesOrigin, String productInfo) {
         this.productCode = productCode;//1
         this.productName = productName;//2
         this.productSale = productSale;//3
@@ -46,7 +46,7 @@ public class Product {
         this.productSize = productSize;//7
         this.productDescription = productDescription;//8
         this.productColorList = productColorList;//9
-        this.productImagesDetail = productImagesDetail;//10
+        this.productImagesOrigin = productImagesOrigin;//10
         this.productInfo = productInfo;//11
     }
 
@@ -82,12 +82,12 @@ public class Product {
         this.productColorList = productColor;
     }
 
-    public List<String> getProductImagesDetail() {
-        return productImagesDetail;
+    public List<String> getProductImagesOrigin() {
+        return productImagesOrigin;
     }
 
-    public void setProductImagesDetail(List<String> productImagesDetail) {
-        this.productImagesDetail = productImagesDetail;
+    public void setProductImagesOrigin(List<String> productImagesOrigin) {
+        this.productImagesOrigin = productImagesOrigin;
     }
 
     public String getProductInfo() {
@@ -154,7 +154,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productSale=" + productSale + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productSize=" + productSize + ", productDescription=" + productDescription + ", productColor=" + productColorList + ", productImagesDetail=" + productImagesDetail + ", productImages=" + productImagesLarge + ", productInfo=" + productInfo + '}';
+        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productSale=" + productSale + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productSize=" + productSize + ", productDescription=" + productDescription + ", productColor=" + productColorList + ", productImagesOrigin=" + productImagesOrigin + ", productImages=" + productImagesLarge + ", productInfo=" + productInfo + '}';
     }
     
     

@@ -324,7 +324,7 @@ public class DAO {
         String sql = "select ProductColor.[ colorId], [ colorLink]\n"
                 + "from ProductColor\n"
                 + "join Color on ProductColor.[ colorId] = Color.[ colorId]\n"
-                + "where productCode = ?";
+                + "where productCode = ? order by ProductColor.[ colorId] ASC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -473,12 +473,12 @@ public class DAO {
 //        }
 //        System.out.println("sum = " + sum);
         //System.out.println(dao.getNumberProductByCategory("C01"));
-        System.out.println(dao.getProductByProductCode("MBL267"));
+//        System.out.println(dao.getProductByProductCode("MBL267"));
 //        System.out.println(dao.getProductByProductCode("MBL267").getProductColorList());
         for (ProductColor productColor : dao.getProductByProductCode("MBL267").getProductColorList()){
-            System.out.println(productColor.getColorLinkString());
+            System.out.println(productColor.getColorID() + ":  "+ productColor.getColorLinkString());
         }
-        //System.out.println(dao.getProductColor("MBL267"));
+       //System.out.println(dao.getProductColor("MBL267"));
     }
 
 }

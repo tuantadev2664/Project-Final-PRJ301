@@ -67,6 +67,7 @@ public class DetailServlet extends HttpServlet {
         request.setAttribute("listP", product);
         request.setAttribute("listP1", list);
         request.getRequestDispatcher("detail.jsp").forward(request, response);
+        //request.getRequestDispatcher("newjsp.jsp").forward(request, response);
     } 
 
     /** 
