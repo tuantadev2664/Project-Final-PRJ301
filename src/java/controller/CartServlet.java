@@ -86,34 +86,34 @@ public class CartServlet extends HttpServlet {
                 return;
             }
 
-            switch (action) {
-                case "AddItem":
-                    id = request.getParameter("code");
-                    product = dao.search(id);
-                    System.out.println(product);
-                    if (product != null) {
-                        item.setProduct(product);
-                        item.setQuantity(1);
-                        //add vao gio hang tung account
-                        listItem.add(item);
-                    } else {
-                        System.out.println("Not Found");
-                    }
-                    System.out.println("size:" + listItem.size());
-                    request.getRequestDispatcher("detail?productCode=" + id).forward(request, response);
-                    break;
+//            switch (action) {
+//                case "AddItem":
+//                    id = request.getParameter("code");
+//                    product = dao.search(id);
+//                    System.out.println(product);
+//                    if (product != null) {
+//                        item.setProduct(product);
+//                        item.setQuantity(1);
+//                        //add vao gio hang tung account
+//                        listItem.add(item);
+//                    } else {
+//                        System.out.println("Not Found");
+//                    }
+//                    System.out.println("size:" + listItem.size());
+//                    request.getRequestDispatcher("detail?productCode=" + id).forward(request, response);
+//                    break;
+//
+//                case "Remove": // chưa lam
+//                    id = request.getParameter("index");
+//                    listItem.remove(Integer.parseInt(id));
+//                    System.out.println("size:" + listItem.size());
+//                    request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+//
+//                    break;
+//                default:
+//                    throw new AssertionError();
 
-                case "Remove": // chưa lam
-                    id = request.getParameter("index");
-                    listItem.remove(Integer.parseInt(id));
-                    System.out.println("size:" + listItem.size());
-                    request.getRequestDispatcher("viewCart.jsp").forward(request, response);
-
-                    break;
-                default:
-                    throw new AssertionError();
-
-            }
+//            }
     }
 
     /**

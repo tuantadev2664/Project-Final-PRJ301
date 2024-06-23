@@ -4,25 +4,26 @@
     Author     : FPTSHOP
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"
+        import="model.Cart"%>
 <!DOCTYPE html>
 <html>
     <head id="Head1" prefix="og: http://ogp.me/ns# fb:http://ogp.me/ns/fb# article:http://ogp.me/ns/article#">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Product | group 5</title>
-        
-        
+
+
         <link type="image/x-icon" href="images/Premium Vector _ Men's fashion store logo design template_vector illustration.jpg" rel="icon">
-        
-<!--        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/bootstrap.css?v=1716981831"> 
-        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1716981831"> -->
-        
+
+        <!--        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/bootstrap.css?v=1716981831"> 
+                <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1716981831"> -->
+
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css"> 
-        
+
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
 
-               
+
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
 
 
@@ -578,7 +579,7 @@
                 }
             }
         </style>
-        
+
     </head>
     <body style="padding-top: 0px;">
         <div class="header-top">
@@ -596,7 +597,7 @@
                     <b class="d-sm-inline d-none font-weight-normal">CSKH:</b> <span>0848270604</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </a>
                 <a class="d-sm-inline d-none" href="#">
-<!--                    /gioi-thieu-i1-->
+                    <!--                    /gioi-thieu-i1-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4">
                     <circle cx="2" cy="2" r="2" fill="#fb8a06"></circle>
                     </svg>&nbsp;
@@ -610,9 +611,9 @@
                 </a>
             </div>
         </div><!-- /.header-top-->
-        
+
         <div class="header-nav">
-            
+
             <div class="container">
                 <div class="float-left nav-float-left">
                     <nav class="navbar navbar-expand-lg">
@@ -647,7 +648,7 @@
                         </div>
                     </nav>                    
                 </div>
-                
+
                 <div class="float-right">
                     <ul class="list-inline">
                         <li class="list-inline-item d-sm-inline d-none" >
@@ -668,7 +669,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item " >
-<!----------------------------------------------------------------------------------------------------------------------->                            
+                            <!----------------------------------------------------------------------------------------------------------------------->                            
                             <a href="ShowCart">
                                 <!--https://monatabluelight.com/gio-hang-->
                                 <i style='padding-top: 0px'>
@@ -681,7 +682,10 @@
                                     </svg>
                                 </i>
                                 <span class="cart-badge" style='padding-top: 0px'>
-                                    99+                       
+  
+                                    
+                                    
+                                    
                                 </span>
                             </a>
                         </li>
@@ -699,7 +703,7 @@
                                     </svg>
                                 </i>
                             </a>
-                            
+
                             <form id="frm_product" action="#" method="get">
                                 <!--https://monatabluelight.com/san-pham.html-->
                                 <input type="text" name="keyword" value="" placeholder="Tìm kiếm...">
@@ -721,8 +725,8 @@
                 <div class="clearfix"></div>
             </div>
         </div><!-- /.header-nav-->
-        
-        
+
+
         <div class="block-menu-slider">
             <div class="container">
                 <div class="menu-slick slick-initialized slick-slider">
@@ -737,21 +741,21 @@
                 </div>
             </div>
         </div><!-- /.block-menu-slider-->
-        
+
         <script type="text/javascript">
-                    $(document).ready(function () {
-                    $('.block-menu-slider .menu-slick').slick({
+            $(document).ready(function () {
+                $('.block-menu-slider .menu-slick').slick({
                     dots: false,
-                            infinite: true,
-                            autoplay: true,
-                            autoplaySpeed: 3000,
-                            speed: 300,
-                            slidesToShow: 1,
-                            adaptiveHeight: true
-                    });
-                    })
+                    infinite: true,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    speed: 300,
+                    slidesToShow: 1,
+                    adaptiveHeight: true
+                });
+            })
         </script>
-        
+
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/modules/products/assets/js/cat.js?v=1716981831"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/bootstrap.min.js?v=1716981831"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/library.js?v=1716981831"></script>

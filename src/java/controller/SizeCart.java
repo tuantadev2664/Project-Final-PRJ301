@@ -22,7 +22,7 @@ import model.Product;
  *
  * @author mb
  */
-public class ShowCart extends HttpServlet {
+public class SizeCart extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,7 +36,15 @@ public class ShowCart extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SizeCart</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SizeCart at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     } 
 
@@ -68,9 +76,7 @@ public class ShowCart extends HttpServlet {
         int size = cart.getListItem().size();
         HttpSession session = request.getSession();
         session.setAttribute("sizecart", size);
-        
-        request.setAttribute("Cart", cart);
-        request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+        response.sendRedirect("header.jsp");
     } 
 
     /** 

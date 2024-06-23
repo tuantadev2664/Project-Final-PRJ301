@@ -386,4 +386,20 @@ public class DAO {
         return null;
     }
 
+        public Cart readCookieCart(Cookie[] arrCookie){
+            List<Product> listProduct = getAllProduct();
+        String txt = "";
+        
+        if (arrCookie != null) {
+            for (Cookie c : arrCookie) {
+                if (c.getName().equals("Cart")) {
+                    txt += c.getValue();
+                    c.setMaxAge(0);
+                }
+            }
+        }
+        Cart cart = new Cart(txt, listProduct);
+        return cart;
+        }
+
 }
