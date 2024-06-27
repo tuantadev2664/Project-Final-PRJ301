@@ -5,15 +5,15 @@
         <group>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/controller/RegisterServlet.java</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/register.jsp</file>
-            <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/product.jsp</file>
+            <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/header.jsp</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/login.jsp</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/account.jsp</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/dao/LoginDAO.java</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/model/Account.java</file>
-            <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/address.jsp</file>
-            <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/css/account.css</file>
-            <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/index.html</file>
+            <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/model/Address.java</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/controller/LoginServlet.java</file>
+            <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/context/DBContext.java</file>
+            <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/controller/LogoutServlet.java</file>
         </group>
     </open-files>
 </project-private>

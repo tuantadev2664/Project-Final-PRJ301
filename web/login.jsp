@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +16,24 @@
         <link rel="stylesheet" href="css/styleheaderlogin.css">
         <link rel="stylesheet" href="css/bootstrapheaderlogin.css">
         <style>
+            /*            .container:hover {
+                        background-color: lightblue;
+                        transform: scale(0.99);  Tăng kích thước nhẹ 
+                    }*/
+            /* Hiệu ứng khi di chuột qua */
+            .btn:hover {
+                background-color: gray;
+                transform: scale(1.025); /* Tăng kích thước nhẹ */
+            }
+
+            /* Hiệu ứng khi nhấp vào */
+            .btn:active {
+                background-color: darkgray;
+                transform: scale(0.95); /* Giảm kích thước nhẹ */
+            }
+        </style>
+
+        <style>
         </style>
     </head>
     <body>
@@ -22,29 +41,45 @@
             <jsp:include page="header.jsp"/>
         </div>
 
-        <div style="margin-top: 10px" class="container">
+        <div style="margin-top: 10px;
+             background-color: #F5F5F5;
+             margin-top: 10px;
+             width: 30%;
+             height: 70%;
+             padding-top: 15px;
+             padding-bottom: 15px;
+             border: 0.5px solid black;
+             border-radius: 15px;
+             " class="container">
             <div class="eag-content-acc">
-                <h1 class="title-head"><span>Đăng nhập tài khoản</span></h1>
+                <h2 style="display: flex;
+                    height: 60px;
+                    margin: -15px -15px 15px -15px;
+                    width: auto;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: black;
+                    color: white;
+                    border-top-left-radius: 14px;
+                    border-top-right-radius: 14px;" class="title-head"><span>Đăng nhập tài khoản</span></h2>
+                <h3 style="red">${sessionScope.notification}</h3>
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div style="
+                         align-items: center;
+                         " class="col-lg-12">
                         <div class="page-login margin-bottom-30">
                             <div id="login">
-                                <form method="post" action="/project-final-prj301/LoginServlet" id="customer_login" accept-charset="UTF-8"><input name="FormType" type="hidden" value="customer_login"><input name="utf8" type="hidden" value="true"><input name="ReturnUrl" type="hidden" value="/account">
+                                <form action="login" method="post" id="customer_login" accept-charset="UTF-8"><input name="FormType" type="hidden" value="customer_login"><input name="utf8" type="hidden" value="true"><input name="ReturnUrl" type="hidden" value="/account">
                                     <div class="form-signup">
-                                        <%
-                                            String errorMessage = (String) request.getAttribute("errorMessage");
-                                            if (errorMessage != null) {
-                                        %>
-                                        <div class="alert alert-danger" role="alert" style="margin-top: 10px">
-                                            <%= errorMessage %>
-                                        </div>
-                                        <%
-                                            }
-                                        %>
+                                        <c:if test="${requestScope.error != null}">
+                                            <div class="alert alert-danger" role="alert" style="margin-top: 10px">
+                                                ${requestScope.error}
+                                            </div>
+                                        </c:if>
                                     </div>
                                     <div class="form-signup clearfix">
                                         <fieldset class="form-group">
-                                            <label>Email:<span class="ega-red-color">*</span> </label>
+                                            <label>Username:<span class="ega-red-color">*</span> </label>
                                             <input style="
                                                    height:4rem;
                                                    padding:.5rem 1rem;
@@ -52,9 +87,9 @@
                                                    line-height:1.5;
                                                    border-radius:.3rem;
                                                    border: 2px solid black;
-                                                   font-size: 15px" type="email" class="form-control form-control-lg ega-input-valid" value="" name="email" id="customer_email" placeholder="Email">
+                                                   font-size: 15px" type="username" class="form-control form-control-lg ega-input-valid" value="" name="username" id="customer_email" placeholder="Email">
                                             <div class="eg-error-form" style="color:#a94442;display: none">
-                                                Email không hợp lệ!
+                                                Username/Email không hợp lệ!
                                             </div>
                                         </fieldset>
 
@@ -71,13 +106,16 @@
                                             <div class="eg-error-form" style="color:#a94442;display: none">
                                                 Mật khẩu trống!
                                             </div>
-                                        </fieldset>
+                                        </fieldset> 
+                                        <input style="font-size: 50px" type="checkbox" name="rememberMe" value="yes"><span style="font-size: 15px"> Remember Me</span><br>
 
 
-
-                                        <div class="pull-xs-left" style="margin-top: 25px;">
+                                        <div class="col-lg-12" style="margin-top: 10px;
+                                             display: flex;
+                                             justify-content: center;
+                                             align-items: center">
                                             <input style="color: white; background-color: black; font-size: 20px" class="btn ega-btn" type="submit" value="Đăng nhập">
-                                            <a href="register.jsp" class="btn" style="font-size: 20px" style="margin-left: 20px;">
+                                            <a href="${pageContext.request.contextPath}/register" class="btn" style="font-size: 20px" style="margin-left: 20px;">
                                                 Đăng ký
                                             </a>
                                         </div>
@@ -114,7 +152,9 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                                <div class="action_bottom">
+                                <div style="display: flex;
+                                     justify-content: center;
+                                     align-items: center" class="action_bottom">
                                     <input style="color: white; background-color: black; font-size: 15px" class="btn ega-btn-round" type="submit" value="Lấy lại mật khẩu">
 
                                 </div>
@@ -122,9 +162,7 @@
                         </div>
 
                     </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <div id="social_login_widget"></div>
-                    </div>
+
                 </div>
             </div>
 

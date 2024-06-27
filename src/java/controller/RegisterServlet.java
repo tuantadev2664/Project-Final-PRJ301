@@ -4,18 +4,22 @@
  */
 package controller;
 
+import dao.LoginDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import model.Account;
 
 /**
  *
  * @author DELL
  */
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
 
     /**
@@ -35,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
+            out.println("<title>Servlet RegisterServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
@@ -56,7 +60,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +74,36 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        try {
+            String lastName = request.getParameter("lastName");
+            String firstName = request.getParameter("lastName");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            
+            Account nAccount = new Account();
+            nAccount.setFullname(firstName + lastName);
+            nAccount.setUsername(username);
+            nAccount.setPassword(password);
+            nAccount.setEmail(email);
+            
+            HttpSession session = request.getSession();
+            LoginDAO dao = new LoginDAO();
+            if(dao.getAccountByUsername(username) != null){
+                request.setAttribute("error", "Username existed!!");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            } else if (dao.getAccountByEmail(email) != null){
+                request.setAttribute("error", "Email existed!!");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            } else {
+                Account a = new Account(username, password, username, email);
+                dao.insertAccount(a);
+                request.setAttribute("notification", "Please login");
+                request.getRequestDispatcher("login").forward(request, response);
+            }
+        } catch (Exception e) {
+        }
     }
 
     /**
