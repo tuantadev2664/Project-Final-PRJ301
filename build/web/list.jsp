@@ -35,7 +35,7 @@
                         <div class="product-item">
                             <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
                                 <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                                <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
+                                <img class="img-fluid" src="${o.productImagesLarge.get(0)}" data-src="${o.productImagesLarge.get(0)}" data-hover="${((o.productImagesLarge.get(1)!= null)?o.productImagesLarge.get(1): o.productImagesLarge.get(0))}" alt="${o.productName}">
                             </a>
                             <h4 class="heading">
                                 <a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a>
@@ -56,21 +56,30 @@
                 <ul class="pagination">
                     <c:forEach begin="1" end="${endP}" var="u">
                         <li class="page-item ${tagH==u?"active":""}">
-                            <a class="page-link" href="list?index=${u}">
-                                ${u}
-                            </a>
+                            <c:choose>
+                                <c:when test="${not empty param.categoryID}">
+                                    <a class="page-link" href="category?categoryID=${param.categoryID}&index=${u}">
+                                        ${u}
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="page-link" href="list?index=${u}">
+                                        ${u}
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
                         </li>
                     </c:forEach>
                     <li class="page-item">
                         <b>..</b>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" title="Next page" href="list?index=${tagH}">
+                        <a class="page-link" title="Next page" href="/san-pham/page-2.html">
                             →
                         </a>
                     </li>
                 </ul>
-            </nav>    
+            </nav>  
         </div><!-- /.col-lg-9-->
 
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/modules/products/assets/js/cat.js?v=1716981831"></script>

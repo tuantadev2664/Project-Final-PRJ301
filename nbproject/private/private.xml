@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/controller/RegisterServlet.java</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/register.jsp</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/web/header.jsp</file>
@@ -14,6 +15,9 @@
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/controller/LoginServlet.java</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/context/DBContext.java</file>
             <file>file:/E:/Chuyen%20nganh%204/PRJ/Project-Final-PRJ301/src/java/controller/LogoutServlet.java</file>
+=======
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/dao/DAO.java</file>
+>>>>>>> c180db297ff7c08bd7ee001841a01bae6a1302e9
         </group>
     </open-files>
 </project-private>
