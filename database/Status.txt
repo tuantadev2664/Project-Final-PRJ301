@@ -1,0 +1,8 @@
+statusID	statusName
+S01	OUTLET SALE
+S02	Online Store
+S03	Online Only
+S04	Pre-order
+S05	Available
+S06	Sold out
+S07	Flash Sale

@@ -1,0 +1,9 @@
+categoryID	categoryName
+C01	Áo sơ mi (Shirt)
+C02	Quần shorts
+C03	Áo Polo
+C04	Sweater & Hoodie
+C05	T-Shirt
+C06	Coat & Jacket
+C07	Quần (Pants)
+C08	Phụ Kiện (Vớ tất, Balo)

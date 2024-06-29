@@ -6,11 +6,13 @@ package dao;
 
 import com.sun.jdi.connect.spi.Connection;
 import context.DBContext;
+import jakarta.servlet.http.Cookie;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Cart;
 import model.Category;
 import model.Product;
 import model.ProductColor;
@@ -65,7 +67,7 @@ public class DAO {
 
     public List<Product> getAllProductByCategory() {
         List<Product> list = new ArrayList<>();
-        String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge  from Product order by productCode DESC";
+        String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImagesDetail  from Product order by productCode DESC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -322,10 +324,10 @@ public class DAO {
     
     public List<ProductColor> getProductColor(String productCode){
         List<ProductColor> list = new ArrayList<>();
-        String sql = "select ProductColor.[ colorId], [ colorLink]\n"
+        String sql = "select ProductColor.[colorId], [colorLink]\n"
                 + "from ProductColor\n"
-                + "join Color on ProductColor.[ colorId] = Color.[ colorId]\n"
-                + "where productCode = ? order by ProductColor.[ colorId] ASC";
+                + "join Color on ProductColor.[colorId] = Color.[colorId]\n"
+                + "where productCode = ? order by ProductColor.[colorId] ASC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -420,9 +422,9 @@ public class DAO {
         List<ProductImgDetail> listImgDetails = new ArrayList<>();
         for(ProductColor productColor : listColor){
             List<String> listImg = new ArrayList<>();
-            String sql = "select  [ imgDetailColor]\n"
+            String sql = "select  [imgDetailColor]\n"
                     + "from ProductImgDetail\n"
-                    + "where productCode = ? and [ colorId] = ?";
+                    + "where productCode = ? and [colorId] = ?";
             try {
                 java.sql.Connection connection = new DBContext().getConnect();
                 PreparedStatement st = connection.prepareStatement(sql);
@@ -513,45 +515,38 @@ public class DAO {
         }
        return listImages;
     }
+//-------------------------------------------------------------------------------
+    public Product searchProduct(String code) {
+        ArrayList<Product> list = (ArrayList<Product>) getAllProductByCategory();
+        for (Product s : list) {
+            if (s.getProductCode().contains(code)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public Cart readCookieCart(Cookie[] arrCookie) {
+        List<Product> listProduct = getAllProductByCategory();
+        String txt = "";
+
+        if (arrCookie != null) {
+            for (Cookie c : arrCookie) {
+                if (c.getName().equals("Cart")) {
+                    txt += c.getValue();
+                    c.setMaxAge(0);
+                }
+            }
+        }
+        Cart cart = new Cart(txt, listProduct);
+        return cart;
+    }
+
     public static void main(String[] args) {
        DAO dao = new DAO();
        int sum = 0;
-//       for(Product product : dao.getASampleProductByProductCode("MBL267")){
-//           sum++;
-//           System.out.println(product.getProductImages().get(1));
-//       }
-       
-//        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
-        
-//        System.out.println(dao.getProductByProductCode("MBL267"));
-        
-//       for(Category category : dao.getAllCategory()){
-//           sum++;
-//           System.out.println(category);
-//       }
-//        for (Product pro : dao.getAllProduct()) {
-//            System.out.println(pro.toString());
-//        }
-//        System.out.println("------------");
-//        List<Product> proList = dao.pagingProducts(1);
-//        for (Product product : proList) {
-//            System.out.println(product.toString());
-//            sum++;
-//        }
-//        System.out.println("sum = " + sum);
-        //System.out.println(dao.getNumberProductByCategory("C01"));
-//        System.out.println(dao.getProductByProductCode("MBL267"));
-//        System.out.println(dao.getProductByProductCode("MBL267").getProductColorList());
-//        for (ProductColor productColor : dao.getProductByProductCode("MBL267").getProductColorList()){
-//            System.out.println(productColor.getColorID() + ":  "+ productColor.getColorLinkString());
-//        }
-       //System.out.println(dao.getProductColor("MBL267"));
-       for(ProductImgDetail productImgDetail : dao.getProductImgDetails("MBL259")){
-           System.out.println(productImgDetail.getColorID());
-           for(String str : productImgDetail.getImgDetailColor()){
-               System.out.println(str);
-           }
-       }
+        System.out.println(dao.getProductByProductCode("MBL266"));
+//        System.out.println(dao.getProductImgDetails("MBL266"));
     }
 
 }
