@@ -5,24 +5,25 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head id="Head1" prefix="og: http://ogp.me/ns# fb:http://ogp.me/ns/fb# article:http://ogp.me/ns/article#">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Product | group 5</title>
-        
-        
+
+
         <link type="image/x-icon" href="images/Premium Vector _ Men's fashion store logo design template_vector illustration.jpg" rel="icon">
-        
-<!--        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/bootstrap.css?v=1716981831"> 
-        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1716981831"> -->
-        
+
+        <!--        <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/bootstrap.css?v=1716981831"> 
+                <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1716981831"> -->
+
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css"> 
-        
+
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
 
-               
+
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
 
 
@@ -578,7 +579,7 @@
                 }
             }
         </style>
-        
+
     </head>
     <body style="padding-top: 0px;">
         <div class="header-top">
@@ -596,7 +597,7 @@
                     <b class="d-sm-inline d-none font-weight-normal">CSKH:</b> <span>0848270604</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </a>
                 <a class="d-sm-inline d-none" href="#">
-<!--                    /gioi-thieu-i1-->
+                    <!--                    /gioi-thieu-i1-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4">
                     <circle cx="2" cy="2" r="2" fill="#fb8a06"></circle>
                     </svg>&nbsp;
@@ -610,9 +611,9 @@
                 </a>
             </div>
         </div><!-- /.header-top-->
-        
+
         <div class="header-nav">
-            
+
             <div class="container">
                 <div class="float-left nav-float-left">
                     <nav class="navbar navbar-expand-lg">
@@ -647,26 +648,46 @@
                         </div>
                     </nav>                    
                 </div>
-                
+
+                <c:set var="account" value="${sessionScope.account}"/>
                 <div class="float-right">
                     <ul class="list-inline">
                         <li class="list-inline-item d-sm-inline d-none" >
-                            <a href="">Store</a>
-                            <!--/store-->
-                        </li>
-                        <li class="list-inline-item " >
-                            <a href="login.jsp">
-                                <!--https://monatabluelight.com/trang-ca-nhan-->
-                                <i style='padding-top: 0px'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="26" viewBox="0 0 22 26" >
-                                    <g transform="translate(0 0)">
-                                    <path id="Path_667" data-name="Path 667" d="M93.3,12.942a5.965,5.965,0,0,0,4.429-1.9,6.368,6.368,0,0,0,1.835-4.575A6.368,6.368,0,0,0,97.724,1.9a6.121,6.121,0,0,0-8.857,0,6.367,6.367,0,0,0-1.835,4.575,6.368,6.368,0,0,0,1.835,4.575A5.967,5.967,0,0,0,93.3,12.942ZM89.944,3.009a4.631,4.631,0,0,1,6.7,0,4.757,4.757,0,0,1,1.389,3.462,4.757,4.757,0,0,1-1.389,3.462,4.631,4.631,0,0,1-6.7,0,4.756,4.756,0,0,1-1.389-3.462,4.757,4.757,0,0,1,1.389-3.462Zm0,0" transform="translate(-82.465 0)" fill="#1d2738"></path>
-                                    <path id="Path_668" data-name="Path 668" d="M21.947,255a16.27,16.27,0,0,0-.214-1.7,13.585,13.585,0,0,0-.41-1.707A8.513,8.513,0,0,0,20.634,250a5.988,5.988,0,0,0-1.038-1.379,4.568,4.568,0,0,0-1.492-.955,5.072,5.072,0,0,0-1.9-.351,1.913,1.913,0,0,0-1.032.446c-.309.206-.671.443-1.075.706a6.1,6.1,0,0,1-1.391.625,5.308,5.308,0,0,1-3.4,0,6.088,6.088,0,0,1-1.39-.624c-.4-.261-.762-.5-1.076-.707a1.911,1.911,0,0,0-1.032-.446,5.065,5.065,0,0,0-1.9.352,4.563,4.563,0,0,0-1.492.955A5.991,5.991,0,0,0,1.364,250a8.529,8.529,0,0,0-.689,1.592,13.617,13.617,0,0,0-.41,1.707A16.161,16.161,0,0,0,.053,255c-.035.513-.053,1.047-.053,1.587a4.506,4.506,0,0,0,1.3,3.375,4.631,4.631,0,0,0,3.351,1.245h12.7A4.631,4.631,0,0,0,20.7,259.96a4.5,4.5,0,0,0,1.3-3.375c0-.541-.018-1.075-.053-1.587Zm-2.313,3.822a3.117,3.117,0,0,1-2.286.811H4.651a3.117,3.117,0,0,1-2.286-.811,2.944,2.944,0,0,1-.821-2.235c0-.5.016-1,.049-1.478a14.574,14.574,0,0,1,.193-1.529,12.009,12.009,0,0,1,.36-1.5,6.943,6.943,0,0,1,.56-1.294,4.44,4.44,0,0,1,.763-1.019,3.03,3.03,0,0,1,.992-.629,3.5,3.5,0,0,1,1.217-.239c.054.029.15.085.307.189.318.211.684.452,1.089.715a7.59,7.59,0,0,0,1.746.8,6.825,6.825,0,0,0,4.354,0,7.6,7.6,0,0,0,1.747-.8c.414-.27.77-.5,1.088-.715.156-.1.252-.16.307-.189a3.5,3.5,0,0,1,1.217.239,3.034,3.034,0,0,1,.992.629,4.429,4.429,0,0,1,.763,1.019,6.919,6.919,0,0,1,.561,1.294,11.983,11.983,0,0,1,.361,1.5,14.7,14.7,0,0,1,.193,1.529h0c.033.475.049.972.049,1.477a2.943,2.943,0,0,1-.821,2.234Zm0,0" transform="translate(0 -235.205)" fill="#1d2738"></path>
-                                    </g>
-                                    </svg>
-                                </i>
+                            <a href="">
+                                Store
                             </a>
                         </li>
+                        
+                        <c:if test="${empty sessionScope.account}">  
+                            <li class="list-inline-item" >
+                                <a  href="login">
+                                    <i style='padding-top: 0px;margin-left: 5px; margin-top: 1px'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="26" viewBox="0 0 22 26" > 
+                                        <g transform="translate(0 0)">  
+                                        <path id="Path_667" data-name="Path 667" d="M93.3,12.942a5.965,5.965,0,0,0,4.429-1.9,6.368,6.368,0,0,0,1.835-4.575A6.368,6.368,0,0,0,97.724,1.9a6.121,6.121,0,0,0-8.857,0,6.367,6.367,0,0,0-1.835,4.575,6.368,6.368,0,0,0,1.835,4.575A5.967,5.967,0,0,0,93.3,12.942ZM89.944,3.009a4.631,4.631,0,0,1,6.7,0,4.757,4.757,0,0,1,1.389,3.462,4.757,4.757,0,0,1-1.389,3.462,4.631,4.631,0,0,1-6.7,0,4.756,4.756,0,0,1-1.389-3.462,4.757,4.757,0,0,1,1.389-3.462Zm0,0" transform="translate(-82.465 0)" fill="#1d2738"></path>
+                                        <path id="Path_668" data-name="Path 668" d="M21.947,255a16.27,16.27,0,0,0-.214-1.7,13.585,13.585,0,0,0-.41-1.707A8.513,8.513,0,0,0,20.634,250a5.988,5.988,0,0,0-1.038-1.379,4.568,4.568,0,0,0-1.492-.955,5.072,5.072,0,0,0-1.9-.351,1.913,1.913,0,0,0-1.032.446c-.309.206-.671.443-1.075.706a6.1,6.1,0,0,1-1.391.625,5.308,5.308,0,0,1-3.4,0,6.088,6.088,0,0,1-1.39-.624c-.4-.261-.762-.5-1.076-.707a1.911,1.911,0,0,0-1.032-.446,5.065,5.065,0,0,0-1.9.352,4.563,4.563,0,0,0-1.492.955A5.991,5.991,0,0,0,1.364,250a8.529,8.529,0,0,0-.689,1.592,13.617,13.617,0,0,0-.41,1.707A16.161,16.161,0,0,0,.053,255c-.035.513-.053,1.047-.053,1.587a4.506,4.506,0,0,0,1.3,3.375,4.631,4.631,0,0,0,3.351,1.245h12.7A4.631,4.631,0,0,0,20.7,259.96a4.5,4.5,0,0,0,1.3-3.375c0-.541-.018-1.075-.053-1.587Zm-2.313,3.822a3.117,3.117,0,0,1-2.286.811H4.651a3.117,3.117,0,0,1-2.286-.811,2.944,2.944,0,0,1-.821-2.235c0-.5.016-1,.049-1.478a14.574,14.574,0,0,1,.193-1.529,12.009,12.009,0,0,1,.36-1.5,6.943,6.943,0,0,1,.56-1.294,4.44,4.44,0,0,1,.763-1.019,3.03,3.03,0,0,1,.992-.629,3.5,3.5,0,0,1,1.217-.239c.054.029.15.085.307.189.318.211.684.452,1.089.715a7.59,7.59,0,0,0,1.746.8,6.825,6.825,0,0,0,4.354,0,7.6,7.6,0,0,0,1.747-.8c.414-.27.77-.5,1.088-.715.156-.1.252-.16.307-.189a3.5,3.5,0,0,1,1.217.239,3.034,3.034,0,0,1,.992.629,4.429,4.429,0,0,1,.763,1.019,6.919,6.919,0,0,1,.561,1.294,11.983,11.983,0,0,1,.361,1.5,14.7,14.7,0,0,1,.193,1.529h0c.033.475.049.972.049,1.477a2.943,2.943,0,0,1-.821,2.234Zm0,0" transform="translate(0 -235.205)" fill="#1d2738"></path>
+                                        </g>
+                                        </svg>
+                                    </i>
+                                </a>
+                            </li>
+                        </c:if> 
+                        <c:if test="${not empty sessionScope.account}">
+                            <li class="list-inline-item d-sm-inline d-none" >
+                                <a href="${pageContext.request.contextPath}/login" style="
+                                   padding-top: 2px;
+                                   padding-left: 0px;
+                                   font-size: 18px;
+                                   font-weight: bold;
+                                   vertical-align: middle;
+                                   display: inline-block;
+                                   position: relative;">
+                                    Hello ${account.username} </a>
+                                <!--/store-->
+                            </li>
+                        </c:if>
+
+
                         <li class="list-inline-item " >
                             <a href="#">
                                 <!--https://monatabluelight.com/gio-hang-->
@@ -698,7 +719,7 @@
                                     </svg>
                                 </i>
                             </a>
-                            
+
                             <form id="frm_product" action="#" method="get">
                                 <!--https://monatabluelight.com/san-pham.html-->
                                 <input type="text" name="keyword" value="" placeholder="Tìm kiếm...">
@@ -720,8 +741,8 @@
                 <div class="clearfix"></div>
             </div>
         </div><!-- /.header-nav-->
-        
-        
+
+
         <div class="block-menu-slider">
             <div class="container">
                 <div class="menu-slick slick-initialized slick-slider">
@@ -736,21 +757,21 @@
                 </div>
             </div>
         </div><!-- /.block-menu-slider-->
-        
+
         <script type="text/javascript">
-                    $(document).ready(function () {
-                    $('.block-menu-slider .menu-slick').slick({
+            $(document).ready(function () {
+                $('.block-menu-slider .menu-slick').slick({
                     dots: false,
-                            infinite: true,
-                            autoplay: true,
-                            autoplaySpeed: 3000,
-                            speed: 300,
-                            slidesToShow: 1,
-                            adaptiveHeight: true
-                    });
-                    })
+                    infinite: true,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    speed: 300,
+                    slidesToShow: 1,
+                    adaptiveHeight: true
+                });
+            })
         </script>
-        
+
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/modules/products/assets/js/cat.js?v=1716981831"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/bootstrap.min.js?v=1716981831"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/library.js?v=1716981831"></script>

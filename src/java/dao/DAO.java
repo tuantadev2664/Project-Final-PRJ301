@@ -516,6 +516,8 @@ public class DAO {
     public static void main(String[] args) {
        DAO dao = new DAO();
        int sum = 0;
+        System.out.println(dao.getAllProductByCategory());
+
 //       for(Product product : dao.getASampleProductByProductCode("MBL267")){
 //           sum++;
 //           System.out.println(product.getProductImages().get(1));
@@ -546,12 +548,12 @@ public class DAO {
 //            System.out.println(productColor.getColorID() + ":  "+ productColor.getColorLinkString());
 //        }
        //System.out.println(dao.getProductColor("MBL267"));
-       for(ProductImgDetail productImgDetail : dao.getProductImgDetails("MBL259")){
-           System.out.println(productImgDetail.getColorID());
-           for(String str : productImgDetail.getImgDetailColor()){
-               System.out.println(str);
-           }
-       }
+//       for(ProductImgDetail productImgDetail : dao.getProductImgDetails("MBL259")){
+//           System.out.println(productImgDetail.getColorID());
+//           for(String str : productImgDetail.getImgDetailColor()){
+//               System.out.println(str);
+//           }
+//       }
     }
 
 }
