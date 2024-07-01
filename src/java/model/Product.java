@@ -18,6 +18,9 @@ public class Product {
     private String productPrice;
     private String productOldPrice;
     private String productSize;
+    private String productColor;
+    private String productImg;
+    private String colorLink;
     private List<String> productDescription;
     private List<ProductColor> productColorList;
     private List<String> productImagesOrigin;
@@ -28,6 +31,18 @@ public class Product {
     public Product() {
     }
 
+    public Product(String productCode, String productName, String productColor, String productSize, String productPrice, String productImg, String colorLink) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.productColor = productColor;
+        this.productSize = productSize;
+        this.productPrice = productPrice;
+        this.productImg = productImg;
+        this.colorLink = colorLink;
+
+    }
+
+    
     public Product(String productCode, String productName, String productStatus, String productPrice, String productOldPrice, List<String> productImagesLarge) {
         this.productCode = productCode;
         this.productName = productName;
@@ -157,6 +172,30 @@ public class Product {
 
     public void setProductImgDetails(List<ProductImgDetail> productImgDetails) {
         this.productImgDetails = productImgDetails;
+    }
+
+    public String getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(String productColor) {
+        this.productColor = productColor;
+    }
+
+    public String getProductImg() {
+        return productImg;
+    }
+
+    public void setProductImg(String productImg) {
+        this.productImg = productImg;
+    }
+
+    public String getColorLink() {
+        return colorLink;
+    }
+
+    public void setColorLink(String colorLink) {
+        this.colorLink = colorLink;
     }
     
     

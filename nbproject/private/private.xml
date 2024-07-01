@@ -4,16 +4,22 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/model/Product.java</file>
+            <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/controller/ListServlet.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/dao/DAO.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/model/Cart.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/controller/AddToCart.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/model/Item.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/controller/CartServlet.java</file>
+            <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/controller/CategoryServlet.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/controller/ShoppingServlet.java</file>
+            <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/web/header.jsp</file>
+            <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/context/DBContext.java</file>
+            <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/web/viewCart.jsp</file>
+            <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/controller/ListSampleServlet.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/controller/ShowCart.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/controller/SizeCart.java</file>
             <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/web/product-detail.jsp</file>
-            <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/context/DBContext.java</file>
+            <file>file:/Users/mb/Desktop/Java/Final/Project-Final-PRJ301-new/src/java/Listener/Listener.java</file>
         </group>
     </open-files>
 </project-private>

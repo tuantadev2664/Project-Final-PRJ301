@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author mb
- */
 public class Cart {
 
     List<Item> listItem;
@@ -23,9 +15,19 @@ public class Cart {
         return listItem;
     }
 
-    public Item getItemById(String id) {
+    public Item getItemByIdColorSize(String id, String color, String size) {
         for (Item i : listItem) {
-            if (i.getProduct().getProductCode().equals(id)) {
+            Product product = i.getProduct();
+            if (product != null && product.getProductCode().equals(id) && product.getProductColor().equals(color) && product.getProductSize().equals(size)) {
+                return i;
+            }
+        }
+        return null;
+    }
+    public Item getItemById(String id){
+        for (Item i : listItem) {
+            Product product = i.getProduct();
+            if (product != null && product.getProductCode().equals(id)) {
                 return i;
             }
         }
@@ -33,84 +35,91 @@ public class Cart {
     }
 
     public int getQuanById(String id) {
-        return getItemById(id).getQuantity();
+        Item item = getItemById(id);
+        return (item != null) ? item.getQuantity() : 0;
     }
-//------------------------------------------------------------------------------
-    public void addItem(Item i) {
 
-        if (getItemById(i.getProduct().getProductCode()) != null) { // ktra da ton tai sp trong gio hang
-            Item item = getItemById(i.getProduct().getProductCode());
-            item.setQuantity(item.getQuantity() + i.getQuantity());
+    public void addItem(Item i) {
+        if (i.getProduct() == null) {
+            throw new IllegalArgumentException("Item must have a non-null Product.");
+        }
+
+        Item existingItem = getItemByIdColorSize(i.getProduct().getProductCode(), i.getProduct().getProductColor(), i.getProduct().getProductSize());
+        if (existingItem != null) {
+            existingItem.setQuantity(existingItem.getQuantity() + i.getQuantity());
         } else {
             listItem.add(i);
         }
     }
-    
-//------------------------------------------------------------------------------
+
     public void removeItem(String id) {
-        if (getItemById(id) != null) {
-            listItem.remove(getItemById(id));
+        Item item = getItemById(id);
+        if (item != null) {
+            listItem.remove(item);
         }
     }
 
-//------------------------------------------------------------------------------
     public float getTotalMoney() {
         float s = 0;
         for (Item i : listItem) {
-            s += Float.parseFloat(i.getProduct().getProductPrice());
-//            s += (i.getQuantity() * Float.parseFloat(i.getProduct().getProductPrice()) * (1 - Float.parseFloat(i.getProduct().getProductSale())));
+            Product product = i.getProduct();
+            if (product != null) {
+                s += Float.parseFloat(product.getProductPrice());
+            }
         }
         return s;
     }
 
-//------------------------------------------------------------------------------  
-        private Product getProductById(String id, List<Product> listProduct) {
+    private Product getProductById(String id, List<Product> listProduct) {
         for (Product p : listProduct) {
             if (p.getProductCode().equals(id)) {
                 return p;
             }
-
         }
         return null;
     }
-//------------------------------------------------------------------------------    
+
     private Product getProductByIdColorSize(String id, String color, String size, List<Product> listProduct) {
         for (Product p : listProduct) {
-            if (p.getProductCode().equals(id) && p.getProductColorList().contains(color) && p.getProductSize().equals(size)) {
+            if (p.getProductCode().equals(id) && p.getProductColor().equals(color) && p.getProductSize().equals(size)) {
                 return p;
             }
-
         }
         return null;
     }
 
-//------------------------------------------------------------------------------
     public String cartSize() {
-        if (this.listItem.size() != 0) {
-            return String.valueOf(this.listItem.size());
-        } else {
-            return "0";
-        }
+        return String.valueOf(this.listItem.size());
     }
 
-    public Cart(String txt, List<Product> listProduct) {// list product laf ds cac mat hang cua shop
+    public Cart(String txt, List<Product> listProduct) {
         listItem = new ArrayList<>();
-        if (txt != null && txt.length() != 0) {
+        if (txt != null && !txt.isEmpty()) {
             String[] arr = txt.split("/");
             for (String item : arr) {
                 String[] productArr = item.split(":");
-                String id = productArr[0];
-                String color = productArr[1];
-                String size = productArr[2];
-                String quan = productArr[3];
-                quan="1";
-                
-                Product p = getProductById(id,listProduct);
-//                Product p = getProductByIdColorSize(id,color,size, listProduct);
-                Item i = new Item(p, Integer.parseInt(quan));
-                addItem(i);
+                if (productArr.length == 4) {
+                    String id = productArr[0];
+                    String color = productArr[1];
+                    String size = productArr[2];
+                    String quan = productArr[3];
+                    // k tim dc p
+                    Product p = getProductByIdColorSize(id, color, size, listProduct);
+                    System.out.println(p.getProductCode() + p.getProductName() + p.getProductColor() + p.getProductSize() + p.getProductPrice() + p.getProductImg() + p.getColorLink());
+
+                    if (p != null) {
+                        Item i = new Item(p, Integer.parseInt(quan));
+                        addItem(i);
+
+                    }
+                }
             }
         }
-
     }
+
+    @Override
+    public String toString() {
+        return "Cart{" + "listItem=" + listItem + '}';
+    }
+
 }

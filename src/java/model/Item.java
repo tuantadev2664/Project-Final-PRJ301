@@ -36,5 +36,10 @@ public class Item {
     public Item() {
     }
 
+    @Override
+    public String toString() {
+        return "Item{" + "product=" + product + ", quantity=" + quantity + '}';
+    }
+
     
 }

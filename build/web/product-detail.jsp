@@ -159,19 +159,31 @@
 
 
 
-                    <div class="row detail-size-quantity">
+<div class="row detail-size-quantity">
+    <div class="col-md-6">
+        <div class="de-title">Size</div>
+        <%
+            int k = 0;
+        %>
+        <c:forEach items="${listP.productSize}" var="o3">
+            <% k++; %>
+            <button id="button-size-<%=k%>" class="button-size" data-size="${o3}" onclick="selectSize('${o3}')">${o3}</button>
+        </c:forEach>
+    </div>
+</div>
 
-                        <div class="col-md-6">
-                            <div class="de-title">Size</div>
-                            <%
-                                int k = 0;
-                            %>
-                            <c:forEach items="${listP.productSize}" var="o3">
-                                <% k++; %>
-                                <button id="button-size-1" class="button-size" value="<%= k%>">${o3}</button>
-                            </c:forEach>
-                        </div>
-                        <div class="col-md-6">
+<script>
+    function selectSize(size) {
+        // Set the selected size in the hidden input field
+        document.getElementById('selectedSize').value = size;
+        
+        // Optional: You can also add some visual feedback for the selected button
+        const buttons = document.querySelectorAll('.button-size');
+        buttons.forEach(button => button.classList.remove('selected'));
+        event.target.classList.add('selected');
+    }
+</script>
+<!--                        <div class="col-md-6">
                             <div class="de-title">Số lượng</div>
                             <div class="input-group">
                                 <button type="button" class="btn btn-outline-secondary" onclick="decreaseQuantity()">-</button>
@@ -199,24 +211,55 @@
                                 var visibleQuantity = document.getElementById("visibleQuantity").value;
                                 document.getElementById("hiddenQuantity").value = visibleQuantity;
                             }
-                        </script>
+                        </script>-->
+<div class="col-md-6">
+    <div class="de-title">Số lượng</div>
+    <div class="input-group">
+        <input class="form-control" type="number" name="quantity" id="visibleQuantity" value="1" aria-live="assertive" oninput="updateHiddenQuantity()">
+    </div>
+</div>
 
-                        <form id="addToCartForm" action="AddToCart" >
+
+<script>
+    function increaseQuantity() {
+        var quantityInput = document.getElementById("visibleQuantity");
+        var currentValue = parseInt(quantityInput.value) || 0;
+        quantityInput.value = currentValue + 1;
+        updateHiddenQuantity();
+    }
+
+    function decreaseQuantity() {
+        var quantityInput = document.getElementById("visibleQuantity");
+        var currentValue = parseInt(quantityInput.value) || 0;
+        if (currentValue > 1) {  // Ensure the quantity doesn't go below 1
+            quantityInput.value = currentValue - 1;
+            updateHiddenQuantity();
+        }
+    }
+
+    function updateHiddenQuantity() {
+        var visibleQuantity = document.getElementById("visibleQuantity").value;
+        document.getElementById("hiddenQuantity").value = visibleQuantity;
+    }
+</script>
+
+
+                        <form  action="AddToCart" >
                             <input type="hidden" name="code" value="${listP.productCode}">
                             <input type="hidden" name="color" id="color" value="${data-id}">
-                            <input type="hidden" name="size" id="size" value="${button-size}">
-                            <input type="hidden" name="quantity" id="quantity" value="${form-control.quantity}">
-                            <a class="" href="AddToCart" data-quick="0" data-id="267">Thêm vào giỏ hàng</a>
-                            <button type="submit"> add</button>
+                            <input type="hidden" name="size" id="size" value="${selectedSize}" defaul="1">
+                            <input type="hidden" id="selectedSize" name="selectedSize" value="">
+
+                            <input type="hidden" name="hiddenQuantity" id="hiddenQuantity" value="1">
+                            <button type="submit" class="btn-detail"> Thêm vào giỏ hàng</button>
                         </form>
 
-                        <!--                    <form action="AddToCart">
+                                            <form  class="btn-detail add2cart" action="AddToCart">
                                                 <input type="hidden" name="color" id="color" value="${detail-color.selected}">
                                                 <input type="hidden" name="size" id="size" value="${button-size-1}">
                                                 <a  type="submit" href="AddToCart?code=${listP.productCode}" data-quick="0" data-id="267">Thêm vào giỏ hàng</a>
-                                                class="btn-detail add2cart"
-                                                &size=${size}&quan=${quantity}&color=${color}
-                                            </form>      -->
+                                                
+                                            </form>      
 
                         <div class="bound-btn-detail">
                             <a class="btn-detail add2cart" href="javascript:void(0);" data-quick="1" data-id="267">Mua ngay</a>

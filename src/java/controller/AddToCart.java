@@ -52,7 +52,7 @@ public class AddToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
-        List<Product> listProduct = dao.getAllProductByCategory();
+//        List<Product> listProduct = dao.getAllProductDetails();
         Cookie[] arrCookie = request.getCookies();
         String txt = "";
 
@@ -67,8 +67,10 @@ public class AddToCart extends HttpServlet {
 
         String code = request.getParameter("code");
         String color = request.getParameter("color");
-        String size = request.getParameter("size");
-        String quan = request.getParameter("quantity");
+        String size = request.getParameter("selectedSize").trim();
+        String quan = request.getParameter("hiddenQuantity");
+        System.out.println(quan);
+        if(size.equals("0")) size ="2";
         color = String.valueOf(Math.abs(Integer.parseInt(color)));
         System.out.println("ab," + color + "," + size + "," + quan);
         if (txt.isEmpty()) {

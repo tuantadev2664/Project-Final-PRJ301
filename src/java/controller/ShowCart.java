@@ -52,7 +52,7 @@ public class ShowCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         DAO dao = new DAO();
-        List<Product> listProduct = dao.getAllProductByCategory();
+        List<Product> listProduct = dao.getAllProductDetails();
         Cookie[] arrCookie = request.getCookies();
         String txt = "";
         
@@ -67,8 +67,8 @@ public class ShowCart extends HttpServlet {
         Cart cart = new Cart(txt, listProduct);
         int size = cart.getListItem().size();
         HttpSession session = request.getSession();
-        session.setAttribute("sizecart", size);
-        
+        session.setAttribute("sizeCart", size);
+        System.out.println(size);
         request.setAttribute("Cart", cart);
         request.getRequestDispatcher("viewCart.jsp").forward(request, response);
     } 
