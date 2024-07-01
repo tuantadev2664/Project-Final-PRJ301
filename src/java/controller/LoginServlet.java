@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.DAO;
 import dao.LoginDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Account;
 import model.Address;
+import model.Product;
 
 /**
  *
@@ -66,15 +68,26 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Cookie[] cookies = request.getCookies();
         LoginDAO loginDAO = new LoginDAO();
         HttpSession session = request.getSession();
-        
-        Account a = (Account)session.getAttribute("account");
-        if (a != null) {
-            request.setAttribute("listAddress", loginDAO.getUserAddress(a.getId()));
-            request.getRequestDispatcher("account.jsp").forward(request, response);
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                
+            }
         }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+
+        try {
+            Account a = (Account) session.getAttribute("account");
+            if (a != null) {
+                request.setAttribute("listAddress", loginDAO.getUserAddress(a.getId()));
+                request.getRequestDispatcher("account.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -90,6 +103,10 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        
+        DAO dao = new DAO();
+        List<Product> list = dao.getASampleProduct();
+        request.setAttribute("listP", list);
 
         try {
             String user = request.getParameter("username");
@@ -99,7 +116,7 @@ public class LoginServlet extends HttpServlet {
             LoginDAO loginDAO = new LoginDAO();
             Account a = loginDAO.check(user, pass);
             if (a != null) {
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 session.setAttribute("account", a);
                 request.setAttribute("listAddress", loginDAO.getUserAddress(a.getId()));
 
@@ -109,7 +126,7 @@ public class LoginServlet extends HttpServlet {
                     response.addCookie(cookie);
                 }
 
-                request.getRequestDispatcher("account.jsp").forward(request, response);
+                request.getRequestDispatcher("home.jsp").forward(request, response);
             } else {
                 request.setAttribute("error", "Tai khoan khong ton tai hoac sai mat khau");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

@@ -653,15 +653,14 @@
                 <div class="float-right">
                     <ul class="list-inline">
                         <li class="list-inline-item d-sm-inline d-none" >
-
                             <a href="">
                                 Store
                             </a>
-
                         </li>
+                        
                         <c:if test="${empty sessionScope.account}">  
                             <li class="list-inline-item" >
-                                <a  href="login.jsp">
+                                <a  href="login">
                                     <i style='padding-top: 0px;margin-left: 5px; margin-top: 1px'>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="26" viewBox="0 0 22 26" > 
                                         <g transform="translate(0 0)">  
@@ -683,28 +682,28 @@
                                    vertical-align: middle;
                                    display: inline-block;
                                    position: relative;">
-                                   Hello ${account.username} </a>
-                                   <!--/store-->
-                                   </li>
-                                </c:if>
+                                    Hello ${account.username} </a>
+                                <!--/store-->
+                            </li>
+                        </c:if>
 
 
-                                <li class="list-inline-item " >
-                                <a href="#">
-                                    <!--https://monatabluelight.com/gio-hang-->
-                                    <i style='padding-top: 0px'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" viewBox="0 0 24 26">
-                                        <g transform="translate(-14.696)">
-                                        <g id="Group_123" data-name="Group 123" transform="translate(14.696)">
-                                        <path id="Path_669" data-name="Path 669" d="M38.687,25.352l-1.974-18.1a.6.6,0,0,0-.592-.518H32.47v-1.1a5.725,5.725,0,0,0-11.449,0v1.1h-3.75a.6.6,0,0,0-.592.518L14.7,25.352a.574.574,0,0,0,.132.453.534.534,0,0,0,.428.194H38.128a.534.534,0,0,0,.428-.194A.574.574,0,0,0,38.687,25.352ZM31.877,10a.518.518,0,1,1-.526.518A.516.516,0,0,1,31.877,10ZM22.205,5.634a4.541,4.541,0,0,1,9.08,0v1.1h-9.08ZM21.613,10a.518.518,0,1,1-.526.518A.516.516,0,0,1,21.613,10ZM15.955,24.8,17.8,7.868h3.224V8.936A1.648,1.648,0,0,0,19.9,10.491a1.678,1.678,0,0,0,3.356,0A1.648,1.648,0,0,0,22.14,8.936V7.868h9.08V8.936A1.648,1.648,0,0,0,30.1,10.491a1.678,1.678,0,0,0,3.356,0,1.648,1.648,0,0,0-1.119-1.554V7.868h3.356L37.536,24.8Z" transform="translate(-14.696)" fill="#1d2738"></path>
-                                        </g>
-                                        </g>
-                                        </svg>
-                                    </i>
-                                    <span class="cart-badge" style='padding-top: 0px'>
-                                        0                        
-                                    </span>
-                                </a>
+                        <li class="list-inline-item " >
+                            <a href="#">
+                                <!--https://monatabluelight.com/gio-hang-->
+                                <i style='padding-top: 0px'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" viewBox="0 0 24 26">
+                                    <g transform="translate(-14.696)">
+                                    <g id="Group_123" data-name="Group 123" transform="translate(14.696)">
+                                    <path id="Path_669" data-name="Path 669" d="M38.687,25.352l-1.974-18.1a.6.6,0,0,0-.592-.518H32.47v-1.1a5.725,5.725,0,0,0-11.449,0v1.1h-3.75a.6.6,0,0,0-.592.518L14.7,25.352a.574.574,0,0,0,.132.453.534.534,0,0,0,.428.194H38.128a.534.534,0,0,0,.428-.194A.574.574,0,0,0,38.687,25.352ZM31.877,10a.518.518,0,1,1-.526.518A.516.516,0,0,1,31.877,10ZM22.205,5.634a4.541,4.541,0,0,1,9.08,0v1.1h-9.08ZM21.613,10a.518.518,0,1,1-.526.518A.516.516,0,0,1,21.613,10ZM15.955,24.8,17.8,7.868h3.224V8.936A1.648,1.648,0,0,0,19.9,10.491a1.678,1.678,0,0,0,3.356,0A1.648,1.648,0,0,0,22.14,8.936V7.868h9.08V8.936A1.648,1.648,0,0,0,30.1,10.491a1.678,1.678,0,0,0,3.356,0,1.648,1.648,0,0,0-1.119-1.554V7.868h3.356L37.536,24.8Z" transform="translate(-14.696)" fill="#1d2738"></path>
+                                    </g>
+                                    </g>
+                                    </svg>
+                                </i>
+                                <span class="cart-badge" style='padding-top: 0px'>
+                                    0                        
+                                </span>
+                            </a>
                         </li>
                         <li class="list-inline-item" >
                             <a href="javascript:void(0);" onclick="$('#frm_product').toggleClass('selected')">

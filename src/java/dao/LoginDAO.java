@@ -167,19 +167,34 @@ public class LoginDAO {
         return null;
     }
 
-    public void insertAddress(){
-        
+    //cap nhat mat khau 
+    public void updatePassword(String username, String newPassword) {
+        try (Connection connection = new DBContext().getConnect()) {
+            String query = "UPDATE [dbo].[Account]\n"
+                    + "   SET password = ?"
+                    + " WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    public void insertAddress() {
+
+    }
+
     public static void main(String[] args) {
         LoginDAO loginDAO = new LoginDAO();
         Account a = new Account(0, "vanA", "123", "nguyen van a", "vana@gmail.com", null, null, null, 3);
         Account account = new Account("vanA", "123", "nguyen van a", "vana@gmail.com");
         loginDAO.insertAccount(account);
-        
+
         for (Account account1 : loginDAO.getAllAccount()) {
             System.out.println(account1);
         }
-        
 
     }
 }

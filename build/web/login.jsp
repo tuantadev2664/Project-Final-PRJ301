@@ -37,6 +37,13 @@
         </style>
     </head>
     <body>
+        <c:if test="${not empty message}">
+            <script>
+                alert('${message}');
+                <c:remove var="message" scope="session" />
+            </script>
+        </c:if>
+            
         <div id="header_tab">
             <jsp:include page="header.jsp"/>
         </div>
@@ -81,13 +88,13 @@
                                         <fieldset class="form-group">
                                             <label>Username:<span class="ega-red-color">*</span> </label>
                                             <input style="
-                                                   height:4rem;
+                                                   height:2.5rem;
                                                    padding:.5rem 1rem;
                                                    font-size:1.25rem;
                                                    line-height:1.5;
                                                    border-radius:.3rem;
                                                    border: 2px solid black;
-                                                   font-size: 15px" type="username" class="form-control form-control-lg ega-input-valid" value="" name="username" id="customer_email" placeholder="Email">
+                                                   font-size: 15px;" type="username" class="form-control form-control-lg ega-input-valid" value="" name="username" id="customer_email" placeholder="Username">
                                             <div class="eg-error-form" style="color:#a94442;display: none">
                                                 Username/Email không hợp lệ!
                                             </div>
@@ -96,7 +103,7 @@
                                         <fieldset class="form-group">
                                             <label>Mật khẩu:<span class="ega-red-color">*</span> </label>
                                             <input style="
-                                                   height:4rem;
+                                                   height:2.5rem;
                                                    padding:.5rem 1rem;
                                                    font-size:1.25rem;
                                                    line-height:1.5;
@@ -110,7 +117,7 @@
                                         <input style="font-size: 50px" type="checkbox" name="rememberMe" value="yes"><span style="font-size: 15px"> Remember Me</span><br>
 
 
-                                        <div class="col-lg-12" style="margin-top: 10px;
+                                        <div class="col-lg-12" style="
                                              display: flex;
                                              justify-content: center;
                                              align-items: center">
@@ -140,7 +147,7 @@
                                     <fieldset class="form-group" style="padding-top: 5px">
 
                                         <input style="
-                                               height:4rem;
+                                               height:2.5rem;
                                                padding:.5rem 1rem;
                                                font-size:1.25rem;
                                                line-height:1.5;
