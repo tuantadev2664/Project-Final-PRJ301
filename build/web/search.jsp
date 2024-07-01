@@ -30,7 +30,7 @@
             <div class="block-banner-default">
             </div>                
             <div class="row row-products">
-                <c:forEach items="${listP}" var="o">
+                <c:forEach items="${listSearch}" var="o">
                     <div class="col-lg-4 col-md-4 col-6 col-6">
                         <div class="product-item">
                             <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
@@ -56,21 +56,12 @@
                 <ul class="pagination">
                     <c:if test="${tagH > 1}">
                         <li class="page-item">
-                            <c:choose>
-                                <c:when test="${not empty param.categoryID}">
-                                    <a class="page-link" href="category?categoryID=${param.categoryID}&index=${tagH-1}">
-                                        ←
-                                    </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="page-link" href="list?index=${tagH - 1}">
-                                        ←
-                                    </a>
-                                </c:otherwise>
-                            </c:choose>  
+                            <a class="page-link" title="Previous page" href="search?index=${tagH - 1}&search=${search}">
+                                ←
+                            </a>
                         </li>
                     </c:if>
-                    <c:forEach begin="1" end="${endP}" var="u">
+                    <c:forEach begin="1" end="${endPage}" var="u">
                         <li class="page-item ${tagH==u?"active":""}">
                             <c:choose>
                                 <c:when test="${not empty param.categoryID}">
@@ -79,27 +70,18 @@
                                     </a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="page-link" href="list?index=${u}">
+                                    <a class="page-link" href="search?index=${u}&search=${search}">
                                         ${u}
                                     </a>
                                 </c:otherwise>
                             </c:choose>
                         </li>
                     </c:forEach>
-                    <c:if test="${tagH < endP}">
+                    <c:if test="${tagH < endPage}">
                         <li class="page-item">
-                           <c:choose>
-                                <c:when test="${not empty param.categoryID}">
-                                    <a class="page-link" href="category?categoryID=${param.categoryID}&index=${tagH+1}">
-                                        →
-                                    </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="page-link" href="list?index=${tagH + 1}">
-                                        →
-                                    </a>
-                                </c:otherwise>
-                            </c:choose>     
+                            <a class="page-link" title="Next page" href="search?index=${tagH + 1}&search=${search}">
+                                →
+                            </a>
                         </li>
                     </c:if>
                 </ul>

@@ -699,9 +699,9 @@
                                 </i>
                             </a>
                             
-                            <form id="frm_product" action="#" method="get">
+                            <form id="frm_product" action="search?index=1" method="post">
                                 <!--https://monatabluelight.com/san-pham.html-->
-                                <input type="text" name="keyword" value="" placeholder="Tìm kiếm...">
+                                <input type="text" name="search" value="" placeholder="Tìm kiếm...">
                                 <button type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 26 26">
                                     <g transform="translate(-0.006)">
