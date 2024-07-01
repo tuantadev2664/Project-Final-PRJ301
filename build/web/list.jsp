@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css">
 
+
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
 
@@ -88,7 +89,7 @@
                     </c:forEach>
                     <c:if test="${tagH < endP}">
                         <li class="page-item">
-                           <c:choose>
+                            <c:choose>
                                 <c:when test="${not empty param.categoryID}">
                                     <a class="page-link" href="category?categoryID=${param.categoryID}&index=${tagH+1}">
                                         →
