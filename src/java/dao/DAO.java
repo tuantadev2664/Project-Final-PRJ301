@@ -104,8 +104,8 @@ public class DAO {
         }
         return list;
     }
-    
-    public  List<Product> pagingProducts(int index){
+
+    public List<Product> pagingProducts(int index) {
         List<Product> proList = new ArrayList<>();
         String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
 "order by productCode DESC\n" +
@@ -113,9 +113,9 @@ public class DAO {
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, (index-1)*12);
+            st.setInt(1, (index - 1) * 12);
             ResultSet rs = st.executeQuery();
-           while (rs.next()) {
+            while (rs.next()) {
                 String imagesString = rs.getString(6);
                 String[] data = imagesString.split(",");
                 List<String> listImages = new ArrayList<>();
@@ -123,7 +123,6 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                //tuan fix chỗ này
                 if(listImages.size() == 1){
                     listImages.add(listImages.get(0));
                 }
@@ -141,6 +140,7 @@ public class DAO {
         }
         return proList;
     }
+
     public List<Product> getASampleProduct() {
         List<Product> list = new ArrayList<>();
         String sql = "select top 8  productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge  from Product order by productCode DESC";
@@ -227,8 +227,6 @@ public class DAO {
         return null;
     }
     
-   
-
     public List<Category> getAllCategory() {
         List<Category> list = new ArrayList<>();
         String sql = "select * from Category";
@@ -252,7 +250,7 @@ public class DAO {
         List<Product> proList = new ArrayList<>();
         String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
 "where categoryID = ? \n" +
-"order by productCode DESC\n" +
+"order by productCode\n" +
 "offset ? rows fetch next 12 rows only;";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
@@ -319,6 +317,7 @@ public class DAO {
         }
         return list;
     }
+
     
     public List<ProductColor> getProductColor(String productCode){
         List<ProductColor> list = new ArrayList<>();
@@ -378,6 +377,7 @@ public class DAO {
         }
         return null;
     }
+
     
     public List<Product> getAllProductByListProductCode(List<String> listProductCode) {
         List<Product> list = new ArrayList<>();
@@ -494,25 +494,117 @@ public class DAO {
         }
         return list;
     }
-    
+
     public List<String> handleString(String imagesString){
+
         String[] data = imagesString.split(",");
         List<String> listImages = new ArrayList<>();
         for (String string : data) {
             string = string.replaceAll("'", "");
             listImages.add(string);
         }
-       return listImages;
+        return listImages;
     }
-    public List<String> handleStringDescription(String imagesString){
+
+    public List<String> handleStringDescription(String imagesString) {
         String[] data = imagesString.split(";");
         List<String> listImages = new ArrayList<>();
         for (String string : data) {
             string = string.replaceAll("'", "");
             listImages.add(string);
         }
-       return listImages;
+        return listImages;
     }
+
+    public int count(String search) {
+        String sql = "select count(*) from Product where productName like ?";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + search + "%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<Product> search(String search, int index) {
+        List<Product> productList = new ArrayList<>();
+        String sql = "with x as(select ROW_NUMBER() over (order by productImagesLarge desc) as r\n"
+                + ",* from Product where productDescription like ? or productName like ?)\n"
+                + "select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from x where r between ?*12-11 and ?*12";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + search + "%");
+            st.setString(2, "%" + search + "%");
+            st.setInt(3, index);
+            st.setInt(4, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String imagesString = rs.getString(6);
+                String[] data = imagesString.split(",");
+                List<String> listImages = new ArrayList<>();
+                for (String string : data) {
+                    string = string.replaceAll("'", "");
+                    listImages.add(string);
+                }
+                if (listImages.size() == 1) {
+                    listImages.add(listImages.get(0));
+                }
+                productList.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
+            }
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return productList;
+    }
+    
+    public List<Product> searchByName(String search){
+        List<Product> productList = new ArrayList<>();
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
+"where productName like ?";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + search + "%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String imagesString = rs.getString(6);
+                String[] data = imagesString.split(",");
+                List<String> listImages = new ArrayList<>();
+                for (String string : data) {
+                    string = string.replaceAll("'", "");
+                    listImages.add(string);
+                }
+                if (listImages.size() == 1) {
+                    listImages.add(listImages.get(0));
+                }
+                productList.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
+            }
+            rs.close();
+            connection.close();
+        } catch (Exception e) {
+        }
+        return productList;
+    }
+
+
     public static void main(String[] args) {
        DAO dao = new DAO();
        int sum = 0;
@@ -522,11 +614,14 @@ public class DAO {
 //           sum++;
 //           System.out.println(product.getProductImages().get(1));
 //       }
+//        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
+//        System.out.println(dao.getProductByProductCode("MBL267"));
+
        
 //        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
         
 //        System.out.println(dao.getProductByProductCode("MBL267"));
-        
+
 //       for(Category category : dao.getAllCategory()){
 //           sum++;
 //           System.out.println(category);
@@ -554,6 +649,16 @@ public class DAO {
 //               System.out.println(str);
 //           }
 //       }
+
+//        List<Category> test = new ArrayList<>();
+//        test = dao.getAllCategory();
+//        for (Category product : test) {
+//            System.out.println(product.toString());
+//        }
+
+        for (Product product : dao.search("Áo", 1)) {
+            System.out.println(product.toString());
+        }
     }
 
 }
