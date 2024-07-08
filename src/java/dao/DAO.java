@@ -348,7 +348,8 @@ public class DAO {
         return list;
         
     }
-//    
+    
+    
 //    public List<Product> getAllProductByListProductCode(List<String> listProductCode) {
 //        List<Product> list = new ArrayList<>();
 //        for (String string1 : listProductCode) {
@@ -384,7 +385,9 @@ public class DAO {
 //        }
 //        return list;
 //    }
-//    
+
+    
+    
     public Product getProductByProductCode(String productCode){
         
         String sql = "select productCode, productName, productSale, productStatus, productPrice, productOldPrice, productSize, productDescription, productImagesOrigin, productInfo from product where productCode = ?";
@@ -422,7 +425,7 @@ public class DAO {
         return null;
     }
 
-//    
+
 //    public ProductDetail getProductDetailByProductCode(String productCode){
 //        
 //        String sql = "select * from productDetail where productCode = ? order by [ colorId] ASC";
@@ -457,7 +460,8 @@ public class DAO {
 //        }
 //        return null;
 //    }
-//    
+    
+    
     public int getQuantity(String productCode, String colorID, String productSize){
         
         String sql = "select [productStock] from productDetail where productCode = ? and [colorId] = ? and [productSize] = ?";
@@ -725,68 +729,68 @@ public class DAO {
         return productList;
     }
 
-
-    public static void main(String[] args) {
-       DAO dao = new DAO();
-       int sum = 0;
-//        System.out.println(dao.getAllProductByCategory());
-
-//       for(Product product : dao.getASampleProductByProductCode("MBL267")){
-//           sum++;
-//           System.out.println(product.getProductImages().get(1));
-//       }
-//        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
-//        System.out.println(dao.getProductByProductCode("MBL267"));
-
-       
-//        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
-        
-//        System.out.println(dao.getProductByProductCode("MBL267"));
-
-//       for(Category category : dao.getAllCategory()){
-//           sum++;
-//           System.out.println(category);
-//       }
-//        for (Product pro : dao.getAllProduct()) {
-//            System.out.println(pro.toString());
+//
+//    public static void main(String[] args) {
+//       DAO dao = new DAO();
+//       int sum = 0;
+////        System.out.println(dao.getAllProductByCategory());
+//
+////       for(Product product : dao.getASampleProductByProductCode("MBL267")){
+////           sum++;
+////           System.out.println(product.getProductImages().get(1));
+////       }
+////        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
+////        System.out.println(dao.getProductByProductCode("MBL267"));
+//
+//       
+////        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
+//        
+////        System.out.println(dao.getProductByProductCode("MBL267"));
+//
+////       for(Category category : dao.getAllCategory()){
+////           sum++;
+////           System.out.println(category);
+////       }
+////        for (Product pro : dao.getAllProduct()) {
+////            System.out.println(pro.toString());
+////        }
+////        System.out.println("------------");
+////        List<Product> proList = dao.pagingProducts(1);
+////        for (Product product : proList) {
+////            System.out.println(product.toString());
+////            sum++;
+////        }
+////        System.out.println("sum = " + sum);
+//        //System.out.println(dao.getNumberProductByCategory("C01"));
+////        System.out.println(dao.getProductByProductCode("MBL267"));
+////        System.out.println(dao.getProductByProductCode("MBL267").getProductColorList());
+////        for (ProductColor productColor : dao.getProductByProductCode("MBL267").getProductColorList()){
+////            System.out.println(productColor.getColorID() + ":  "+ productColor.getColorLinkString());
+////        }
+//       //System.out.println(dao.getProductColor("MBL267"));
+////       for(ProductImgDetail productImgDetail : dao.getProductImgDetails("MBL259")){
+////           System.out.println(productImgDetail.getColorID());
+////           for(String str : productImgDetail.getImgDetailColor()){
+////               System.out.println(str);
+////           }
+////       }
+//
+////        List<Category> test = new ArrayList<>();
+////        test = dao.getAllCategory();
+////        for (Category product : test) {
+////            System.out.println(product.toString());
+////        }
+//
+////        for (Product product : dao.search("Áo", 1)) {
+////            System.out.println(product.toString());
+////        }
+//        //System.out.println(dao.getProductDetailByProductCode("MBL267").getColorSizeStock("634.0"));
+////        System.out.println(dao.getQuantity("MBL267", "635", "S"));
+//        for(Product product : dao.getASampleProduct()){
+//            System.out.println(product.getProductCode() + " " + product.getProductName() + " " + product.getProductImagesLarge() +  " " + product.getProductStatus() + " " + product.getProductPrice() + " " + product.getProductOldPrice());
 //        }
-//        System.out.println("------------");
-//        List<Product> proList = dao.pagingProducts(1);
-//        for (Product product : proList) {
-//            System.out.println(product.toString());
-//            sum++;
-//        }
-//        System.out.println("sum = " + sum);
-        //System.out.println(dao.getNumberProductByCategory("C01"));
-//        System.out.println(dao.getProductByProductCode("MBL267"));
-//        System.out.println(dao.getProductByProductCode("MBL267").getProductColorList());
-//        for (ProductColor productColor : dao.getProductByProductCode("MBL267").getProductColorList()){
-//            System.out.println(productColor.getColorID() + ":  "+ productColor.getColorLinkString());
-//        }
-       //System.out.println(dao.getProductColor("MBL267"));
-//       for(ProductImgDetail productImgDetail : dao.getProductImgDetails("MBL259")){
-//           System.out.println(productImgDetail.getColorID());
-//           for(String str : productImgDetail.getImgDetailColor()){
-//               System.out.println(str);
-//           }
-//       }
-
-//        List<Category> test = new ArrayList<>();
-//        test = dao.getAllCategory();
-//        for (Category product : test) {
-//            System.out.println(product.toString());
-//        }
-
-//        for (Product product : dao.search("Áo", 1)) {
-//            System.out.println(product.toString());
-//        }
-        //System.out.println(dao.getProductDetailByProductCode("MBL267").getColorSizeStock("634.0"));
-//        System.out.println(dao.getQuantity("MBL267", "635", "S"));
-        for(Product product : dao.getASampleProduct()){
-            System.out.println(product.getProductCode() + " " + product.getProductName() + " " + product.getProductImagesLarge() +  " " + product.getProductStatus() + " " + product.getProductPrice() + " " + product.getProductOldPrice());
-        }
-           
-    }
+//           
+//    }
 //-------------------------------------------------------------------------------
 
     public List<Product> getAllProductDetails() {
@@ -823,6 +827,49 @@ public class DAO {
         }
         return productDetaiList;
     }
+    
+    //tuan làm them để chạy cart
+    public Product getProductDetailsForCart(String productCode, String colorID, String productSize) {
+        String sql = "SELECT ProductDetail.productCode,\n" +
+"                      Product.productName,\n" +
+"                      ProductDetail.colorId, \n" +
+                "Color.colorName, \n" +
+"                    ProductDetail.productSize,\n" +
+"                      Product.productPrice ,\n" +
+"                      Product.productImagesLarge,\n" +
+"                     Color.[ colorLink]\n" +
+"                \n" +
+"                FROM ProductDetail\n" +
+"                JOIN Product\n" +
+"               ON ProductDetail.productCode = Product.productCode\n" +
+"               JOIN Color\n" +
+"                ON ProductDetail.colorId = Color.[ colorId]\n" +
+"				where product.productCode = ? and Color.[ colorId] = ? and ProductDetail.productSize = ? ";
+
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productCode);
+            st.setString(2, colorID);
+            st.setString(3, productSize);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                String code = rs.getString(1);
+                String name = rs.getString(2);
+                String color = rs.getString(4);
+                String size = rs.getString(5);
+                String price = rs.getString(6);
+                String listImg = rs.getString(7);
+                String img = listImg.split(",")[0];
+                String colorLink = rs.getString(8);
+//                System.out.println(code + " \n" + name + "\n" + color + "\n" + size + "\n" + price + "\n" + price + "\n" + img + "\n" + colorLink);
+                return new Product(code, name, color, size, price, img, colorLink);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL Exception: " + e.getMessage());
+        }
+        return null;
+    }
 //-------------------------------------------------------------------------------
 
     public Product searchProduct(String code) {
@@ -834,7 +881,8 @@ public class DAO {
         }
         return null;
     }
-
+    
+    
     public Cart readCookieCart(Cookie[] arrCookie) {
         List<Product> listProduct = getAllProductByCategory();
         String txt = "";
@@ -851,14 +899,12 @@ public class DAO {
         return cart;
     }
 
-//     public static void main(String[] args) {
-//         DAO dao = new DAO();
-//         int sum = 0;
-//         for (Product p : dao.getAllProductDetails()) {
-//             System.out.println(p.getProductCode() + p.getProductName() + p.getProductColor() + p.getProductSize() + p.getProductPrice() + p.getProductImg() + p.getColorLink());
-//         }
-//         System.out.println(dao.getAllProductDetails());
-// //        System.out.println(dao.getProductImgDetails("MBL266"));
-//     }
+     public static void main(String[] args) {
+         DAO dao = new DAO();
+         
+         Product p = dao.getProductDetailsForCart("MBL267", "634", "S");
+         System.out.println(p.getProductCode() + "\n" + p.getProductName() + "\n" + p.getProductColor()+ "\n" + p.getProductSize()+ "\n" + p.getProductPrice()+ "\n" + p.getProductImg()+ "\n" + p.getColorLink());
+         
+     }
 
 }

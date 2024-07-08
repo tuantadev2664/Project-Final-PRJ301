@@ -1,5 +1,6 @@
 package model;
 
+import dao.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Cart {
     public Cart() {
         listItem = new ArrayList<>();
     }
+    
 
     public List<Item> getListItem() {
         return listItem;
@@ -94,6 +96,7 @@ public class Cart {
 
     public Cart(String txt, List<Product> listProduct) {
         listItem = new ArrayList<>();
+        DAO dao = new DAO();
         if (txt != null && !txt.isEmpty()) {
             String[] arr = txt.split("/");
             for (String item : arr) {
@@ -104,9 +107,11 @@ public class Cart {
                     String size = productArr[2];
                     String quan = productArr[3];
                     // k tim dc p
-                    Product p = getProductByIdColorSize(id, color, size, listProduct);
-                    System.out.println(p.getProductCode() + p.getProductName() + p.getProductColor() + p.getProductSize() + p.getProductPrice() + p.getProductImg() + p.getColorLink());
-
+                    
+//                    Product p = getProductByIdColorSize(id, color, size, listProduct);
+//                    System.out.println(p.getProductCode() + p.getProductName() + p.getProductColor() + p.getProductSize() + p.getProductPrice() + p.getProductImg() + p.getColorLink());
+                    //tuan làm them để chạy
+                    Product p = dao.getProductDetailsForCart(id, color, size);
                     if (p != null) {
                         Item i = new Item(p, Integer.parseInt(quan));
                         addItem(i);
@@ -121,5 +126,8 @@ public class Cart {
     public String toString() {
         return "Cart{" + "listItem=" + listItem + '}';
     }
-
+    
+    public static void main(String[] args) {
+        Cart cart = new Cart("MBL267:634:S:1/MBL267:634:S:1", null);
+    }
 }

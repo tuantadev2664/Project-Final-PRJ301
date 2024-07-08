@@ -12,6 +12,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Product;
 
@@ -65,23 +66,49 @@ public class AddToCart extends HttpServlet {
             }
         }
 
-        String code = request.getParameter("code");
-        String color = request.getParameter("color");
-        String size = request.getParameter("selectedSize").trim();
-        String quan = request.getParameter("hiddenQuantity");
-        System.out.println(quan);
-        if(size.equals("0")) size ="2";
-        color = String.valueOf(Math.abs(Integer.parseInt(color)));
-        System.out.println("ab," + color + "," + size + "," + quan);
-        if (txt.isEmpty()) {
-            txt = code + ":" + color+ ":" + size+ ":" + quan;
+        String productCode = request.getParameter("code");
+        String productColor = request.getParameter("color");
+        String productSize = request.getParameter("size").trim();
+        String productQuantity = request.getParameter("quantity");
+
+        HttpSession session = request.getSession();
+        if ("0".equals(productSize)) {
+            session.setAttribute("error", "Bạn vui lòng chọn size");
+            response.sendRedirect("detail?productCode=" + productCode);
         } else {
-            txt += "/" + code + ":" + color+ ":" + size+ ":" + quan;
+            if (dao.getQuantity(productCode, productColor, productSize) == 0) {
+                session.setAttribute("error", "Màu: " + dao.getColorName(productColor) + " Size: " + productSize + " Đã Soldout. Quý khách vui lòng chọn sản phẩm khác!");
+                response.sendRedirect("detail?productCode=" + productCode);
+            } else {
+                if (Integer.parseInt(productQuantity) > dao.getQuantity(productCode, productColor, productSize)) {
+                    session.setAttribute("error", "Bạn vui lòng nhập số lương muốn mua nhỏ hơn hoặc bằng: " + dao.getQuantity(productCode, productColor, productSize));
+                    response.sendRedirect("detail?productCode=" + productCode);
+                } else {
+                    System.out.println(productQuantity);
+                    if (productSize.equals("0")) {
+                        productSize = "2";
+                    }
+                    productColor = String.valueOf(Math.abs(Integer.parseInt(productColor)));
+                    System.out.println("ab," + productColor + "," + productSize + "," + productQuantity);
+                    if (txt.isEmpty()) {
+                        txt = productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                    } else {
+                        txt += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                    }
+                    Cookie c = new Cookie("Cart", txt);
+                    c.setMaxAge(30 * 24 * 60 * 60);
+                    response.addCookie(c);
+                    request.getRequestDispatcher("detail?productCode=" + productCode).forward(request, response);
+                }
+            }
         }
-        Cookie c = new Cookie("Cart", txt);
-        c.setMaxAge(30 * 24 * 60 * 60);
-        response.addCookie(c);
-        request.getRequestDispatcher("detail?productCode=" + code).forward(request, response);
+
+//        
+//        String code = request.getParameter("code");
+//        String color = request.getParameter("color");
+//        String size = request.getParameter("selectedSize").trim();
+//        String quan = request.getParameter("hiddenQuantity");
+//        
     }
 
     /**
