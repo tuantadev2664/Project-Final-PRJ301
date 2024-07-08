@@ -326,10 +326,10 @@ public class DAO {
     
     public List<ProductColor> getProductColor(String productCode){
         List<ProductColor> list = new ArrayList<>();
-        String sql = "select ProductColor.[colorId], [colorLink]\n"
+        String sql = "select ProductColor.[ colorId], [ colorLink]\n"
                 + "from ProductColor\n"
-                + "join Color on ProductColor.[colorId] = Color.[colorId]\n"
-                + "where productCode = ? order by ProductColor.[colorId] ASC";
+                + "join Color on ProductColor.[ colorId] = Color.[ colorId]\n"
+                + "where productCode = ? order by ProductColor.[ colorId] ASC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -504,9 +504,9 @@ public class DAO {
         List<ProductImgDetail> listImgDetails = new ArrayList<>();
         for (ProductColor productColor : listColor) {
             List<String> listImg = new ArrayList<>();
-            String sql = "select  [imgDetailColor]\n"
+            String sql = "select  [ imgDetailColor]\n"
                     + "from ProductImgDetail\n"
-                    + "where productCode = ? and [colorId] = ?";
+                    + "where productCode = ? and [ colorId] = ?";
             try {
                 java.sql.Connection connection = new DBContext().getConnect();
                 PreparedStatement st = connection.prepareStatement(sql);
@@ -744,7 +744,11 @@ public class DAO {
 //            System.out.println(product.toString());
 //        }
         //System.out.println(dao.getProductDetailByProductCode("MBL267").getColorSizeStock("634.0"));
-        System.out.println(dao.getQuantity("MBL267", "635", "S"));
+//        System.out.println(dao.getQuantity("MBL267", "635", "S"));
+        for(Product product : dao.getASampleProduct()){
+            System.out.println(product.getProductCode() + " " + product.getProductName() + " " + product.getProductImagesLarge() +  " " + product.getProductStatus() + " " + product.getProductPrice() + " " + product.getProductOldPrice());
+        }
+           
     }
 //-------------------------------------------------------------------------------
 

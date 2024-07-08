@@ -3,9 +3,8 @@
     Created on : May 30, 2024, 2:14:29 PM
     Author     : FPTSHOP
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,16 +65,17 @@
                 <div class="heading">
                     New Arrival            
                 </div>
-            </div>
+            </div> 
             <div>
                 <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="3"
                                   space-between="30" free-mode="true">
 
 
-                    <c:forEach items="${listP}" var="o">
+                    <c:forEach items="${requestScope.listP}" var="o">
                         <swiper-slide > 
                             <div class="banner2-item">
                                 <div class="product-item">
+                                    
                                     <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
                                         <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
                                         <img class="img-fluid" src="${o.productImagesLarge.get(0)}" data-src="${o.productImagesLarge.get(0)}" data-hover="${o.productImagesLarge.get(1)}" alt="Tee Tele Bear">

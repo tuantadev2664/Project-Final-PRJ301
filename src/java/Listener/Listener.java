@@ -16,25 +16,25 @@ import jakarta.servlet.http.HttpSessionListener;
  */
 public class Listener implements HttpSessionListener, HttpSessionAttributeListener {
 
-    
-    public static int onlineUser = 0;
-
-    @Override
-    public void sessionDestroyed(HttpSessionEvent se) {
-        onlineUser--;
-        System.out.println("Online:" + onlineUser);
-    }
-
-    @Override
-    public void sessionCreated(HttpSessionEvent se) {
-        onlineUser++;
-        System.out.println("Online:" + onlineUser);
-    }
-
-    @Override
-    public void attributeAdded(HttpSessionBindingEvent se) {
-        if (se.getName().equals("user")) {
-            System.out.println("User attribute added");
-        }
-    }
+//    
+//    public static int onlineUser = 0;
+//
+//    @Override
+//    public void sessionDestroyed(HttpSessionEvent se) {
+//        onlineUser--;
+//        System.out.println("Online:" + onlineUser);
+//    }
+//
+//    @Override
+//    public void sessionCreated(HttpSessionEvent se) {
+//        onlineUser++;
+//        System.out.println("Online:" + onlineUser);
+//    }
+//
+//    @Override
+//    public void attributeAdded(HttpSessionBindingEvent se) {
+//        if (se.getName().equals("user")) {
+//            System.out.println("User attribute added");
+//        }
+//    }
 }
