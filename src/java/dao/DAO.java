@@ -231,6 +231,7 @@ public class DAO {
         return null;
     }
     
+   
 
     public List<Category> getAllCategory() {
         List<Category> list = new ArrayList<>();
@@ -335,9 +336,9 @@ public class DAO {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productCode);
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                double db_colorid = Double.parseDouble(rs.getString(1));
-                list.add(new ProductColor(("" + (int) db_colorid), rs.getString(2)));
+            while(rs.next()){
+               double db_colorid = Double.parseDouble(rs.getString(1));
+               list.add(new ProductColor((""+(int)db_colorid) , rs.getString(2)));
             }
             rs.close();
             connection.close();
@@ -345,11 +346,47 @@ public class DAO {
             System.out.println("e");
         }
         return list;
-
+        
     }
-
-    public Product getProductByProductCode(String productCode) {
-
+//    
+//    public List<Product> getAllProductByListProductCode(List<String> listProductCode) {
+//        List<Product> list = new ArrayList<>();
+//        for (String string1 : listProductCode) {
+//            String sql = "select productCode, productName, productStatus, productPrice, productOldPrice, productImages  from Product where productCode = ? order by productCode DESC";
+//            try {
+//                java.sql.Connection connection = new DBContext().getConnect();
+//                PreparedStatement st = connection.prepareStatement(sql);
+//                st.setString(1, string1);
+//                ResultSet rs = st.executeQuery();
+//                if (rs.next()) {
+//                    String imagesString = rs.getString(6);
+//                    String[] data = imagesString.split(",");
+//                    List<String> listImages = new ArrayList<>();
+//                    for (String string : data) {
+//                        string = string.replaceAll("'", "");
+//                        listImages.add(string);
+//                    }
+//                    if (listImages.size() == 1) {
+//                        listImages.add(listImages.get(0));
+//                    }
+//                    list.add(new Product(rs.getString(1),
+//                            rs.getString(2),
+//                            rs.getString(3),
+//                            rs.getString(4),
+//                            rs.getString(5),
+//                            listImages));
+//                }
+//                rs.close();
+//                connection.close();
+//            } catch (SQLException e) {
+//                System.out.println("e");
+//            }
+//        }
+//        return list;
+//    }
+//    
+    public Product getProductByProductCode(String productCode){
+        
         String sql = "select productCode, productName, productSale, productStatus, productPrice, productOldPrice, productSize, productDescription, productImagesOrigin, productInfo from product where productCode = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
@@ -498,11 +535,11 @@ public class DAO {
         }
         return list;
     }
-
-    public List<ProductImgDetail> getProductImgDetails(String productCode) {
+    
+    public List<ProductImgDetail> getProductImgDetails(String productCode){
         List<ProductColor> listColor = getProductColor(productCode);
         List<ProductImgDetail> listImgDetails = new ArrayList<>();
-        for (ProductColor productColor : listColor) {
+        for(ProductColor productColor : listColor){
             List<String> listImg = new ArrayList<>();
             String sql = "select  [ imgDetailColor]\n"
                     + "from ProductImgDetail\n"
@@ -525,8 +562,8 @@ public class DAO {
         }
         return listImgDetails;
     }
-
-    public List<Status> getAllStatus() {
+    
+    public List<Status> getAllStatus(){
         List<Status> list = new ArrayList<>();
         String sql = "select * from Status";
         try {
