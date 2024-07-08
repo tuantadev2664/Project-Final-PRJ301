@@ -16,7 +16,6 @@ import java.util.Map;
 import model.Category;
 import model.Product;
 import model.ProductColor;
-import model.ProductDetail;
 import model.ProductImgDetail;
 import model.Status;
 
