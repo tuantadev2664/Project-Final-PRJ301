@@ -14,17 +14,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import model.Product;
 
 /**
  *
  * @author FPTSHOP
  */
-@WebServlet(name="DetailServlet", urlPatterns={"/detail"})
-public class DetailServlet extends HttpServlet {
+@WebServlet(name="CheckServlet", urlPatterns={"/check"})
+public class CheckServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +37,10 @@ public class DetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DetailServlet</title>");  
+            out.println("<title>Servlet CheckServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DetailServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CheckServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,54 +57,44 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        DAO dao = new DAO();
-        String productCode = request.getParameter("productCode");
-        List<String> listA;
-        HttpSession session = request.getSession();
-        if(session.getAttribute("productCodes") == null){
-            listA = new ArrayList<>();
+       String productCode = request.getParameter("code");
+       String productColor = request.getParameter("color");
+       String productSize = request.getParameter("size").trim();
+       String productQuantity = request.getParameter("quantity");
+       
+       HttpSession session = request.getSession();
+       DAO dao = new DAO();
+       if("0".equals(productSize)){
+           session.setAttribute("error", "Bạn vui lòng chọn size");
+           
         } else {
-            listA = (List<String>)session.getAttribute("productCodes");
-            
-            for (int i = 0; i < (listA.size() - 1) / 2; i++) {
-                String temp = listA.get(i);
-                listA.set(i, listA.get(listA.size() - 1 - i));
-                listA.set(listA.size() - 1 - i, temp);
-            }
-            for (int i = 0; i < listA.size(); i++) {
-                if (listA.get(i).equals(productCode)) {
-                    for (int j = i; j < listA.size() - 1; j++) {
-                        listA.set(j, listA.get(j + 1));
-                    }
-                    listA.remove(listA.size() - 1);  // Xóa phần tử cuối cùng
-                    i--;  // Giảm giá trị của biến i để kiểm tra lại phần tử mới tại vị trí i
-                }
-            }
+           if (dao.getQuantity(productCode, productColor, productSize) == 0) {
+               session.setAttribute("error", "Màu: " + dao.getColorName(productColor) +" Size: " + productSize + " Đã Soldout. Quý khách vui lòng chọn sản phẩm khác!");
+//               response.sendRedirect("detail?productCode=" + productCode);
+           }else{
+               if (Integer.parseInt(productQuantity) > dao.getQuantity(productCode, productColor, productSize)) {
+               session.setAttribute("error", "Bạn vui lòng nhập số lương muốn mua nhỏ hơn hoặc bằng: " + dao.getQuantity(productCode, productColor, productSize));
+//               response.sendRedirect("detail?productCode=" + productCode);
+               }
+           }
         }
-        
-        listA.add(productCode);
-        //listA = listA.stream().distinct().collect(Collectors.toList());
-        session.setAttribute("productCodes", listA);
-        for(int i = 0; i < (listA.size() - 1)/2; i++){
-            String temp = listA.get(i);
-            listA.set(i, listA.get(listA.size() - 1 - i));
-            listA.set(listA.size() - 1 - i, temp);
-        }
-        List<Product> listP2 = dao.getAllProductByListProductCode(listA);
-
-        
-        Product product = dao.getProductByProductCode(productCode);
-        List<Product> listP1 = dao.getASampleProductByProductCode(productCode);
-        
-        if(session.getAttribute("error")!=null){
-            request.setAttribute("error", session.getAttribute("error"));
-            session.removeAttribute("error");
-        }
-        request.setAttribute("listP", product);
-        request.setAttribute("listP1", listP1);
-        request.setAttribute("listP2", listP2);
-        request.getRequestDispatcher("detail.jsp").forward(request, response);
-        //request.getRequestDispatcher("newjsp.jsp").forward(request, response);
+       response.sendRedirect("detail?productCode="+ productCode);
+//       
+//       response.setContentType("text/html;charset=UTF-8");
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet CheckServlet</title>");  
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet CheckServlet at " + Integer.parseInt(productQuantity) + "    " + productCode + " " + productColor + productSize  + "</h1>");
+//            out.println("<h1>Servlet CheckServlet at " + Integer.parseInt(productQuantity) + "    " + dao.getQuantity(productCode, productColor, productSize) + "</h1>");
+//            out.println("<h1>Servlet CheckServlet at " + (Integer.parseInt(productQuantity) > dao.getQuantity(productCode, productColor, productSize)) + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }   
     } 
 
     /** 
