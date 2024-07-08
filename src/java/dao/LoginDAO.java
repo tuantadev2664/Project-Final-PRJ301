@@ -182,19 +182,100 @@ public class LoginDAO {
         }
     }
 
-    public void insertAddress() {
+    public Address getAddressByID(int idAddress) {
+        String sql = "select * from Address where aid = ?";
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement(sql);
 
+            st.setInt(1, idAddress);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return (new Address(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8)));
+            }
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return null;
+    }
+
+    public void updateAddress(int aid, String country, String province, String district, String ward, String street, String houseNumber, int accountId) {
+        try (Connection connection = new DBContext().getConnect()) {
+            String query = "Update Address \n"
+                    + "set country = ?,\n"
+                    + "province = ?,\n"
+                    + "district = ?,\n"
+                    + "ward = ?,\n"
+                    + "street = ?,\n"
+                    + "houseNumber = ?,\n"
+                    + "accountId =?\n"
+                    + "where aid = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, country);
+            preparedStatement.setString(2, province);
+            preparedStatement.setString(3, district);
+            preparedStatement.setString(4, ward);
+            preparedStatement.setString(5, street);
+            preparedStatement.setString(6, houseNumber);
+            preparedStatement.setInt(7, accountId);
+            preparedStatement.setInt(8, aid);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+     public void deleteAddress(int aid) {
+        try (Connection connection = new DBContext().getConnect()) {
+            String query = "delete from Address\n" +
+"Where aid = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, aid);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public int getIdByAdid(int aid) {
+        String sql = "Select accountId from Address\n"
+                + "where aid = ?";
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, aid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return 0;
     }
 
     public static void main(String[] args) {
         LoginDAO loginDAO = new LoginDAO();
-        Account a = new Account(0, "vanA", "123", "nguyen van a", "vana@gmail.com", null, null, null, 3);
-        Account account = new Account("vanA", "123", "nguyen van a", "vana@gmail.com");
-        loginDAO.insertAccount(account);
+//        Account a = new Account(0, "vanA", "123", "nguyen van a", "vana@gmail.com", null, null, null, 3);
+//        Account account = new Account("vanA", "123", "nguyen van a", "vana@gmail.com");
+//        loginDAO.insertAccount(account);
 
-        for (Account account1 : loginDAO.getAllAccount()) {
-            System.out.println(account1);
-        }
+//        List<Address> adlist = new ArrayList<>();
+//        for (Address product : loginDAO.getUserAddress(1)) {
+//            System.out.println(product.toString());
+//        }
+        Address a = loginDAO.getAddressByID(1);
+        System.out.println(a.toString());
 
     }
 }

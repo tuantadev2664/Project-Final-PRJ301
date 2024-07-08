@@ -13,11 +13,17 @@
 
     </head>
     <body>
-        
+
         <div id="header_tab">
             <jsp:include page="header.jsp"/>
         </div>
-        
+        <div id='content_tab'>
+            <div class="container products" >
+                <div class="row">     
+                    <jsp:include page="addresschange.jsp"/>
+                </div>
+            </div>
+        </div>
         <div id="footer_tab">
             <jsp:include page="footer.jsp"/>
         </div>

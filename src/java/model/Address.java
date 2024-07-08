@@ -98,7 +98,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" + "idAddress=" + idAddress + ", country=" + country + ", province=" + province + ", district=" + district + ", ward=" + ward + ", street=" + street + ", houseNumber=" + houseNumber + ", accountID=" + accountID + '}';
+        return houseNumber+','+street+','+ward+','+district+','+province+','+country;
     }
 
    

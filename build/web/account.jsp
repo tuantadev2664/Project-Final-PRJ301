@@ -83,6 +83,8 @@
             }
 
 
+
+
             /* Button Styles */
             .button {
                 display: inline-block;
@@ -260,7 +262,7 @@
                             <ul>
                                 <li><a class="button" href="#account-info" onclick="goToSection('account-info', this)" title="Thông tin tài khoản">Thông tin tài khoản</a></li>
                                 <li><a class="button" href="#change-password" onclick="goToSection('change-password', this)">Đổi mật khẩu</a></li>
-                                <li><a class="button" href="#address-book" onclick="goToSection('address-book', this)">Sổ địa chỉ (0)</a></li>
+                                <li><a class="button" href="#address-book" onclick="goToSection('address-info', this)">Sổ địa chỉ (${fn:length(listAddress)})</a></li>
                                 <li><a href="https://www.messenger.com/t/iamtiss" class="button">Chat hỗ trợ</a></li>
                                 <li><a class="button" href="${pageContext.request.contextPath}/logout" title="Logout">Đăng xuất</a></li>
                             </ul>
@@ -332,27 +334,31 @@
                     <!-- Address Section -->
                     <div class="col-xs-12 col-sm-12 col-lg-9 col-right-ac" id="address-info" style="display: none;">
                         <h1 class="title-head margin-top-0">Sổ địa chỉ</h1>
-                        <button class="button_address" onclick="addNewAddress()">Thêm mới địa chỉ</button>
-                        <div id="view_address_26601108" class="customer_address col-xs-12 col-lg-12 col-md-12 col-xl-12">
-                            <div class="address_info" style="border-top: 1px #ebebeb solid;padding-top: 16px;margin-top: 20px;">
-                                <div class="address-group">
-                                    <div class="address form-signup">
-                                        <p><strong>Họ tên: </strong>Trần Việt Thắng</p>
-                                        <p><strong>Địa chỉ: </strong>24 Tân Trà, Phường Phú Bài, Thị xã Hương Thủy, Thừa Thiên Huế, Vietnam</p>
-                                        <p><strong>Số điện thoại:</strong> 01347831221</p>
+                        <button class="button" onclick="addNewAddress()">Thêm mới địa chỉ</button>
+
+                        <c:forEach items="${listAddress}" var="address">
+                            <div id="view_address_${address.idAddress}" class="customer_address col-xs-12 col-lg-12 col-md-12 col-xl-12">
+                                <div class="address_info" style="border-top: 1px #ebebeb solid;padding-top: 16px;margin-top: 20px;">
+                                    <div class="address-group">
+                                        <div class="address form-signup d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p><strong>Họ tên: </strong>${account.fullname}</p>
+                                                <p><strong>Địa chỉ: </strong>${address.houseNumber}, ${address.street}, ${address.ward}, ${address.district}, ${address.province}, ${address.country}</p>
+                                                <p><strong>Số điện thoại:</strong> ${account.phone}</p>
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <a href="address?aid=${address.idAddress}" class="btn-edit-addr btn btn-edit" type="button" style="color: #007bff; background-color: transparent;">
+                                                    Chỉnh sửa địa chỉ
+                                                </a>
+                                                <a href="#" class="btn btn-edit-addr btn-delete" type="button" onclick="showMess(${address.idAddress}); return false" style="color: #dc3545; background-color: transparent;">
+                                                    Xóa
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div id="tool_address_26601108" class="btn-address">
-                                    <p class="btn-row">
-                                        <button class="btn-edit-addr btn btn-primary btn-edit" type="button" data-form="edit_address_26601108" aria-controls="edit_address_26601108">
-                                            Chỉnh sửa địa chỉ
-                                        </button>
-                                        <button class="btn btn-dark-address btn-edit-addr btn-delete" type="button" onclick="Bizweb.CustomerAddress.destroy(26601108);
-                                                return false"><span>Xóa</span></button>
-                                    </p>
-                                </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
@@ -388,6 +394,14 @@
             }
 
         </script>
+        <script>
+         function showMess(id){
+             var option = confirm('You want to delete this address ?');
+             if(option === true){
+                 window.location.href = 'deleteaddress?aid='+id;
+             }
+         }
+    </script>
         <!--        <script>
                     // Function to switch to a section and mark it as active
                     function goToSection(sectionId, linkElement) {

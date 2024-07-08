@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Address;
 import model.Category;
 import model.Product;
 import model.ProductColor;
@@ -608,7 +609,7 @@ public class DAO {
     public static void main(String[] args) {
        DAO dao = new DAO();
        int sum = 0;
-        System.out.println(dao.getAllProductByCategory());
+//        System.out.println(dao.getAllProductByCategory());
 
 //       for(Product product : dao.getASampleProductByProductCode("MBL267")){
 //           sum++;
@@ -655,10 +656,7 @@ public class DAO {
 //        for (Category product : test) {
 //            System.out.println(product.toString());
 //        }
-
-        for (Product product : dao.search("Áo", 1)) {
-            System.out.println(product.toString());
-        }
+        
     }
 
 }
