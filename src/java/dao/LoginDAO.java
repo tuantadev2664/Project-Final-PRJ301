@@ -5,6 +5,7 @@
 package dao;
 
 import context.DBContext;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,91 +21,180 @@ import model.Card;
  */
 public class LoginDAO {
 
+    //list cac account cho admin
     public List<Account> getAllAccount() {
         List<Account> list = new ArrayList<>();
-        String sql = "select * from Accounts";
-        try {
-            java.sql.Connection connection = new DBContext().getConnect();
-            PreparedStatement st = connection.prepareStatement(sql);
+        String sql = "select * from Account";
+
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
+
             while (rs.next()) {
                 list.add(new Account(
-                        rs.getString(1),
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getDate(8)));
+                        rs.getDate(8),
+                        rs.getInt(9)));
             }
+
             rs.close();
-            connection.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
         return list;
     }
 
-    public List<Address> getUserAddress(String idAccount) {
+    //list cac address cua mot id account
+    public List<Address> getUserAddress(int idAccount) {
         List<Address> list = new ArrayList<>();
-        String sql = "select id, account_id, country, province, district, street, home_number from Addresses where account_id = ?";
-        try {
-            java.sql.Connection connection = new DBContext().getConnect();
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, idAccount);
+        String sql = "select * from Address where accountId = ?";
+
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement(sql);
+
+            st.setInt(1, idAccount);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                list.add(new Address(rs.getString(1),
-                        idAccount,
+                list.add(new Address(rs.getInt(1),
+                        rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getString(7)));
+                        rs.getString(7),
+                        rs.getInt(8)));
             }
             rs.close();
-            connection.close();
-        } catch (SQLException e) {
-            System.out.println("e");
-        }
-        return list;
-    }
-    
-    
-    public List<Card> getUserCards(String idCard) {
-        List<Card> list = new ArrayList<>();
-        String sql = "select id, account_id, card_number, bank_name from Cards where account_id = ?";
-        try {
-            java.sql.Connection connection = new DBContext().getConnect();
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, idCard);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                list.add(new Card(
-                        rs.getString(1), 
-                        idCard, 
-                        rs.getString(3), 
-                        rs.getString(4)));
-            }
-            rs.close();
-            connection.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println("e");
         }
         return list;
     }
 
+    //them Account vao database
+    public void insertAccount(Account a) {
+        String sql = "INSERT INTO [dbo].[Account]\n"
+                + "           ([username]\n"
+                + "           ,[password]\n"
+                + "           ,[fullName]\n"
+                + "           ,[email]\n"
+                + "           ,[phone]\n"
+                + "           ,[gender]\n"
+                + "           ,[birthday]\n"
+                + "           ,[role])\n"
+                + "     VALUES(?,?,?,?,null,null,null,3)";
+
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, a.getUsername());
+            st.setString(2, a.getPassword());
+            st.setString(3, a.getFullname());
+            st.setString(4, a.getEmail());
+            st.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    //check account trung bang username
+    public Account getAccountByUsername(String username) {
+
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement("select * from Account where username=? ");
+            st.setString(1, username);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Account a = new Account(rs.getString(2), rs.getString(5));
+                return a;
+            }
+
+        } catch (Exception ex) {
+        }
+        return null;
+    }
+
+    //check Account trung bang email
+    public Account getAccountByEmail(String email) {
+
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement("select * from Account where email=? ");
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Account a = new Account(rs.getString(2), rs.getString(5));
+                return a;
+            }
+
+        } catch (Exception ex) {
+        }
+        return null;
+    }
+
+    //check username, password tra ve mot account
+    public Account check(String user, String pass) {
+        String sql = "select * from Account where username =? and password =?";
+        try (java.sql.Connection con = new DBContext().getConnect()) {
+
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, user);
+            st.setString(2, pass);
+
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Account(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getDate(8),
+                        rs.getInt(9));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    //cap nhat mat khau 
+    public void updatePassword(String username, String newPassword) {
+        try (Connection connection = new DBContext().getConnect()) {
+            String query = "UPDATE [dbo].[Account]\n"
+                    + "   SET password = ?"
+                    + " WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertAddress() {
+
+    }
+
     public static void main(String[] args) {
         LoginDAO loginDAO = new LoginDAO();
-        for (Account account : loginDAO.getAllAccount()) {
-            System.out.println(account.toString());
+        Account a = new Account(0, "vanA", "123", "nguyen van a", "vana@gmail.com", null, null, null, 3);
+        Account account = new Account("vanA", "123", "nguyen van a", "vana@gmail.com");
+        loginDAO.insertAccount(account);
+
+        for (Account account1 : loginDAO.getAllAccount()) {
+            System.out.println(account1);
         }
-        for (Address userAddres : loginDAO.getUserAddress("2")) {
-            System.out.println(userAddres.toString());
-        }
-        for (Card userCard : loginDAO.getUserCards("3")) {
-            System.out.println(userCard.toString());
-        }
+
     }
 }

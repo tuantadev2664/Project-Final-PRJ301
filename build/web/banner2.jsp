@@ -78,7 +78,7 @@
                                 <div class="product-item">
                                     <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
                                         <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                                        <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${o.productImages.get(1)}" alt="Tee Tele Bear">
+                                        <img class="img-fluid" src="${o.productImagesLarge.get(0)}" data-src="${o.productImagesLarge.get(0)}" data-hover="${o.productImagesLarge.get(1)}" alt="Tee Tele Bear">
                                     </a>
                                     <h4 class="heading"><a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a></h4>
                                     <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->

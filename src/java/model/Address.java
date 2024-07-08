@@ -9,41 +9,35 @@ package model;
  * @author DELL
  */
 public class Address {
-    private String idAddress;
-    private String aid;
+    private int idAddress;
     private String country;
     private String province;
     private String district;
+    private String ward;
     private String street;
     private String houseNumber;
+    private int accountID;
 
-    public Address(String idAddress, String aid, String country, String province, String district, String street, String houseNumber) {
+    public Address(int idAddress, String country, String province, String district, String ward, String street, String houseNumber, int accountID) {
         this.idAddress = idAddress;
-        this.aid = aid;
         this.country = country;
         this.province = province;
         this.district = district;
+        this.ward = ward;
         this.street = street;
         this.houseNumber = houseNumber;
+        this.accountID = accountID;
     }
 
     public Address() {
     }
 
-    public String getIdAddress() {
+    public int getIdAddress() {
         return idAddress;
     }
 
-    public void setId(String id) {
-        this.idAddress = id;
-    }
-
-    public String getAid() {
-        return aid;
-    }
-
-    public void setAid(String aid) {
-        this.aid = aid;
+    public void setIdAddress(int idAddress) {
+        this.idAddress = idAddress;
     }
 
     public String getCountry() {
@@ -70,6 +64,14 @@ public class Address {
         this.district = district;
     }
 
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
     public String getStreet() {
         return street;
     }
@@ -86,11 +88,22 @@ public class Address {
         this.houseNumber = houseNumber;
     }
 
-    @Override
-    public String toString() {
-        return "Address{" + "id=" + idAddress + ", aid=" + aid + ", country=" + country + ", province=" + province + ", district=" + district + ", street=" + street + ", houseNumber=" + houseNumber + '}';
+    public int getAccountID() {
+        return accountID;
     }
 
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" + "idAddress=" + idAddress + ", country=" + country + ", province=" + province + ", district=" + district + ", ward=" + ward + ", street=" + street + ", houseNumber=" + houseNumber + ", accountID=" + accountID + '}';
+    }
+
+   
+
+    
     
 
     

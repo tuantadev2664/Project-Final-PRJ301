@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.Product;
 
 /**
@@ -68,19 +69,46 @@ public class DetailServlet extends HttpServlet {
             listA = new ArrayList<>();
         } else {
             listA = (List<String>)session.getAttribute("productCodes");
+            
+            for (int i = 0; i < (listA.size() - 1) / 2; i++) {
+                String temp = listA.get(i);
+                listA.set(i, listA.get(listA.size() - 1 - i));
+                listA.set(listA.size() - 1 - i, temp);
+            }
+            for (int i = 0; i < listA.size(); i++) {
+                if (listA.get(i).equals(productCode)) {
+                    for (int j = i; j < listA.size() - 1; j++) {
+                        listA.set(j, listA.get(j + 1));
+                    }
+                    listA.remove(listA.size() - 1);  // Xóa phần tử cuối cùng
+                    i--;  // Giảm giá trị của biến i để kiểm tra lại phần tử mới tại vị trí i
+                }
+            }
         }
-        listA.add(productCode);
-        session.setAttribute("productCodes", listA);
-        List<Product> listP2 = dao.getAllProductByListProductCode(listA);
         
+        listA.add(productCode);
+        //listA = listA.stream().distinct().collect(Collectors.toList());
+        session.setAttribute("productCodes", listA);
+        for(int i = 0; i < (listA.size() - 1)/2; i++){
+            String temp = listA.get(i);
+            listA.set(i, listA.get(listA.size() - 1 - i));
+            listA.set(listA.size() - 1 - i, temp);
+        }
+        List<Product> listP2 = dao.getAllProductByListProductCode(listA);
+
         
         Product product = dao.getProductByProductCode(productCode);
         List<Product> listP1 = dao.getASampleProductByProductCode(productCode);
         
+        if(session.getAttribute("error")!=null){
+            request.setAttribute("error", session.getAttribute("error"));
+            session.removeAttribute("error");
+        }
         request.setAttribute("listP", product);
         request.setAttribute("listP1", listP1);
         request.setAttribute("listP2", listP2);
         request.getRequestDispatcher("detail.jsp").forward(request, response);
+        //request.getRequestDispatcher("newjsp.jsp").forward(request, response);
     } 
 
     /** 

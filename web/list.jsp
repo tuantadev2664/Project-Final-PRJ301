@@ -15,14 +15,15 @@
 
         <link rel="stylesheet" href="css/bootstrapheader.css"> 
         <link rel="stylesheet" href="css/styleheader.css">
-        
+
+
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
-        
+
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/jquery.fancybox.min.css?v=1717149127"> 
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/bootstrap.css?v=1717149127"> 
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1717149127"> 
-       
+
 
     </head>
     <body>
@@ -35,7 +36,7 @@
                         <div class="product-item">
                             <a class="thumb" href="detail?productCode=${o.productCode}" title="${o.productName}">
                                 <!--https://monatabluelight.com/tee-tele-bear-pd267.html-->
-                                <img class="img-fluid" src="${o.productImages.get(0)}" data-src="${o.productImages.get(0)}" data-hover="${((o.productImages.get(1)!= null)?o.productImages.get(1): o.productImages.get(0))}" alt="${o.productName}">
+                                <img class="img-fluid" src="${o.productImagesLarge.get(0)}" data-src="${o.productImagesLarge.get(0)}" data-hover="${((o.productImagesLarge.get(1)!= null)?o.productImagesLarge.get(1): o.productImagesLarge.get(0))}" alt="${o.productName}">
                             </a>
                             <h4 class="heading">
                                 <a href="detail?productCode=${o.productCode}" title="${o.productName}">${o.productName}</a>
@@ -54,6 +55,22 @@
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
+                    <c:if test="${tagH > 1}">
+                        <li class="page-item">
+                            <c:choose>
+                                <c:when test="${not empty param.categoryID}">
+                                    <a class="page-link" href="category?categoryID=${param.categoryID}&index=${tagH-1}">
+                                        ←
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="page-link" href="list?index=${tagH - 1}">
+                                        ←
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>  
+                        </li>
+                    </c:if>
                     <c:forEach begin="1" end="${endP}" var="u">
                         <li class="page-item ${tagH==u?"active":""}">
                             <c:choose>
@@ -70,14 +87,22 @@
                             </c:choose>
                         </li>
                     </c:forEach>
-                    <li class="page-item">
-                        <b>..</b>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" title="Next page" href="/san-pham/page-2.html">
-                            →
-                        </a>
-                    </li>
+                    <c:if test="${tagH < endP}">
+                        <li class="page-item">
+                            <c:choose>
+                                <c:when test="${not empty param.categoryID}">
+                                    <a class="page-link" href="category?categoryID=${param.categoryID}&index=${tagH+1}">
+                                        →
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="page-link" href="list?index=${tagH + 1}">
+                                        →
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>     
+                        </li>
+                    </c:if>
                 </ul>
             </nav>  
         </div><!-- /.col-lg-9-->
