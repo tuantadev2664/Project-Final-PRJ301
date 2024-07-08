@@ -10,10 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Category;
 import model.Product;
 import model.ProductColor;
+import model.ProductDetail;
 import model.ProductImgDetail;
 import model.Status;
 
@@ -356,6 +359,7 @@ public class DAO {
                 List<ProductColor> listColor = getProductColor(productCode);
                 List<String> listImages = handleString(rs.getString(9));
                 List<ProductImgDetail> listImgDetails = getProductImgDetails(productCode);
+                
                 return new Product(rs.getString(1), 
                         rs.getString(2), 
                        rs.getString(3), 
@@ -368,6 +372,7 @@ public class DAO {
                       listImages,
                         rs.getString(10),
                         listImgDetails
+                       
                 );
             }
             rs.close();
@@ -378,6 +383,83 @@ public class DAO {
         return null;
     }
 
+//    
+//    public ProductDetail getProductDetailByProductCode(String productCode){
+//        
+//        String sql = "select * from productDetail where productCode = ? order by [ colorId] ASC";
+//        try {
+//            java.sql.Connection connection = new DBContext().getConnect();
+//            PreparedStatement st = connection.prepareStatement(sql);
+//            st.setString(1, productCode);
+//            ResultSet rs = st.executeQuery();
+//            String temp = "";
+//            Map<String, Integer> mapSizeStock = new HashMap<String, Integer>();
+//            Map<String, Map<String, Integer>> mapColorSizeStock = new HashMap<String, Map<String, Integer>>();
+//            ProductDetail productDetail = null;
+//            while(rs.next()){
+//                if(!temp.equals(rs.getString(2)) && !"".equals(temp)){
+//                    mapSizeStock = new HashMap<String, Integer>();
+//                    temp = rs.getString(2);
+//                }
+//                if(temp.equals(rs.getString(2)) || "".equals(temp)){
+//                    mapSizeStock.put(rs.getString(3), rs.getInt(4));
+//                    mapColorSizeStock.put(rs.getString(2), mapSizeStock);
+//                    temp = rs.getString(2);
+//                   
+//                }
+//                productDetail = new ProductDetail(rs.getString(1), mapColorSizeStock);
+//            }
+//            
+//            rs.close();
+//            connection.close();
+//            return  productDetail;
+//        } catch (SQLException e) {
+//            System.out.println("e");
+//        }
+//        return null;
+//    }
+//    
+    public int getQuantity(String productCode, String colorID, String productSize){
+        
+        String sql = "select [productStock] from productDetail where productCode = ? and [colorId] = ? and [productSize] = ?";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productCode);
+            st.setString(2, colorID);
+            st.setString(3,productSize);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return Integer.parseInt( rs.getString(1));
+            }          
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return 0;
+    }
+    
+    public String getColorName( String colorID){
+        
+        String sql = " select colorName from Color where [ colorId] = ?";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            st.setString(1, colorID);
+            
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getString(1);
+            }          
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return null;
+    }
     
     public List<Product> getAllProductByListProductCode(List<String> listProductCode) {
         List<Product> list = new ArrayList<>();
@@ -608,7 +690,7 @@ public class DAO {
     public static void main(String[] args) {
        DAO dao = new DAO();
        int sum = 0;
-        System.out.println(dao.getAllProductByCategory());
+//        System.out.println(dao.getAllProductByCategory());
 
 //       for(Product product : dao.getASampleProductByProductCode("MBL267")){
 //           sum++;
@@ -656,9 +738,11 @@ public class DAO {
 //            System.out.println(product.toString());
 //        }
 
-        for (Product product : dao.search("Áo", 1)) {
-            System.out.println(product.toString());
-        }
+//        for (Product product : dao.search("Áo", 1)) {
+//            System.out.println(product.toString());
+//        }
+        //System.out.println(dao.getProductDetailByProductCode("MBL267").getColorSizeStock("634.0"));
+        System.out.println(dao.getQuantity("MBL267", "635", "S"));
     }
 
 }

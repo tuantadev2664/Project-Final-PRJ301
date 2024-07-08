@@ -30,11 +30,11 @@
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1717149127"> 
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-
+       
 
     </head>
     <body>
-        
+
         <div class="container products">
             <div class="row">
                 <input type="hidden" name="product_id" data-quantity="0" id="product_id" value="267">
@@ -42,13 +42,13 @@
                     <a id="a-product-image" href="${listP.productImagesOrigin.get(0)}" data-fancybox="gallery" class="gallery-item">
                         <img id="product-image" class="img-fluid" src="${listP.productImagesOrigin.get(1)}">
                     </a>
-                    
-                    
+
+
                     <ul class="images-thumb ">
-                         <li data-color="0" class="color-image main-image">
+                        <li data-color="0" class="color-image main-image">
                             <img class="img-responsive" src="${(listP.productImagesOrigin.get(2)!=null)?listP.productImagesOrigin.get(2):""}">
                         </li>
-                        
+
                         <c:forEach items="${listP.productImgDetails}" var="o1" begin="0" end="0">
                             <c:set var="id" value="${o1.getColorID()}"/>
                             <c:forEach items="${o1.getImgDetailColor()}" var="o2">
@@ -57,7 +57,7 @@
                                 </li>
                             </c:forEach>
                         </c:forEach>
-                        
+
                         <c:forEach items="${listP.productImgDetails}" var="o1" begin="1">
                             <c:set var="id" value="${o1.getColorID()}"/>
                             <c:forEach items="${o1.getImgDetailColor()}" var="o2">
@@ -67,21 +67,21 @@
                             </c:forEach>
                         </c:forEach>
                     </ul>
-                        
+
                 </div><!-- /.col-lg-6-->
-                
-                
-                
+
+
+
                 <div class="col-lg-6">
-                    
+
                     <h1 class="detail-name">
                         ${listP.productName}
 
                         <span>${listP.productSale}</span>
 
-                       
+
                     </h1>
-                    
+
                     <div class="row code-status">
                         <div class="col-md-6">Mã sản phẩm: 
                             <b id="product-code">${listP.productCode}</b>
@@ -90,35 +90,37 @@
                             <b>${listP.productStatus}</b>
                         </div>
                     </div>
-                    
+
                     <div class="detail-price">
-                          ${listP.productPrice}                                  
+                        ${listP.productPrice}                                  
                     </div>
-                    
+
                     <div class="detail-summary">
                         <c:forEach items="${listP.productDescription}" var="o2">
-                        <p>${o2}</p>
+                            <p>${o2}</p>
                         </c:forEach>      
                     </div>
-                    
+
                     <div class="detail-colors">
                         <a href="javascript:void(0);" data-id="${listP.productColorList.get(0).getColorID()}" class="selected">
                             <img src="${listP.productColorList.get(0).getColorLinkString()}">
                         </a>
+
                         <c:forEach items="${listP.productColorList}" var="o2" begin="1">
                             <a href="javascript:void(0);" data-id="${o2.getColorID()}" class="">
-                            <img src="${((o2.getColorLinkString() != null)? o2.getColorLinkString() : "")}">
-                        </a>
+                                <img src="${((o2.getColorLinkString() != null)? o2.getColorLinkString() : "")}">
+                            </a>
                         </c:forEach>
-                        
+
                     </div>
-                    
+
                     <script type="text/javascript">
                         $('.detail-colors a').click(function () {
                             $('.detail-colors a').removeClass('selected');
                             $(this).addClass('selected');
                             var $id = $(this).attr('data-id');
                             $('input#color').val($id);
+
 
                             $('.product-thumbs ul li').removeClass('main-image').removeClass('first-color').removeClass('selected');
                             $('.product-thumbs ul li.color-' + $id).addClass('first-color');
@@ -155,47 +157,55 @@
                         })
 
                     </script>
-                    
-                    
-                    <input type="hidden" name="color" id="color" value="634">
-                    <input type="hidden" name="size" id="size" value="0">
-                    
-                    <div class="row detail-size-quantity">
-                        
-                        <div class="col-md-6">
-                            <div class="de-title">Size</div>
-                            <%
-                                int k = 0;
-                            %>
-                            <c:forEach items="${listP.productSize}" var="o3">
-                                <%
-                                    k++;
-                                %>
-                                <button id="button-size-1" class="button-size" value="<%= k%>">${o3}</button>
-                            </c:forEach>
+
+
+
+
+                   
+
+
+
+                    <form action="check">
+                        <input type="hidden" name="code" id="code" value="${listP.productCode}">
+                        <input type="hidden" name="color" id="color" value="634">
+
+                        <input type="hidden" name="size" id="size" value="0">
+
+                        <div class="row detail-size-quantity">
+
+                            <div class="col-md-6">
+                                <div class="de-title">Size</div>
+
+                                <c:forEach items="${listP.productSize}" var="o3">
+
+                                    <button type="button" id="button-size-1" class="button-size" value="${o3}">${o3}</button>
+                                </c:forEach>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="de-title">Số lượng</div>
+
+                                <input class="form-control" type="number" value="1" name="quantity" id="quantity">
+
+                            </div>
+
                         </div>
                         
-                        <div class="col-md-6">
-                            
-                            <div class="de-title">Số lượng</div>
-                            
-                            <input class="form-control" type="number" value="1" name="quantity" id="quantity">
-                            
+                        <button style="width: 100%; padding:0" type="submit">
+                            <a class="btn-detail " >Thêm vào giỏ hàng</a>
+                        </button>
+
+                        <div class="bound-btn-detail">
+                            <a class="btn-detail add2cart" href="javascript:void(0);" data-quick="1" data-id="267">Mua ngay</a>
+                            <a class="btn-detail btn-detail-fav">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25.714" viewBox="0 0 30 25.714">
+                                <path d="M27.857-15.737c0,3.064-3.1,5.91-3.147,5.96L15-.419,5.273-9.794c-.033-.033-3.131-2.879-3.131-5.943,0-4.7,3.181-5.692,5.859-5.692,2.494,0,5.307,2.7,6.177,3.733a1.106,1.106,0,0,0,1.641,0c.871-1.038,3.683-3.733,6.177-3.733C24.676-21.429,27.857-20.441,27.857-15.737Zm2.143,0c0-4.905-3-7.835-8-7.835-2.93,0-5.675,2.31-7,3.616-1.323-1.306-4.068-3.616-7-3.616-5.006,0-8,2.93-8,7.835,0,4.018,3.683,7.383,3.817,7.5L14.263,1.842a1.051,1.051,0,0,0,1.473,0L26.166-8.2C26.317-8.354,30-11.719,30-15.737Z" transform="translate(0 23.571)" fill="#fb8a06"></path>
+                                </svg>
+                            </a>
                         </div>
-                        
-                    </div>
-                    
-                    <a class="btn-detail add2cart" href="javascript:void(0);" data-quick="0" data-id="267">Thêm vào giỏ hàng</a>
-                    
-                    <div class="bound-btn-detail">
-                        <a class="btn-detail add2cart" href="javascript:void(0);" data-quick="1" data-id="267">Mua ngay</a>
-                        <a class="btn-detail btn-detail-fav">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25.714" viewBox="0 0 30 25.714">
-                            <path d="M27.857-15.737c0,3.064-3.1,5.91-3.147,5.96L15-.419,5.273-9.794c-.033-.033-3.131-2.879-3.131-5.943,0-4.7,3.181-5.692,5.859-5.692,2.494,0,5.307,2.7,6.177,3.733a1.106,1.106,0,0,0,1.641,0c.871-1.038,3.683-3.733,6.177-3.733C24.676-21.429,27.857-20.441,27.857-15.737Zm2.143,0c0-4.905-3-7.835-8-7.835-2.93,0-5.675,2.31-7,3.616-1.323-1.306-4.068-3.616-7-3.616-5.006,0-8,2.93-8,7.835,0,4.018,3.683,7.383,3.817,7.5L14.263,1.842a1.051,1.051,0,0,0,1.473,0L26.166-8.2C26.317-8.354,30-11.719,30-15.737Z" transform="translate(0 23.571)" fill="#fb8a06"></path>
-                            </svg>
-                        </a>
-                    </div>
-                    
+                    </form>
+
                     <div class="detail-content">
                         <div class="accordion" id="accordionDetail">
                             <div class="card">
@@ -208,7 +218,7 @@
                                     <div class="card-body">
                                         <p>
                                             <c:if test="${listP.productInfo != 'https://monatabluelight.com//upload_images/images/2024/02/24/QR%20PAY.jpeg'}">
-                                            <img data-upload-status="success" data-uploading="uploaded" src="${(listP.productInfo == 'https://monatabluelight.com//upload_images/images/2024/02/24/QR%20PAY.jpeg')?'':listP.productInfo}" style="width: 600px; height: 600px;">
+                                                <img data-upload-status="success" data-uploading="uploaded" src="${(listP.productInfo == 'https://monatabluelight.com//upload_images/images/2024/02/24/QR%20PAY.jpeg')?'':listP.productInfo}" style="width: 600px; height: 600px;">
                                             </c:if>
                                         </p>                        
                                     </div>
@@ -261,14 +271,14 @@
                             </div>
                         </div>
                     </div><!-- /.detail-content-->
-                    
+
                 </div><!-- /.col-lg-6-->
-                
+
             </div><!-- /.row-->
-            
-            
+
+
             <!--detailproductchidenday-->
-            
+
             <div class="products-other">
                 <div class="content-title">Sản phẩm liên quan</div>
                 <div class="row">
@@ -294,7 +304,7 @@
                 </div>
             </div>
 
-            
+
             <div class="products-other">
                 <div class="content-title">Sản phẩm đã xem</div>
                 <div class="row">
@@ -326,15 +336,23 @@
                     </swiper-container>
                 </div>
             </div>
-            
+
         </div>
-       
+        
 
         
+
+
         <!-- Your Chat Plugin code -->
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/modules/products/assets/js/product.js?v=1717149127"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.fancybox.min.js?v=1717149127"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/bootstrap.min.js?v=1717149127"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/library.js?v=1717149127"></script>
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/slick.min.js?v=1717149127"></script>
+        
+        <c:if test="${error != null}">
+            <script type="text/javascript">
+                alert('<c:out value="${error}" />');
+            </script>
+        </c:if>
     </body></html>

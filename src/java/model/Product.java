@@ -27,7 +27,8 @@ public class Product {
 
     public Product() {
     }
-
+   
+    
     public Product(String productCode, String productName, String productStatus, String productPrice, String productOldPrice, List<String> productImagesLarge) {
         this.productCode = productCode;
         this.productName = productName;
@@ -51,7 +52,11 @@ public class Product {
         this.productImagesOrigin = productImagesOrigin;//10
         this.productInfo = productInfo;//11
         this.productImgDetails = productImgDetails;
+        
     }
+
+   
+    
     
     public String getProductSale() {
         return productSale;
