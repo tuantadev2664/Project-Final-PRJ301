@@ -126,6 +126,7 @@ public class ShowCart extends HttpServlet {
             String price =  item.getProduct().getProductPrice().split(",")[0];
             sum = sum + Integer.parseInt(price)*item.getQuantity();
         }
+        
         int size = cart.getListItem().size();
         
         session.setAttribute("num", num);
