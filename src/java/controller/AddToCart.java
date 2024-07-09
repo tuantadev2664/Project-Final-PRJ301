@@ -84,7 +84,8 @@ public class AddToCart extends HttpServlet {
                     session.setAttribute("error", "Bạn vui lòng nhập số lương muốn mua nhỏ hơn hoặc bằng: " + dao.getQuantity(productCode, productColor, productSize));
                     response.sendRedirect("detail?productCode=" + productCode);
                 } else {
-                    System.out.println(productQuantity);
+                    session.setAttribute("error", "bạn đã thêm vào giỏ hàng thành công");
+//                    System.out.println(productQuantity);
                     if (productSize.equals("0")) {
                         productSize = "2";
                     }
