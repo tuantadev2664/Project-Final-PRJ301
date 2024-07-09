@@ -19,6 +19,7 @@ public class Product {
     private String productOldPrice;
     private String productSize;
     private String productColor;
+    private String productColorID;
     private String productImg;
     private String colorLink;
     private List<String> productDescription;
@@ -30,7 +31,19 @@ public class Product {
 
     public Product() {
     }
+    
+    public Product(String productCode, String productName, String productColor, String productColorID ,String productSize, String productPrice, String productImg, String colorLink) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.productColorID = productColorID;
+        this.productColor = productColor;
+        this.productSize = productSize;
+        this.productPrice = productPrice;
+        this.productImg = productImg;
+        this.colorLink = colorLink;
 
+    }
+    
     public Product(String productCode, String productName, String productColor, String productSize, String productPrice, String productImg, String colorLink) {
         this.productCode = productCode;
         this.productName = productName;
@@ -67,6 +80,14 @@ public class Product {
         this.productInfo = productInfo;//11
         this.productImgDetails = productImgDetails;
         
+    }
+
+    public String getProductColorID() {
+        return productColorID;
+    }
+
+    public void setProductColorID(String productColorID) {
+        this.productColorID = productColorID;
     }
 
    

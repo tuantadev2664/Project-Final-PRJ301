@@ -52,7 +52,11 @@
                 </c:forEach>
             </div><!-- /.row-products-->
 
-
+            
+            <%
+                /*haha*/
+            %>
+            
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <c:if test="${tagH > 1}">

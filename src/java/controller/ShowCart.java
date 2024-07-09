@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Cart;
+import model.Item;
 import model.Product;
 
 /**
@@ -51,26 +52,89 @@ public class ShowCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
         DAO dao = new DAO();
         List<Product> listProduct = dao.getAllProductDetails();
         Cookie[] arrCookie = request.getCookies();
         String txt = "";
-        
+        String txt1="";
         if (arrCookie != null) {
             for (Cookie c : arrCookie) {
                 if (c.getName().equals("Cart")) {
                     txt += c.getValue();
                     c.setMaxAge(0);
+                    response.addCookie(c);
                 }
             }
         }
-        Cart cart = new Cart(txt, listProduct);
+       
+            String pid="";
+            String pcolor="";
+            String psize="";
+            String quantity="";
+        if (request.getParameter("param") != null) {
+            String param = request.getParameter("param");
+            pid = param.split(";")[0];
+            pcolor = param.split(";")[1];
+            psize = param.split(";")[2];
+            quantity = param.split(";")[3];
+        }
+        
+        if (txt != null && !txt.isEmpty()) {
+            String[] arr = txt.split("/");
+            for (String item : arr) {
+                String[] productArr = item.split(":");
+                if (productArr.length == 4) {
+                    String id = productArr[0];
+                    String color = productArr[1];
+                    String size = productArr[2];
+                    String quan = productArr[3];
+                    
+                    String temp = quan;
+                    if(id.equals(pid) && color.equals(pcolor) && size.equals(psize)){
+                        quan = quantity;
+                    }
+                    if (Integer.parseInt(quan) > 0 && Integer.parseInt(quan) <= dao.getQuantity(id, color, size)) {
+                        if (txt.isEmpty()) {
+                            txt1 = id + ":" + color + ":" + size + ":" + quan;
+                        } else {
+                            txt1 += "/" + id + ":" + color + ":" + size + ":" + quan;
+                        }
+                    }else if(Integer.parseInt(quan) > dao.getQuantity(id, color, size)){
+                        request.setAttribute("error", "Số lượng sản phần đã tối đa");
+                        if (txt.isEmpty()) {
+                            txt1 = id + ":" + color + ":" + size + ":" + temp;
+                        } else {
+                            txt1 += "/" + id + ":" + color + ":" + size + ":" + temp;
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
+        Cookie c = new Cookie("Cart", txt1);
+        c.setMaxAge(30 * 24 * 60 * 60);
+        response.addCookie(c);
+        
+        Cart cart = new Cart(txt1, listProduct);
+        
+        int num = 0;
+        int sum = 0;
+        for(Item item : cart.getListItem()){
+            num = num + item.getQuantity();
+            String price =  item.getProduct().getProductPrice().split(",")[0];
+            sum = sum + Integer.parseInt(price)*item.getQuantity();
+        }
         int size = cart.getListItem().size();
-        HttpSession session = request.getSession();
+        
+        session.setAttribute("num", num);
+        session.setAttribute("sum", sum);
         session.setAttribute("sizeCart", size);
         System.out.println(size);
         request.setAttribute("Cart", cart);
         request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+        
     } 
 
     /** 

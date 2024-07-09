@@ -856,6 +856,7 @@ public class DAO {
             if (rs.next()) {
                 String code = rs.getString(1);
                 String name = rs.getString(2);
+                String colorid = rs.getString(3);
                 String color = rs.getString(4);
                 String size = rs.getString(5);
                 String price = rs.getString(6);
@@ -863,7 +864,7 @@ public class DAO {
                 String img = listImg.split(",")[0];
                 String colorLink = rs.getString(8);
 //                System.out.println(code + " \n" + name + "\n" + color + "\n" + size + "\n" + price + "\n" + price + "\n" + img + "\n" + colorLink);
-                return new Product(code, name, color, size, price, img, colorLink);
+                return new Product(code, name,color ,colorid, size, price, img, colorLink);
             }
         } catch (SQLException e) {
             System.err.println("SQL Exception: " + e.getMessage());
@@ -903,7 +904,7 @@ public class DAO {
          DAO dao = new DAO();
          
          Product p = dao.getProductDetailsForCart("MBL267", "634", "S");
-         System.out.println(p.getProductCode() + "\n" + p.getProductName() + "\n" + p.getProductColor()+ "\n" + p.getProductSize()+ "\n" + p.getProductPrice()+ "\n" + p.getProductImg()+ "\n" + p.getColorLink());
+         System.out.println(p.getProductCode() + "\n" + p.getProductName() + "\n" + p.getProductColor()+ "\n" + p.getProductColorID()+ "\n" + p.getProductSize()+ "\n" + p.getProductPrice()+ "\n" + p.getProductImg()+ "\n" + p.getColorLink());
          
      }
 
