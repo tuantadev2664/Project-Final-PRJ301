@@ -98,6 +98,10 @@ public class AddToCart extends HttpServlet {
                         //txt += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
                         //gop cookie neu trung key
                         String[] arr = txt.split("/");
+                        
+                        //co
+                        boolean isDuplicateCookieCart = false;
+                        
                         for (String item : arr) {
                             String[] productArr = item.split(":");
                             if (productArr.length == 4) {
@@ -110,10 +114,13 @@ public class AddToCart extends HttpServlet {
                                     int quanOld = Integer.parseInt(quan);
                                     quanOld += Integer.parseInt(productQuantity);
                                     quan = quanOld + "";
+                                    isDuplicateCookieCart = true;
                                 }
-                                
                                 txt1 += "/" + id + ":" + color + ":" + size + ":" + quan;
                             }
+                        }
+                        if(!isDuplicateCookieCart){
+                            txt1 += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
                         }
                         //set lai txt
                         txt = "";
