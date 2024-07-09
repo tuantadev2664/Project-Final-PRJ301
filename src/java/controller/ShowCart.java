@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Cart;
 import model.Item;
+import model.Item;
 import model.Product;
 
 /**
@@ -126,6 +127,7 @@ public class ShowCart extends HttpServlet {
             String price =  item.getProduct().getProductPrice().split(",")[0];
             sum = sum + Integer.parseInt(price)*item.getQuantity();
         }
+        
         int size = cart.getListItem().size();
         
         session.setAttribute("num", num);
