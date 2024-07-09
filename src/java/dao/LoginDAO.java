@@ -38,9 +38,7 @@ public class LoginDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getString(7),
-                        rs.getDate(8),
-                        rs.getInt(9)));
+                        rs.getInt(7)));
             }
 
             rs.close();
@@ -86,11 +84,8 @@ public class LoginDAO {
                 + "           ,[password]\n"
                 + "           ,[fullName]\n"
                 + "           ,[email]\n"
-                + "           ,[phone]\n"
-                + "           ,[gender]\n"
-                + "           ,[birthday]\n"
                 + "           ,[role])\n"
-                + "     VALUES(?,?,?,?,null,null,null,3)";
+                + "     VALUES(?,?,?,?,?,1)";
 
         try (Connection con = new DBContext().getConnect()) {
             PreparedStatement st = con.prepareStatement(sql);
@@ -98,11 +93,88 @@ public class LoginDAO {
             st.setString(2, a.getPassword());
             st.setString(3, a.getFullname());
             st.setString(4, a.getEmail());
+            st.setString(5, a.getPhone());
             st.execute();
         } catch (Exception e) {
             System.out.println(e);
         }
 
+    }
+
+    //them Account vao database
+    public void addAccount(Account a) {
+        String sql = "INSERT INTO [dbo].[Account]\n"
+                + "           ([username]\n"
+                + "           ,[password]\n"
+                + "           ,[fullName]\n"
+                + "           ,[email]\n"
+                + "           ,[phone]\n"
+                + "           ,[role])\n"
+                + "     VALUES(?,?,?,?,?,?)";
+
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, a.getUsername());
+            st.setString(2, a.getPassword());
+            st.setString(3, a.getFullname());
+            st.setString(4, a.getEmail());
+            st.setString(5, a.getPhone());
+            st.setInt(6, a.getRole());
+
+            st.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public void updateAccount(Account account) {
+
+        PreparedStatement stmt = null;
+        Connection conn = new DBContext().getConnect();
+        try {
+
+            String query = "UPDATE [dbo].[Account]\n"
+                    + "   SET [username] = ?\n"
+                    + "      ,[password] = ?\n"
+                    + "      ,[fullName] = ?\n"
+                    + "      ,[email] = ?\n"
+                    + "      ,[phone] = ?\n"
+                    + "      ,[role] = ?\n"
+                    + " WHERE id=?\n";
+
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, account.getUsername());
+            stmt.setString(2, account.getPassword());
+            stmt.setString(3, account.getFullname());
+            stmt.setString(4, account.getEmail());
+            stmt.setString(5, account.getPhone());
+            stmt.setInt(6, account.getRole());
+            stmt.setInt(7, account.getId());
+
+            stmt.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //tim Account bang id
+    public Account getAccountById(int id) {
+
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement("select * from Account where id=? ");
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Account a = new Account(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                return a;
+            }
+
+        } catch (Exception ex) {
+        }
+        return null;
     }
 
     //check account trung bang username
@@ -113,7 +185,7 @@ public class LoginDAO {
             st.setString(1, username);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Account a = new Account(rs.getString(2), rs.getString(5));
+                Account a = new Account(rs.getString(2), rs.getString(3));
                 return a;
             }
 
@@ -130,7 +202,7 @@ public class LoginDAO {
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Account a = new Account(rs.getString(2), rs.getString(5));
+                Account a = new Account(rs.getString(2), rs.getString(3));
                 return a;
             }
 
@@ -157,9 +229,7 @@ public class LoginDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getString(7),
-                        rs.getDate(8),
-                        rs.getInt(9));
+                        rs.getInt(7));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -186,15 +256,26 @@ public class LoginDAO {
 
     }
 
+    public void deleteAccount(int id) {
+        String sql = "EXECUTE DeleteAccount @AccountID = ?;";
+        try (Connection con = new DBContext().getConnect()) {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] args) {
         LoginDAO loginDAO = new LoginDAO();
-        Account a = new Account(0, "vanA", "123", "nguyen van a", "vana@gmail.com", null, null, null, 3);
-        Account account = new Account("vanA", "123", "nguyen van a", "vana@gmail.com");
-        loginDAO.insertAccount(account);
+
+        //test update
+        Account a1 = new Account(1, "user1", "123", "Nguyen Van B", "user1@example.com", "1234567890", 1);
+        loginDAO.updateAccount(a1);
 
         for (Account account1 : loginDAO.getAllAccount()) {
             System.out.println(account1);
         }
-
     }
 }

@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package model;
 
 /**
  *
@@ -19,8 +13,6 @@ public class Account {
     private String fullname;
     private String email;
     private String phone;
-    private String gender;
-    private Date birthday;
     private int role;
 
     public Account() {
@@ -38,17 +30,29 @@ public class Account {
         this.email = email;
     }
 
-    public Account(int id, String username, String password, String fullname, String email, String phone, String gender, Date birthday, int role) {
+    public Account(String username, String password, String fullname, String email, String phone, int role) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.email = email;
+        this.phone = phone;
+        this.role = role;
+    }
+    
+    
+
+    public Account(int id, String username, String password, String fullname, String email, String phone, int role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
         this.email = email;
         this.phone = phone;
-        this.gender = gender;
-        this.birthday = birthday;
         this.role = role;
     }
+    
+    
+
 
     public int getId() {
         return id;
@@ -98,22 +102,6 @@ public class Account {
         this.phone = phone;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
     public int getRole() {
         return role;
     }
@@ -122,19 +110,11 @@ public class Account {
         this.role = role;
     }
 
-    public String getFormatDate() {
-        if (birthday == null) {
-            return null;
-        } else {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            String formattedDate = formatter.format(birthday);
-            return formattedDate;
-        }
-    }
-
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", username=" + username + ", password=" + password + ", fullname=" + fullname + ", email=" + email + ", phone=" + phone + ", gender=" + gender + ", birthday=" + birthday + ", role=" + role + '}';
+        return "Account{" + "id=" + id + ", username=" + username + ", password=" + password + ", fullname=" + fullname + ", email=" + email + ", phone=" + phone + ", role=" + role + '}';
     }
 
+
+ 
 }

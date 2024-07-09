@@ -81,12 +81,15 @@ public class RegisterServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            
             
             Account nAccount = new Account();
             nAccount.setFullname(firstName + lastName);
             nAccount.setUsername(username);
             nAccount.setPassword(password);
             nAccount.setEmail(email);
+            nAccount.setPhone(phone);
             
             HttpSession session = request.getSession();
             LoginDAO dao = new LoginDAO();
@@ -97,7 +100,7 @@ public class RegisterServlet extends HttpServlet {
                 request.setAttribute("error", "Email existed!!");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             } else {
-                Account a = new Account(username, password, username, email);
+                Account a = new Account(username, password, firstName + lastName, email,phone,1);
                 dao.insertAccount(a);
                 request.setAttribute("notification", "Please login");
                 request.getRequestDispatcher("login").forward(request, response);
