@@ -84,6 +84,7 @@ public class LoginDAO {
                 + "           ,[password]\n"
                 + "           ,[fullName]\n"
                 + "           ,[email]\n"
+                + "           ,[phone]\n"
                 + "           ,[role])\n"
                 + "     VALUES(?,?,?,?,?,1)";
 
