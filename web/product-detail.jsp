@@ -30,11 +30,11 @@
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1717149127"> 
         <script language="javascript" type="text/javascript" src="https://monatabluelight.com/templates/default/js/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-       
+
 
     </head>
     <body>
-
+        
         <div class="container products">
             <div class="row">
                 <input type="hidden" name="product_id" data-quantity="0" id="product_id" value="267">
@@ -42,13 +42,13 @@
                     <a id="a-product-image" href="${listP.productImagesOrigin.get(0)}" data-fancybox="gallery" class="gallery-item">
                         <img id="product-image" class="img-fluid" src="${listP.productImagesOrigin.get(1)}">
                     </a>
-
-
+                    
+                    
                     <ul class="images-thumb ">
-                        <li data-color="0" class="color-image main-image">
+                         <li data-color="0" class="color-image main-image">
                             <img class="img-responsive" src="${(listP.productImagesOrigin.get(2)!=null)?listP.productImagesOrigin.get(2):""}">
                         </li>
-
+                        
                         <c:forEach items="${listP.productImgDetails}" var="o1" begin="0" end="0">
                             <c:set var="id" value="${o1.getColorID()}"/>
                             <c:forEach items="${o1.getImgDetailColor()}" var="o2">
@@ -57,7 +57,7 @@
                                 </li>
                             </c:forEach>
                         </c:forEach>
-
+                        
                         <c:forEach items="${listP.productImgDetails}" var="o1" begin="1">
                             <c:set var="id" value="${o1.getColorID()}"/>
                             <c:forEach items="${o1.getImgDetailColor()}" var="o2">
@@ -67,7 +67,7 @@
                             </c:forEach>
                         </c:forEach>
                     </ul>
-
+                        
                 </div><!-- /.col-lg-6-->
 
 
@@ -79,7 +79,7 @@
 
                         <span>${listP.productSale}</span>
 
-
+                       
                     </h1>
 
                     <div class="row code-status">
@@ -105,13 +105,12 @@
                         <a href="javascript:void(0);" data-id="${listP.productColorList.get(0).getColorID()}" class="selected">
                             <img src="${listP.productColorList.get(0).getColorLinkString()}">
                         </a>
-
                         <c:forEach items="${listP.productColorList}" var="o2" begin="1">
                             <a href="javascript:void(0);" data-id="${o2.getColorID()}" class="">
-                                <img src="${((o2.getColorLinkString() != null)? o2.getColorLinkString() : "")}">
-                            </a>
+                            <img src="${((o2.getColorLinkString() != null)? o2.getColorLinkString() : "")}">
+                        </a>
                         </c:forEach>
-
+                        
                     </div>
 
                     <script type="text/javascript">

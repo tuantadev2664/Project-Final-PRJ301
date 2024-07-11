@@ -11,6 +11,7 @@ import java.util.List;
  * @author FPTSHOP
  */
 public class Product {
+
     private String productCode;
     private String productName;
     private String productSale;
@@ -27,8 +28,7 @@ public class Product {
 
     public Product() {
     }
-   
-    
+
     public Product(String productCode, String productName, String productStatus, String productPrice, String productOldPrice, List<String> productImagesLarge) {
         this.productCode = productCode;
         this.productName = productName;
@@ -38,8 +38,7 @@ public class Product {
         this.productImagesLarge = productImagesLarge;
     }
 
-
-    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription,List<ProductColor> productColorList , List<String> productImagesOrigin, String productInfo, List<ProductImgDetail> productImgDetails) {
+    public Product(String productCode, String productName, String productSale, String productStatus, String productPrice, String productOldPrice, String productSize, List<String> productDescription, List<ProductColor> productColorList, List<String> productImagesOrigin, String productInfo, List<ProductImgDetail> productImgDetails) {
         this.productCode = productCode;//1
         this.productName = productName;//2
         this.productSale = productSale;//3
@@ -52,12 +51,8 @@ public class Product {
         this.productImagesOrigin = productImagesOrigin;//10
         this.productInfo = productInfo;//11
         this.productImgDetails = productImgDetails;
-        
     }
 
-   
-    
-    
     public String getProductSale() {
         return productSale;
     }
@@ -105,9 +100,7 @@ public class Product {
     public void setProductInfo(String productInfo) {
         this.productInfo = productInfo;
     }
-    
-    
-    
+
     public String getProductCode() {
         return productCode;
     }
@@ -163,17 +156,13 @@ public class Product {
     public void setProductImgDetails(List<ProductImgDetail> productImgDetails) {
         this.productImgDetails = productImgDetails;
     }
-    
-    
 
 //    public String toString() {
 //        return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productImages=" + productImages + '}';
 //    }
-
     @Override
     public String toString() {
         return "Product{" + "productCode=" + productCode + ", productName=" + productName + ", productSale=" + productSale + ", productStatus=" + productStatus + ", productPrice=" + productPrice + ", productOldPrice=" + productOldPrice + ", productSize=" + productSize + ", productDescription=" + productDescription + ", productColor=" + productColorList + ", productImagesOrigin=" + productImagesOrigin + ", productImages=" + productImagesLarge + ", productInfo=" + productInfo + '}';
     }
-    
-    
+
 }

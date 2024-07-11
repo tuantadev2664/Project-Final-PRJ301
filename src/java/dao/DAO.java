@@ -16,7 +16,6 @@ import java.util.Map;
 import model.Category;
 import model.Product;
 import model.ProductColor;
-import model.ProductDetail;
 import model.ProductImgDetail;
 import model.Status;
 
@@ -25,6 +24,40 @@ import model.Status;
  * @author FPTSHOP
  */
 public class DAO {
+
+    public List<Product> getAllProduct() {
+        List<Product> proList = new ArrayList<>();
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n"
+                + "order by productCode DESC;";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String imagesString = rs.getString(6);
+                String[] data = imagesString.split(",");
+                List<String> listImages = new ArrayList<>();
+                for (String string : data) {
+                    string = string.replaceAll("'", "");
+                    listImages.add(string);
+                }
+                if (listImages.size() == 1) {
+                    listImages.add(listImages.get(0));
+                }
+                proList.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
+            }
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return proList;
+    }
 
     public int getNumberProduct() {
         String sql = "select count(*) from Product;";
@@ -44,10 +77,10 @@ public class DAO {
         }
         return 0;
     }
-    
+
     public int getNumberProductByCategory(String categoryID) {
-        String sql = "select count(*) from Product \n" +
-                "where categoryID = ?;";
+        String sql = "select count(*) from Product \n"
+                + "where categoryID = ?;";
         int total;
         try {
             java.sql.Connection connection = new DBContext().getConnect();
@@ -81,24 +114,24 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                if(listImages.size() == 1){
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
-                list.add(new Product(rs.getString(1), 
-                        rs.getString(2), 
-                       rs.getString(3), 
-                       rs.getString(4), 
-                     rs.getString(5), 
-                      listImages));
-                if(listImages.size() == 1){
+                list.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
-                list.add(new Product(rs.getString(1), 
-                        rs.getString(2), 
-                       rs.getString(3), 
-                       rs.getString(4), 
-                     rs.getString(5), 
-                      listImages));
+                list.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
             }
             rs.close();
             connection.close();
@@ -110,9 +143,9 @@ public class DAO {
 
     public List<Product> pagingProducts(int index) {
         List<Product> proList = new ArrayList<>();
-        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
-"order by productCode DESC\n" +
-"offset ? rows fetch next 12 rows only;";
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n"
+                + "order by productCode DESC\n"
+                + "offset ? rows fetch next 12 rows only;";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -126,7 +159,7 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                if(listImages.size() == 1){
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
                 proList.add(new Product(rs.getString(1),
@@ -159,15 +192,15 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                if(listImages.size() == 1){
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
-                list.add(new Product(rs.getString(1), 
-                        rs.getString(2), 
-                       rs.getString(3), 
-                       rs.getString(4), 
-                     rs.getString(5), 
-                      listImages));
+                list.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
             }
             rs.close();
             connection.close();
@@ -176,8 +209,8 @@ public class DAO {
         }
         return list;
     }
-    
-    public List<Product> getASampleProductByProductCode(String productCode){
+
+    public List<Product> getASampleProductByProductCode(String productCode) {
         List<Product> list = new ArrayList<>();
         String sql = "select top 8  productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge  from Product where categoryID = ? order by productCode DESC";
         try {
@@ -185,23 +218,23 @@ public class DAO {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, getCategoryIDByProductCode(productCode));
             ResultSet rs = st.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String imagesString = rs.getString(6);
                 String[] data = imagesString.split(",");
                 List<String> listImages = new ArrayList<>();
-                for(String string : data){
+                for (String string : data) {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                if(listImages.size() == 1){
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
-                list.add(new Product(rs.getString(1), 
-                        rs.getString(2), 
-                       rs.getString(3), 
-                       rs.getString(4), 
-                     rs.getString(5), 
-                      listImages));
+                list.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
             }
             rs.close();
             connection.close();
@@ -210,8 +243,8 @@ public class DAO {
         }
         return list;
     }
-    
-    public String getCategoryIDByProductCode(String productCode){
+
+    public String getCategoryIDByProductCode(String productCode) {
         String sql = "select categoryID from Product where productCode = ? ";
 
         try {
@@ -219,7 +252,7 @@ public class DAO {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productCode);
             ResultSet rs = st.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return rs.getString(1);
             }
             rs.close();
@@ -229,7 +262,7 @@ public class DAO {
         }
         return null;
     }
-    
+
     public List<Category> getAllCategory() {
         List<Category> list = new ArrayList<>();
         String sql = "select * from Category";
@@ -248,20 +281,20 @@ public class DAO {
         }
         return list;
     }
-    
-    public  List<Product> pagingProductByCategory(String categoryID,int index){
+
+    public List<Product> pagingProductByCategory(String categoryID, int index) {
         List<Product> proList = new ArrayList<>();
-        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
-"where categoryID = ? \n" +
-"order by productCode\n" +
-"offset ? rows fetch next 12 rows only;";
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n"
+                + "where categoryID = ? \n"
+                + "order by productCode\n"
+                + "offset ? rows fetch next 12 rows only;";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, categoryID);
-            st.setInt(2, (index-1)*12);
+            st.setInt(2, (index - 1) * 12);
             ResultSet rs = st.executeQuery();
-           while (rs.next()) {
+            while (rs.next()) {
                 String imagesString = rs.getString(6);
                 String[] data = imagesString.split(",");
                 List<String> listImages = new ArrayList<>();
@@ -269,7 +302,7 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                if(listImages.size() == 1){
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
                 proList.add(new Product(rs.getString(1),
@@ -303,15 +336,15 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                if(listImages.size() == 1){
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
-                list.add(new Product(rs.getString(1), 
-                        rs.getString(2), 
-                       rs.getString(3), 
-                       rs.getString(4), 
-                     rs.getString(5), 
-                      listImages));
+                list.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
             }
             rs.close();
             connection.close();
@@ -321,58 +354,55 @@ public class DAO {
         return list;
     }
 
-    
-    public List<ProductColor> getProductColor(String productCode){
+    public List<ProductColor> getProductColor(String productCode) {
         List<ProductColor> list = new ArrayList<>();
-        String sql = "select ProductColor.[ colorId], [ colorLink]\n"
+        String sql = "select ProductColor.[colorId], [colorLink]\n"
                 + "from ProductColor\n"
-                + "join Color on ProductColor.[ colorId] = Color.[ colorId]\n"
-                + "where productCode = ? order by ProductColor.[ colorId] ASC";
+                + "join Color on ProductColor.[colorId] = Color.[colorId]\n"
+                + "where productCode = ? order by ProductColor.[colorId] ASC";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productCode);
             ResultSet rs = st.executeQuery();
-            while(rs.next()){
-               double db_colorid = Double.parseDouble(rs.getString(1));
-               list.add(new ProductColor((""+(int)db_colorid) , rs.getString(2)));
+            while (rs.next()) {
+                double db_colorid = Double.parseDouble(rs.getString(1));
+                list.add(new ProductColor(("" + (int) db_colorid), rs.getString(2)));
             }
             rs.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.println("e");
         }
         return list;
-        
+
     }
-    
-    public Product getProductByProductCode(String productCode){
-        
+
+    public Product getProductByProductCode(String productCode) {
+
         String sql = "select productCode, productName, productSale, productStatus, productPrice, productOldPrice, productSize, productDescription, productImagesOrigin, productInfo from product where productCode = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productCode);
             ResultSet rs = st.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 List<String> listDescription = handleStringDescription(rs.getString(8));
                 List<ProductColor> listColor = getProductColor(productCode);
                 List<String> listImages = handleString(rs.getString(9));
                 List<ProductImgDetail> listImgDetails = getProductImgDetails(productCode);
-                
-                return new Product(rs.getString(1), 
-                        rs.getString(2), 
-                       rs.getString(3), 
-                       rs.getString(4), 
-                     rs.getString(5),
-                     rs.getString(6),
-                     rs.getString(7),
+
+                return new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
                         listDescription,
                         listColor,
-                      listImages,
+                        listImages,
                         rs.getString(10),
                         listImgDetails
-                       
                 );
             }
             rs.close();
@@ -419,19 +449,19 @@ public class DAO {
 //        return null;
 //    }
 //    
-    public int getQuantity(String productCode, String colorID, String productSize){
-        
+    public int getQuantity(String productCode, String colorID, String productSize) {
+
         String sql = "select [productStock] from productDetail where productCode = ? and [colorId] = ? and [productSize] = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productCode);
             st.setString(2, colorID);
-            st.setString(3,productSize);
+            st.setString(3, productSize);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
-                return Integer.parseInt( rs.getString(1));
-            }          
+            if (rs.next()) {
+                return Integer.parseInt(rs.getString(1));
+            }
             rs.close();
             connection.close();
         } catch (SQLException e) {
@@ -439,20 +469,20 @@ public class DAO {
         }
         return 0;
     }
-    
-    public String getColorName( String colorID){
-        
+
+    public String getColorName(String colorID) {
+
         String sql = " select colorName from Color where [ colorId] = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
-            
+
             st.setString(1, colorID);
-            
+
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getString(1);
-            }          
+            }
             rs.close();
             connection.close();
         } catch (SQLException e) {
@@ -460,7 +490,7 @@ public class DAO {
         }
         return null;
     }
-    
+
     public List<Product> getAllProductByListProductCode(List<String> listProductCode) {
         List<Product> list = new ArrayList<>();
         for (String string1 : listProductCode) {
@@ -496,15 +526,15 @@ public class DAO {
         }
         return list;
     }
-    
-    public List<ProductImgDetail> getProductImgDetails(String productCode){
+
+    public List<ProductImgDetail> getProductImgDetails(String productCode) {
         List<ProductColor> listColor = getProductColor(productCode);
         List<ProductImgDetail> listImgDetails = new ArrayList<>();
-        for(ProductColor productColor : listColor){
+        for (ProductColor productColor : listColor) {
             List<String> listImg = new ArrayList<>();
-            String sql = "select  [ imgDetailColor]\n"
+            String sql = "select  [imgDetailColor]\n"
                     + "from ProductImgDetail\n"
-                    + "where productCode = ? and [ colorId] = ?";
+                    + "where productCode = ? and [colorId] = ?";
             try {
                 java.sql.Connection connection = new DBContext().getConnect();
                 PreparedStatement st = connection.prepareStatement(sql);
@@ -523,8 +553,8 @@ public class DAO {
         }
         return listImgDetails;
     }
-    
-    public List<Status> getAllStatus(){
+
+    public List<Status> getAllStatus() {
         List<Status> list = new ArrayList<>();
         String sql = "select * from Status";
         try {
@@ -559,15 +589,15 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                if(listImages.size() == 1){
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
-                list.add(new Product(rs.getString(1), 
-                        rs.getString(2), 
-                       rs.getString(3), 
-                       rs.getString(4), 
-                     rs.getString(5), 
-                      listImages));
+                list.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
             }
             rs.close();
             connection.close();
@@ -577,7 +607,7 @@ public class DAO {
         return list;
     }
 
-    public List<String> handleString(String imagesString){
+    public List<String> handleString(String imagesString) {
 
         String[] data = imagesString.split(",");
         List<String> listImages = new ArrayList<>();
@@ -651,11 +681,11 @@ public class DAO {
         }
         return productList;
     }
-    
-    public List<Product> searchByName(String search){
+
+    public List<Product> searchByName(String search) {
         List<Product> productList = new ArrayList<>();
-        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
-"where productName like ?";
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n"
+                + "where productName like ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -686,10 +716,9 @@ public class DAO {
         return productList;
     }
 
-
     public static void main(String[] args) {
-       DAO dao = new DAO();
-       int sum = 0;
+        DAO dao = new DAO();
+        int sum = 0;
 //        System.out.println(dao.getAllProductByCategory());
 
 //       for(Product product : dao.getASampleProductByProductCode("MBL267")){
@@ -698,12 +727,8 @@ public class DAO {
 //       }
 //        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
 //        System.out.println(dao.getProductByProductCode("MBL267"));
-
-       
 //        System.out.println(dao.getCategoryIDByProductCode("MBL267"));
-        
 //        System.out.println(dao.getProductByProductCode("MBL267"));
-
 //       for(Category category : dao.getAllCategory()){
 //           sum++;
 //           System.out.println(category);
@@ -724,25 +749,28 @@ public class DAO {
 //        for (ProductColor productColor : dao.getProductByProductCode("MBL267").getProductColorList()){
 //            System.out.println(productColor.getColorID() + ":  "+ productColor.getColorLinkString());
 //        }
-       //System.out.println(dao.getProductColor("MBL267"));
+        //System.out.println(dao.getProductColor("MBL267"));
 //       for(ProductImgDetail productImgDetail : dao.getProductImgDetails("MBL259")){
 //           System.out.println(productImgDetail.getColorID());
 //           for(String str : productImgDetail.getImgDetailColor()){
 //               System.out.println(str);
 //           }
 //       }
-
 //        List<Category> test = new ArrayList<>();
 //        test = dao.getAllCategory();
 //        for (Category product : test) {
 //            System.out.println(product.toString());
 //        }
-
 //        for (Product product : dao.search("Áo", 1)) {
 //            System.out.println(product.toString());
 //        }
         //System.out.println(dao.getProductDetailByProductCode("MBL267").getColorSizeStock("634.0"));
-        System.out.println(dao.getQuantity("MBL267", "635", "S"));
+//        System.out.println(dao.getQuantity("MBL267", "635", "S"));
+List<Product> list = dao.getAllProduct();
+        for (Product product : list) {
+            System.out.println(product);
+        }
+
     }
 
 }

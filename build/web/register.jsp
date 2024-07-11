@@ -160,9 +160,23 @@
                                                     </div>
                                                 </fieldset>
                                             </div>
+                                            <div class="col-md-12">
+                                                <fieldset class="form-group">
+                                                    <label>Phone number<span class="ega-red-color">*</span> </label>
+                                                    <input style="
+                                                           height:2.5rem;
+                                                           padding:.5rem 1rem;
+                                                           font-size:1.25rem;
+                                                           line-height:1.5;
+                                                           border-radius:.3rem;
+                                                           border: 2px solid black;
+                                                           font-size: 15px" type="number" class="form-control form-control-lg ega-input-valid" value="" name="phone" id="phone" placeholder="Phone number" required="Khong duoc de trong">
+                                                    <div class="eg-error-form" style="color:#a94442;display: none">
+                                                        Phone number invalid
+                                                    </div>
+                                                </fieldset>
+                                            </div>
                                         </div>
-
-
                                         <div class="col-xs-12 text-xs-left" style="display: flex;
                                              justify-content: center;
                                              align-items: center; margin-top:0px; padding: 0">
