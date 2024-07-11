@@ -23,6 +23,7 @@ public class ManageAccountDelete extends HttpServlet {
         String id_raw = request.getParameter("id");
         try{
             int id = Integer.parseInt(id_raw);
+            System.out.println(id);
             LoginDAO dao = new LoginDAO();
             dao.deleteAccount(id);
             response.sendRedirect("manageaccount");

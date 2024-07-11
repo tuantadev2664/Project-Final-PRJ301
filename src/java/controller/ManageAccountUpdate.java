@@ -42,14 +42,11 @@ public class ManageAccountUpdate extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         int role = Integer.parseInt(request.getParameter("role"));
-
-        // Tạo đối tượng Account mới với dữ liệu được cập nhật
-        Account updatedAccount = new Account(id, username, password, fullname, email, phone, role);
-
+//        Account updatedAccount = new Account(id, username, password, fullname, email, phone, role);
         LoginDAO dao = new LoginDAO();
-        dao.updateAccount(updatedAccount);
+        System.out.println(new Account(id, username, password, fullname, email, phone, role));
+        dao.updateAccount(new Account(id, username, password, fullname, email, phone, role));
         response.sendRedirect("manageaccount");
-       
     }
 
 }

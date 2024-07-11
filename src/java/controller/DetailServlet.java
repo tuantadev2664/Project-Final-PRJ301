@@ -100,6 +100,10 @@ public class DetailServlet extends HttpServlet {
         Product product = dao.getProductByProductCode(productCode);
         List<Product> listP1 = dao.getASampleProductByProductCode(productCode);
         
+        if(session.getAttribute("error")!=null){
+            request.setAttribute("error", session.getAttribute("error"));
+            session.removeAttribute("error");
+        }
         request.setAttribute("listP", product);
         request.setAttribute("listP1", listP1);
         request.setAttribute("listP2", listP2);

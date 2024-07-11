@@ -104,8 +104,9 @@
 
             <%-- Form để cập nhật thông tin acc --%>
             <form action="manageaccountupdate" method="POST">
-                <input type="hidden" name="id" value="<%= acc.getId() %>" />
-
+                <div class="form-group">
+                    <input type="hidden" name="id" value="<%= acc.getId() %>" />
+                </div>
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" name="username" value="<%= acc.getUsername() %>" />

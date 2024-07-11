@@ -17,7 +17,7 @@
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
-            border: 1px solid #ccc; /* Added border */
+            border: 1px solid #ccc;
         }
 
         .container h1 {
@@ -44,21 +44,29 @@
             box-sizing: border-box;
         }
 
-        .form-row input[type="submit"] {
+        .form-row input[type="submit"]{
+            font-size: 16px;
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            border: 1px solid #4CAF50; /* Added border */
+            border: 1px solid #4CAF50;
+            margin-right: 10px;
+            width: 100px; /* Set the width for both buttons */
+        }
+
+        .form-row .back-button {
+            text-decoration: none;
+            color: red;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Thêm tài khoản</h1>
-        <form action="manageaccountadd">
+        <form action="manageaccountadd" method="POST">
             <div class="form-row">
                 <label for="usernameInput">Username:</label>
                 <input type="text" id="usernameInput" name="username">
@@ -78,12 +86,12 @@
                 <label for="emailInput">Email:</label>
                 <input type="text" id="emailInput" name="email">
             </div>
-            
+
             <div class="form-row">
                 <label for="phoneInput">Phone:</label>
                 <input type="text" id="phoneInput" name="phone">
             </div>
-            
+
             <div class="form-row">
                 <label for="roleInput">Role:</label>
                 <input type="text" id="roleInput" name="role">
@@ -91,6 +99,7 @@
 
             <div class="form-row">
                 <input type="submit" value="Lưu">
+                <a href="manageaccount" class="back-button">Quay lại</a>
             </div>
         </form>
     </div>
