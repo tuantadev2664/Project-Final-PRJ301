@@ -77,21 +77,14 @@ public class RegisterServlet extends HttpServlet {
         
         try {
             String lastName = request.getParameter("lastName");
-            String firstName = request.getParameter("lastName");
+            String firstName = request.getParameter("firstName");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             
-            
-            Account nAccount = new Account();
-            nAccount.setFullname(firstName + lastName);
-            nAccount.setUsername(username);
-            nAccount.setPassword(password);
-            nAccount.setEmail(email);
-            nAccount.setPhone(phone);
-            
-            HttpSession session = request.getSession();
+            String fullName = firstName + lastName;
+
             LoginDAO dao = new LoginDAO();
             if(dao.getAccountByUsername(username) != null){
                 request.setAttribute("error", "Username existed!!");
@@ -100,10 +93,10 @@ public class RegisterServlet extends HttpServlet {
                 request.setAttribute("error", "Email existed!!");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             } else {
-                Account a = new Account(username, password, firstName + lastName, email,phone,1);
+                Account a = new Account(username, password, fullName, email,phone,1);
                 dao.insertAccount(a);
-                request.setAttribute("notification", "Please login");
-                request.getRequestDispatcher("login").forward(request, response);
+                request.setAttribute("notification", "Register successfully! Please login ");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } catch (Exception e) {
         }

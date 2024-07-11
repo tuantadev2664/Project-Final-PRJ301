@@ -36,12 +36,12 @@ public class LoginServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         LoginDAO loginDAO = new LoginDAO();
         HttpSession session = request.getSession();
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                
-            }
-        }
+//
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                
+//            }
+//        }
 
         try {
             Account a = (Account) session.getAttribute("account");
@@ -93,7 +93,7 @@ public class LoginServlet extends HttpServlet {
 
                 request.getRequestDispatcher("home.jsp").forward(request, response);
             } else {
-                request.setAttribute("error", "Tai khoan khong ton tai hoac sai mat khau");
+                request.setAttribute("notification", "Tai khoan khong ton tai hoac sai mat khau");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 

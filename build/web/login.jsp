@@ -78,9 +78,9 @@
                             <div id="login">
                                 <form action="login" method="post" id="customer_login" accept-charset="UTF-8"><input name="FormType" type="hidden" value="customer_login"><input name="utf8" type="hidden" value="true"><input name="ReturnUrl" type="hidden" value="/account">
                                     <div class="form-signup">
-                                        <c:if test="${requestScope.error != null}">
+                                        <c:if test="${requestScope.notification != null}">
                                             <div class="alert alert-danger" role="alert" style="margin-top: 10px">
-                                                ${requestScope.error}
+                                                ${requestScope.notification}
                                             </div>
                                         </c:if>
                                     </div>
