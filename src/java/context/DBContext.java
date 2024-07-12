@@ -14,9 +14,9 @@ import java.sql.SQLException;
  */
 public class DBContext {
     
-    public static String DRIVERNAME="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    public static String DBURL="jdbc:sqlserver://localhost:1433;databaseName=Project_Final_PRJ301_4;encrypt=false;trustServerCertificate=false;loginTimeout=30";
-    public static String USERDB="sa";
+        public static String DRIVERNAME="com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    public static String DBURL="jdbc:sqlserver://HADI:1433;databaseName=Project_Final_PRJ301;encrypt=false;trustServerCertificate=false;loginTimeout=30";
+    public static String USERDB="hihi";
     public static String PASSDB="123";
     
     public Connection getConnect(){

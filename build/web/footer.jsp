@@ -95,7 +95,7 @@
                                             <!--https://monatabluelight.com/lien-he.html-->
                                         </li>
                                         <li class="menu-28  ">
-                                            <a target="_self" href="#" title="Copyright © 2024 Monat blue">Copyright © 2024 Monat blue</a>
+                                            <a target="_self" href="#" title="Copyright © 2024 Monat blue">Copyright © 2024 Truong Anh Tuan</a>
                                             <!--http://monatabluelight.com/gioi-thieu-i1-->
                                         </li>
                                     </ul>
