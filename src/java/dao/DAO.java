@@ -907,7 +907,11 @@ public class DAO {
     public String createOrderId() {
         DAO dao = new DAO();
         int size = dao.orderSize();
-        return "OR" + String.valueOf(size + 1);
+        if (size < 9) {
+            return "OR00" + String.valueOf(size + 1);
+        } else {
+            return "OR0" + String.valueOf(size + 1);
+        }
     }
 
     public void insertOrder(String orderId, String accountId, String orderDate, String name, String phone, String email, String city, String district, String ward, String address, String quantity, String total) {
@@ -961,8 +965,8 @@ public class DAO {
         System.out.println(dao.getQuantity("MBL267", "634", "S"));
         System.out.println(dao.orderSize());
         System.out.println(dao.createOrderId());
-        dao.insertOrderDetail("OR001", "MBL267", "635", "M", "2");
-//         dao.insertOrder(dao.createOrderId(), "accountId", "12/7/2024", "name", "phone", "email", "city", "district", "ward", "address", "quantity", "total");
+        //dao.insertOrderDetail("OR001", "MBL267", "635", "M", "2");
+         dao.insertOrder(dao.createOrderId(), "accountId", "12/7/2024", "name", "phone", "email", "city", "district", "ward", "address", "quantity", "total");
 //         Product p = dao.getProductDetailsForCart("MBL267", "634", "S");
 //         System.out.println(p.getProductCode() + "\n" + p.getProductName() + "\n" + p.getProductColor()+ "\n" + p.getProductColorID()+ "\n" + p.getProductSize()+ "\n" + p.getProductPrice()+ "\n" + p.getProductImg()+ "\n" + p.getColorLink());
 //         

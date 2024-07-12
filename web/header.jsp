@@ -701,7 +701,7 @@
                                     </svg>
                                 </i>
                                 <span class="cart-badge" style='padding-top: 0px'>
-                                    ${sessionScope.sizeCart}                      
+                                    ${sessionScope.sizeCart!=null?sessionScope.sizeCart:0}                      
                                 </span>
                             </a>
                         </li>

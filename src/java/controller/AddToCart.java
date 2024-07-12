@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Cart;
 import model.Product;
 
 /**
@@ -126,9 +127,16 @@ public class AddToCart extends HttpServlet {
                         txt = "";
                         txt = txt1;
                     }
+                    
                     Cookie c = new Cookie("Cart", txt);
                     c.setMaxAge(30 * 24 * 60 * 60);
                     response.addCookie(c);
+                    
+                    //caapj nhat soluong cart
+                    Cart cart = new Cart(txt, null);
+                    int size = cart.getListItem().size();
+                    session.setAttribute("sizeCart", size);
+                    
                     request.getRequestDispatcher("detail?productCode=" + productCode).forward(request, response);
                 }
             }

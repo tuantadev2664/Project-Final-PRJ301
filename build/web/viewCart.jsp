@@ -186,7 +186,7 @@
                                     <h3 class="regular"><b>Chọn hình thức thanh toán</b></h3>
                                 </div>
                                 <div class="payment-content">
-                                    <input class="payment-type" checked="checked" name="ord_payment_type" type="radio" id="ord_payment_type2" value="2">&nbsp;<label for="ord_payment_type2">Nhận hàng – Thanh toán (COD)</label><br>
+                                    <input class="payment-type" name="ord_payment_type" type="radio" id="ord_payment_type2" value="2">&nbsp;<label for="ord_payment_type2">Nhận hàng – Thanh toán (COD)</label><br>
                                     <input class="payment-type" name="ord_payment_type" type="radio" id="ord_payment_type1" value="1">&nbsp;<label for="ord_payment_type1">Thanh toán bằng chuyển khoản (Phí vận chuyển: 15.000VNĐ) </label><br>
                                     <input class="payment-type" name="ord_payment_type" type="radio" id="ord_payment_type4" value="4">&nbsp;<label for="ord_payment_type4">Thanh toán MOMO</label><br>
                                     <input class="payment-type" name="ord_payment_type" type="radio" id="ord_payment_type3" value="3">&nbsp;<label for="ord_payment_type3">Thanh toán trực tuyến qua Ngân Lượng</label><br />
@@ -234,7 +234,7 @@
                                 <c:forEach items="${o.listItem}" var="i">
                                     <tr class="cart-item">
                                         <td class="thumb" style="width: 60px; vertical-align: top;">
-                                            <a class="df" href="detail?productCode=${i.product.productCode}" title="T${i.product.productName}">
+                                            <a class="df" href="detail?productCode=${i.product.productCode}" title="${i.product.productName}">
                                                 <img style="width: 100%" class="thumb img-responsive" alt="${i.product.productName}" src="${i.product.productImg}" onerror="#'"/>
                                             </a>
                                         </td>

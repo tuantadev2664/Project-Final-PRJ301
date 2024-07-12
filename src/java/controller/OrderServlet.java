@@ -64,9 +64,12 @@ public class OrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         DAO dao = new DAO();
+        
         HttpSession session = request.getSession();
+        
         String orderId = dao.createOrderId();
         Account acc = (Account) session.getAttribute("account");
+        
         String accId = String.valueOf(acc.getId());
         String senderName = request.getParameter("sender_name");
         String senderEmail = request.getParameter("sender_email");
@@ -81,10 +84,13 @@ public class OrderServlet extends HttpServlet {
         Cart cart = (Cart)session.getAttribute("Cart");
         String num = (String)session.getAttribute("num");
         String sum = (String)session.getAttribute("sum");
+        
         Date curenDate= new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-       String now = dateFormat.format(curenDate);
+        String now = dateFormat.format(curenDate);
+       
         // You can now use these values to process the order
+        System.out.println("orderid:" + orderId);
         System.out.println("Sender Name: " + senderName);
         System.out.println("Sender Email: " + senderEmail);
         System.out.println("Sender Telephone: " + senderTelephone);
@@ -95,10 +101,11 @@ public class OrderServlet extends HttpServlet {
         System.out.println("Sender Comments: " + senderComments);
         System.out.println("Payment Type: " + paymentType);
         System.out.println(cart);
-        System.out.println(num);
-        System.out.println(sum);
-        System.out.println(now);
-        System.out.println(session.getAttribute("account"));
+        System.out.println("num:" + num);
+        System.out.println("sum" + sum);
+        System.out.println("now" + now);
+        System.out.println(accId);
+        
         dao.insertOrder(orderId, accId, now, senderName, senderTelephone, senderEmail, cityId, districtId, wardId, senderAddress, num, sum);
     
         //insert to order detail
@@ -111,12 +118,28 @@ public class OrderServlet extends HttpServlet {
         if (arrCookie != null) {
             for (Cookie c : arrCookie) {
                 if (c.getName().equals("Cart")) {
-                    c.setMaxAge(0);                    response.addCookie(c);
-
+                    c.setMaxAge(0);
+                    response.addCookie(c);
                 }
             }
         }
-        response.sendRedirect("listsample");
+        
+        
+        //caapj nhat soluong cart
+        Cart checksizeCart = new Cart("", null);
+        int size = checksizeCart.getListItem().size();
+        session.setAttribute("sizeCart", size);
+        
+        request.setAttribute("name", senderName);
+        request.setAttribute("phone", senderTelephone);
+        request.setAttribute("email", senderName);
+        request.setAttribute("address", (senderComments!=""?senderComments + "-":"")+ senderAddress + "-" + wardId + "-" + districtId + "-" + cityId);
+        request.setAttribute("orderId", orderId);
+        request.setAttribute("num", num);
+        request.setAttribute("sum", sum);
+        
+        request.setAttribute("listI", listItem);
+        request.getRequestDispatcher("orderSuccessful.jsp").forward(request, response);
     } 
 
     /** 
