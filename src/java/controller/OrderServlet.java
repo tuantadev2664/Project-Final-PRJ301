@@ -111,7 +111,8 @@ public class OrderServlet extends HttpServlet {
         if (arrCookie != null) {
             for (Cookie c : arrCookie) {
                 if (c.getName().equals("Cart")) {
-                    c.setMaxAge(0);
+                    c.setMaxAge(0);                    response.addCookie(c);
+
                 }
             }
         }
