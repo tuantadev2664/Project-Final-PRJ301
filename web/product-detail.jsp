@@ -165,9 +165,9 @@
 
 
 
-                    <form action="check">
+                    <form action="AddToCart">
                         <input type="hidden" name="code" id="code" value="${listP.productCode}">
-                        <input type="hidden" name="color" id="color" value="634">
+                        <input type="hidden" name="color" id="color" value="${listP.productColorList.get(0).getColorID()}">
 
                         <input type="hidden" name="size" id="size" value="0">
 

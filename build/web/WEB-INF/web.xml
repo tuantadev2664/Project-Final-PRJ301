@@ -4,5 +4,36 @@
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
 	 version="6.0">
-
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>controller.CartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>controller.AddToCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SizeCart</servlet-name>
+        <servlet-class>controller.SizeCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowCart</servlet-name>
+        <servlet-class>controller.ShowCart</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/CartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/AddToCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SizeCart</servlet-name>
+        <url-pattern>/SizeCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowCart</servlet-name>
+        <url-pattern>/ShowCart</url-pattern>
+    </servlet-mapping>
 </web-app>
