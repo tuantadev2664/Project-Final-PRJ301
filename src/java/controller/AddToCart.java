@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Cart;
 import model.Product;
 
 /**
@@ -56,7 +57,8 @@ public class AddToCart extends HttpServlet {
 //        List<Product> listProduct = dao.getAllProductDetails();
         Cookie[] arrCookie = request.getCookies();
         String txt = "";
-
+        String txt1="";
+        
         if (arrCookie != null) {
             for (Cookie c : arrCookie) {
                 if (c.getName().equals("Cart")) {
@@ -84,7 +86,8 @@ public class AddToCart extends HttpServlet {
                     session.setAttribute("error", "Bạn vui lòng nhập số lương muốn mua nhỏ hơn hoặc bằng: " + dao.getQuantity(productCode, productColor, productSize));
                     response.sendRedirect("detail?productCode=" + productCode);
                 } else {
-                    System.out.println(productQuantity);
+                    session.setAttribute("error", "bạn đã thêm vào giỏ hàng thành công");
+//                    System.out.println(productQuantity);
                     if (productSize.equals("0")) {
                         productSize = "2";
                     }
@@ -93,11 +96,47 @@ public class AddToCart extends HttpServlet {
                     if (txt.isEmpty()) {
                         txt = productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
                     } else {
-                        txt += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                        //txt += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                        //gop cookie neu trung key
+                        String[] arr = txt.split("/");
+                        
+                        //co
+                        boolean isDuplicateCookieCart = false;
+                        
+                        for (String item : arr) {
+                            String[] productArr = item.split(":");
+                            if (productArr.length == 4) {
+                                String id = productArr[0];
+                                String color = productArr[1];
+                                String size = productArr[2];
+                                String quan = productArr[3];
+
+                                if (id.equals(productCode) && color.equals(productColor) && size.equals(productSize)) {
+                                    int quanOld = Integer.parseInt(quan);
+                                    quanOld += Integer.parseInt(productQuantity);
+                                    quan = quanOld + "";
+                                    isDuplicateCookieCart = true;
+                                }
+                                txt1 += "/" + id + ":" + color + ":" + size + ":" + quan;
+                            }
+                        }
+                        if(!isDuplicateCookieCart){
+                            txt1 += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                        }
+                        //set lai txt
+                        txt = "";
+                        txt = txt1;
                     }
+                    
                     Cookie c = new Cookie("Cart", txt);
                     c.setMaxAge(30 * 24 * 60 * 60);
                     response.addCookie(c);
+                    
+                    //caapj nhat soluong cart
+                    Cart cart = new Cart(txt, null);
+                    int size = cart.getListItem().size();
+                    session.setAttribute("sizeCart", size);
+                    
                     request.getRequestDispatcher("detail?productCode=" + productCode).forward(request, response);
                 }
             }
