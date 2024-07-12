@@ -57,7 +57,8 @@ public class AddToCart extends HttpServlet {
 //        List<Product> listProduct = dao.getAllProductDetails();
         Cookie[] arrCookie = request.getCookies();
         String txt = "";
-        String txt1 = "";
+        String txt1="";
+        
         if (arrCookie != null) {
             for (Cookie c : arrCookie) {
                 if (c.getName().equals("Cart")) {
@@ -126,10 +127,10 @@ public class AddToCart extends HttpServlet {
                         txt = "";
                         txt = txt1;
                     }
+                    
                     Cookie c = new Cookie("Cart", txt);
                     c.setMaxAge(30 * 24 * 60 * 60);
                     response.addCookie(c);
-                    
                     
                     //caapj nhat soluong cart
                     Cart cart = new Cart(txt, null);

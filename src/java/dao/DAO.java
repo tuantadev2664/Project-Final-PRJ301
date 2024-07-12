@@ -11,7 +11,9 @@ import jakarta.servlet.http.Cookie;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,7 +130,7 @@ public class DAO {
                     string = string.replaceAll("'", "");
                     listImages.add(string);
                 }
-                if(listImages.size() == 1){
+                if (listImages.size() == 1) {
                     listImages.add(listImages.get(0));
                 }
                 proList.add(new Product(rs.getString(1),
@@ -231,8 +233,6 @@ public class DAO {
         }
         return null;
     }
-    
-   
 
     public List<Category> getAllCategory() {
         List<Category> list = new ArrayList<>();
@@ -255,10 +255,10 @@ public class DAO {
 
     public List<Product> pagingProductByCategory(String categoryID, int index) {
         List<Product> proList = new ArrayList<>();
-        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
-"where categoryID = ? \n" +
-"order by productCode\n" +
-"offset ? rows fetch next 12 rows only;";
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n"
+                + "where categoryID = ? \n"
+                + "order by productCode\n"
+                + "offset ? rows fetch next 12 rows only;";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -325,8 +325,7 @@ public class DAO {
         return list;
     }
 
-    
-    public List<ProductColor> getProductColor(String productCode){
+    public List<ProductColor> getProductColor(String productCode) {
         List<ProductColor> list = new ArrayList<>();
         String sql = "select ProductColor.[colorId], [colorLink]\n"
                 + "from ProductColor\n"
@@ -337,9 +336,9 @@ public class DAO {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productCode);
             ResultSet rs = st.executeQuery();
-            while(rs.next()){
-               double db_colorid = Double.parseDouble(rs.getString(1));
-               list.add(new ProductColor((""+(int)db_colorid) , rs.getString(2)));
+            while (rs.next()) {
+                double db_colorid = Double.parseDouble(rs.getString(1));
+                list.add(new ProductColor(("" + (int) db_colorid), rs.getString(2)));
             }
             rs.close();
             connection.close();
@@ -347,10 +346,9 @@ public class DAO {
             System.out.println("e");
         }
         return list;
-        
+
     }
-    
-    
+
 //    public List<Product> getAllProductByListProductCode(List<String> listProductCode) {
 //        List<Product> list = new ArrayList<>();
 //        for (String string1 : listProductCode) {
@@ -386,11 +384,8 @@ public class DAO {
 //        }
 //        return list;
 //    }
+    public Product getProductByProductCode(String productCode) {
 
-    
-    
-    public Product getProductByProductCode(String productCode){
-        
         String sql = "select productCode, productName, productSale, productStatus, productPrice, productOldPrice, productSize, productDescription, productImagesOrigin, productInfo from product where productCode = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
@@ -402,20 +397,19 @@ public class DAO {
                 List<ProductColor> listColor = getProductColor(productCode);
                 List<String> listImages = handleString(rs.getString(9));
                 List<ProductImgDetail> listImgDetails = getProductImgDetails(productCode);
-                
-                return new Product(rs.getString(1), 
-                        rs.getString(2), 
-                       rs.getString(3), 
-                       rs.getString(4), 
-                     rs.getString(5),
-                     rs.getString(6),
-                     rs.getString(7),
+
+                return new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
                         listDescription,
                         listColor,
                         listImages,
                         rs.getString(10),
                         listImgDetails
-                       
                 );
             }
             rs.close();
@@ -425,7 +419,6 @@ public class DAO {
         }
         return null;
     }
-
 
 //    public ProductDetail getProductDetailByProductCode(String productCode){
 //        
@@ -461,21 +454,19 @@ public class DAO {
 //        }
 //        return null;
 //    }
-    
-    
-    public int getQuantity(String productCode, String colorID, String productSize){
-        
+    public int getQuantity(String productCode, String colorID, String productSize) {
+
         String sql = "select [productStock] from productDetail where productCode = ? and [colorId] = ? and [productSize] = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productCode);
             st.setString(2, colorID);
-            st.setString(3,productSize);
+            st.setString(3, productSize);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
-                return Integer.parseInt( rs.getString(1));
-            }          
+            if (rs.next()) {
+                return Integer.parseInt(rs.getString(1));
+            }
             rs.close();
             connection.close();
         } catch (SQLException e) {
@@ -483,20 +474,20 @@ public class DAO {
         }
         return 0;
     }
-    
-    public String getColorName( String colorID){
-        
+
+    public String getColorName(String colorID) {
+
         String sql = " select colorName from Color where [colorId] = ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
-            
+
             st.setString(1, colorID);
-            
+
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getString(1);
-            }          
+            }
             rs.close();
             connection.close();
         } catch (SQLException e) {
@@ -504,7 +495,7 @@ public class DAO {
         }
         return null;
     }
-    
+
     public List<Product> getAllProductByListProductCode(List<String> listProductCode) {
         List<Product> list = new ArrayList<>();
         for (String string1 : listProductCode) {
@@ -540,11 +531,11 @@ public class DAO {
         }
         return list;
     }
-    
-    public List<ProductImgDetail> getProductImgDetails(String productCode){
+
+    public List<ProductImgDetail> getProductImgDetails(String productCode) {
         List<ProductColor> listColor = getProductColor(productCode);
         List<ProductImgDetail> listImgDetails = new ArrayList<>();
-        for(ProductColor productColor : listColor){
+        for (ProductColor productColor : listColor) {
             List<String> listImg = new ArrayList<>();
             String sql = "select  [imgDetailColor]\n"
                     + "from ProductImgDetail\n"
@@ -567,8 +558,8 @@ public class DAO {
         }
         return listImgDetails;
     }
-    
-    public List<Status> getAllStatus(){
+
+    public List<Status> getAllStatus() {
         List<Status> list = new ArrayList<>();
         String sql = "select * from Status";
         try {
@@ -621,7 +612,7 @@ public class DAO {
         return list;
     }
 
-    public List<String> handleString(String imagesString){
+    public List<String> handleString(String imagesString) {
 
         String[] data = imagesString.split(",");
         List<String> listImages = new ArrayList<>();
@@ -695,11 +686,11 @@ public class DAO {
         }
         return productList;
     }
-    
-    public List<Product> searchByName(String search){
+
+    public List<Product> searchByName(String search) {
         List<Product> productList = new ArrayList<>();
-        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n" +
-"where productName like ?";
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n"
+                + "where productName like ?";
         try {
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
@@ -793,7 +784,6 @@ public class DAO {
 //           
 //    }
 //-------------------------------------------------------------------------------
-
     public List<Product> getAllProductDetails() {
         List<Product> productDetaiList = new ArrayList<>();
         String sql = "SELECT ProductDetail.productCode, \n"
@@ -828,24 +818,24 @@ public class DAO {
         }
         return productDetaiList;
     }
-    
+
     //tuan làm them để chạy cart
     public Product getProductDetailsForCart(String productCode, String colorID, String productSize) {
-        String sql = "SELECT ProductDetail.productCode,\n" +
-"                      Product.productName,\n" +
-"                      ProductDetail.colorId, \n" +
-                "Color.colorName, \n" +
-"                    ProductDetail.productSize,\n" +
-"                      Product.productPrice ,\n" +
-"                      Product.productImagesLarge,\n" +
-"                     Color.[colorLink]\n" +
-"                \n" +
-"                FROM ProductDetail\n" +
-"                JOIN Product\n" +
-"               ON ProductDetail.productCode = Product.productCode\n" +
-"               JOIN Color\n" +
-"                ON ProductDetail.colorId = Color.[colorId]\n" +
-"				where product.productCode = ? and Color.[colorId] = ? and ProductDetail.productSize = ? ";
+        String sql = "SELECT ProductDetail.productCode,\n"
+                + "                      Product.productName,\n"
+                + "                      ProductDetail.colorId, \n"
+                + "Color.colorName, \n"
+                + "                    ProductDetail.productSize,\n"
+                + "                      Product.productPrice ,\n"
+                + "                      Product.productImagesLarge,\n"
+                + "                     Color.[colorLink]\n"
+                + "                \n"
+                + "                FROM ProductDetail\n"
+                + "                JOIN Product\n"
+                + "               ON ProductDetail.productCode = Product.productCode\n"
+                + "               JOIN Color\n"
+                + "                ON ProductDetail.colorId = Color.[colorId]\n"
+                + "				where product.productCode = ? and Color.[colorId] = ? and ProductDetail.productSize = ? ";
 
         try {
             java.sql.Connection connection = new DBContext().getConnect();
@@ -865,7 +855,7 @@ public class DAO {
                 String img = listImg.split(",")[0];
                 String colorLink = rs.getString(8);
 //                System.out.println(code + " \n" + name + "\n" + color + "\n" + size + "\n" + price + "\n" + price + "\n" + img + "\n" + colorLink);
-                return new Product(code, name,color ,colorid, size, price, img, colorLink);
+                return new Product(code, name, color, colorid, size, price, img, colorLink);
             }
         } catch (SQLException e) {
             System.err.println("SQL Exception: " + e.getMessage());
@@ -883,8 +873,7 @@ public class DAO {
         }
         return null;
     }
-    
-    
+
     public Cart readCookieCart(Cookie[] arrCookie) {
         List<Product> listProduct = getAllProductByCategory();
         String txt = "";
@@ -901,12 +890,86 @@ public class DAO {
         return cart;
     }
 
-     public static void main(String[] args) {
-         DAO dao = new DAO();
-         
-         Product p = dao.getProductDetailsForCart("MBL267", "634", "S");
-         System.out.println(p.getProductCode() + "\n" + p.getProductName() + "\n" + p.getProductColor()+ "\n" + p.getProductColorID()+ "\n" + p.getProductSize()+ "\n" + p.getProductPrice()+ "\n" + p.getProductImg()+ "\n" + p.getColorLink());
-         
-     }
+    public int orderSize() {
+        String sql = "select count(*) from [Order]";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public String createOrderId() {
+        DAO dao = new DAO();
+        int size = dao.orderSize();
+        if (size < 9) {
+            return "OR00" + String.valueOf(size + 1);
+        } else {
+            return "OR0" + String.valueOf(size + 1);
+        }
+    }
+
+    public void insertOrder(String orderId, String accountId, String orderDate, String name, String phone, String email, String city, String district, String ward, String address, String quantity, String total) {
+        String sql = "INSERT INTO [Order] (orderId,accountId, orderDate, name, phone, email, city, district, ward, address, quantity, total)\n"
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, orderId);
+            st.setString(2, accountId);
+            st.setString(3, orderDate);
+            st.setString(4, name);
+            st.setString(5, phone);
+            st.setString(6, email);
+            st.setString(7, city);
+            st.setString(8, district);
+            st.setString(9, ward);
+            st.setString(10, address);
+            st.setString(11, quantity);
+            st.setString(12, total);
+
+            st.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void insertOrderDetail(String orderId, String productId, String color, String size, String quantity) {
+        String sql = "INSERT INTO OrderDetail (orderId, productId, color, size, quantity) VALUES (?, ?, ?, ?, ?)";
+        try {
+
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, orderId);
+            st.setString(2, productId);
+            st.setString(3, color);
+            st.setString(4, size);
+            st.setString(5, quantity);
+
+            st.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        DAO dao = new DAO();
+        System.out.println(dao.getQuantity("MBL267", "634", "S"));
+        System.out.println(dao.orderSize());
+        System.out.println(dao.createOrderId());
+        //dao.insertOrderDetail("OR001", "MBL267", "635", "M", "2");
+         dao.insertOrder(dao.createOrderId(), "accountId", "12/7/2024", "name", "phone", "email", "city", "district", "ward", "address", "quantity", "total");
+//         Product p = dao.getProductDetailsForCart("MBL267", "634", "S");
+//         System.out.println(p.getProductCode() + "\n" + p.getProductName() + "\n" + p.getProductColor()+ "\n" + p.getProductColorID()+ "\n" + p.getProductSize()+ "\n" + p.getProductPrice()+ "\n" + p.getProductImg()+ "\n" + p.getColorLink());
+//         
+    }
 
 }
