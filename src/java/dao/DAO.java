@@ -941,19 +941,20 @@ public class DAO {
         }
     }
 
-    public void insertOrderDetail(String orderId, String productId, String color, String size, String quantity) {
-        String sql = "INSERT INTO OrderDetail (orderId, productId, color, size, quantity) VALUES (?, ?, ?, ?, ?)";
+    public void insertOrderDetail(String orderId, String productId, String colorid, String colorname, String size, String quantity) {
+//        String sql = "INSERT INTO OrderDetail (orderId, productId, color, size, quantity) VALUES (?, ?, ?, ?, ?)";
+        String sql="exec PlaceOrder ?, ?, ?, ?, ?, ?";
         try {
 
             java.sql.Connection connection = new DBContext().getConnect();
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, orderId);
             st.setString(2, productId);
-            st.setString(3, color);
-            st.setString(4, size);
-            st.setString(5, quantity);
-
-            st.executeUpdate();
+            st.setString(3, colorid);
+            st.setString(4, colorname);
+            st.setString(5, size);
+            st.setString(6, quantity);
+            st.execute();
             connection.close();
         } catch (SQLException e) {
             System.out.println(e);

@@ -112,7 +112,7 @@ public class OrderServlet extends HttpServlet {
         List<Item> listItem = new ArrayList<>();
         listItem= cart.getListItem();
         for(Item i : listItem ){
-            dao.insertOrderDetail(orderId, i.getProduct().getProductCode(), i.getProduct().getProductColor(), i.getProduct().getProductSize(), String.valueOf(i.getQuantity()));
+            dao.insertOrderDetail(orderId, i.getProduct().getProductCode(),i.getProduct().getProductColorID() ,i.getProduct().getProductColor(), i.getProduct().getProductSize(), String.valueOf(i.getQuantity()));
         }
         Cookie[] arrCookie = request.getCookies();
         if (arrCookie != null) {
