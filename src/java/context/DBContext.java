@@ -16,8 +16,8 @@ public class DBContext {
     
     public static String DRIVERNAME="com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static String DBURL="jdbc:sqlserver://localhost:1433;databaseName=Project_Final_PRJ301;encrypt=false;trustServerCertificate=false;loginTimeout=30";
-    public static String USERDB="SA";
-    public static String PASSDB="MyStrongPass123";
+    public static String USERDB="sa";
+    public static String PASSDB="123";
     
     public Connection getConnect(){
         try{ 
