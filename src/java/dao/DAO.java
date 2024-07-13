@@ -29,6 +29,41 @@ import model.Status;
  * @author FPTSHOP
  */
 public class DAO {
+    
+    //hàm get show product for admin
+    public List<Product> getAllProduct() {
+        List<Product> proList = new ArrayList<>();
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n"
+                + "order by productCode DESC;";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String imagesString = rs.getString(6);
+                String[] data = imagesString.split(",");
+                List<String> listImages = new ArrayList<>();
+                for (String string : data) {
+                    string = string.replaceAll("'", "");
+                    listImages.add(string);
+                }
+                if (listImages.size() == 1) {
+                    listImages.add(listImages.get(0));
+                }
+                proList.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
+            }
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return proList;
+    }
 
     public int getNumberProduct() {
         String sql = "select count(*) from Product;";

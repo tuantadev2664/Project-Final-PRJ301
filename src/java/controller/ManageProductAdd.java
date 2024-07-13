@@ -4,23 +4,24 @@
  */
 package controller;
 
+import dao.DAO;
 import dao.LoginDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import model.Account;
+import model.Product;
+
 
 /**
  *
- * @author DELL
+ * @author hadi
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "ManageProductAdd", urlPatterns = {"/addproduct"})
+public class ManageProductAdd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,18 +35,7 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        request.getRequestDispatcher("adminProductAdd.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("adminProductAdd.jsp").forward(request, response);
     }
 
     /**
@@ -74,32 +64,17 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try {
-            String lastName = request.getParameter("lastName");
-            String firstName = request.getParameter("firstName");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            
-            String fullName = firstName + lastName;
-
-            LoginDAO dao = new LoginDAO();
-            if(dao.getAccountByUsername(username) != null){
-                request.setAttribute("error", "Username existed!!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            } else if (dao.getAccountByEmail(email) != null){
-                request.setAttribute("error", "Email existed!!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            } else {
-                Account a = new Account(username, password, fullName, email,phone,1);
-                dao.insertAccount(a);
-                request.setAttribute("notificationRegister", "Register successfully! Please login ");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-        }
+        String productCode = request.getParameter("productcode");
+        String productName = request.getParameter("productname");
+        String productSale = request.getParameter("productsale");
+        String productCategorty = request.getParameter("productcategory");
+        String productStatus = request.getParameter("productstatus");
+        String productPrice = request.getParameter("productprice");
+        String productOldPrice = request.getParameter("productoldprice");
+        String productImage = request.getParameter("productimage");
+        LoginDAO dao = new LoginDAO();
+        dao.addProduct(productCode, productName, productSale, productStatus, productPrice, productOldPrice, productImage, productCategorty);
+        response.sendRedirect("manageaccount");
     }
 
     /**

@@ -90,8 +90,6 @@ public class Product {
         this.productColorID = productColorID;
     }
 
-   
-    
     
     public String getProductSale() {
         return productSale;

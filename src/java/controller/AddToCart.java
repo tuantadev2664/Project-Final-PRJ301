@@ -74,6 +74,7 @@ public class AddToCart extends HttpServlet {
         String productQuantity = request.getParameter("quantity");
 
         HttpSession session = request.getSession();
+  
         if ("0".equals(productSize)) {
             session.setAttribute("error", "Bạn vui lòng chọn size");
             response.sendRedirect("detail?productCode=" + productCode);

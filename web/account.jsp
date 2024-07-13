@@ -260,7 +260,6 @@
                             <ul>
                                 <li><a class="button" href="#account-info" onclick="goToSection('account-info', this)" title="Thông tin tài khoản">Thông tin tài khoản</a></li>
                                 <li><a class="button" href="#change-password" onclick="goToSection('change-password', this)">Đổi mật khẩu</a></li>
-                                <li><a class="button" href="#address-book" onclick="goToSection('address-book', this)">Sổ địa chỉ (0)</a></li>
                                 <li><a href="https://www.messenger.com/t/iamtiss" class="button">Chat hỗ trợ</a></li>
                                 <li><a class="button" href="${pageContext.request.contextPath}/logout" title="Logout">Đăng xuất</a></li>
                             </ul>
@@ -272,19 +271,11 @@
                             <div class="info-item">
                                 <h3 class="label">Full name:</h3>
                                 <h3 class="value">${account.fullname}</h3>
-                            </div>
-                            <div class="info-item">
-                                <h3 class="label">Gender:</h3>
-                                <h3 class="value">${account.gender}</h3>
-                            </div>
+                            </div>                            
                             <div class="info-item">
                                 <h3 class="label">Email:</h3>
                                 <h3 class="value">${account.email}</h3>
-                            </div>
-                            <div class="info-item">
-                                <h3 class="label">Birthday:</h3>
-                                <h3 class="value">${account.formatDate}</h3>
-                            </div>
+                            </div>                            
                             <div class="info-item">
                                 <h3 class="label">Phone number:</h3>
                                 <h3 class="value">${account.phone}</h3>

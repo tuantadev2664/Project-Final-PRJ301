@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : Login.jsp
     Created on : May 30, 2024, 9:09:45 AM
@@ -43,7 +44,7 @@
                 <c:remove var="message" scope="session" />
             </script>
         </c:if>
-            
+
         <div id="header_tab">
             <jsp:include page="header.jsp"/>
         </div>
@@ -69,7 +70,14 @@
                     color: white;
                     border-top-left-radius: 14px;
                     border-top-right-radius: 14px;" class="title-head"><span>Đăng nhập tài khoản</span></h2>
-                <h3 style="red">${sessionScope.notification}</h3>
+                <c:if test="${sessionScope.notification != null}">
+                    <h3 style="red">${sessionScope.notification}</h3>
+                </c:if>
+                    <c:if test="${requestScope.notificationRegister != null}">
+                        <div class="alert alert-success" role="alert">
+                            <p style="green">${requestScope.notificationRegister}</p>
+                        </div>
+                    </c:if>
                 <div class="row">
                     <div style="
                          align-items: center;
@@ -78,9 +86,9 @@
                             <div id="login">
                                 <form action="login" method="post" id="customer_login" accept-charset="UTF-8"><input name="FormType" type="hidden" value="customer_login"><input name="utf8" type="hidden" value="true"><input name="ReturnUrl" type="hidden" value="/account">
                                     <div class="form-signup">
-                                        <c:if test="${requestScope.error != null}">
+                                        <c:if test="${requestScope.notification != null}">
                                             <div class="alert alert-danger" role="alert" style="margin-top: 10px">
-                                                ${requestScope.error}
+                                                ${requestScope.notification}
                                             </div>
                                         </c:if>
                                     </div>

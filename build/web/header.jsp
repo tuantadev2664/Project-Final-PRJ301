@@ -653,11 +653,18 @@
                 <div class="float-right">
                     <ul class="list-inline">
                         <li class="list-inline-item d-sm-inline d-none" >
-                            <a href="">
-                                Store
-                            </a>
+                            <c:if test="${account.role == 1}">
+                                <a href="manageaccount">
+                                    Admin
+                                </a>
+                            </c:if>
+                            <c:if test="${account.role != 1}">
+                                <a href="listsample">
+                                    Store
+                                </a>
+                            </c:if>
                         </li>
-                        
+
                         <c:if test="${empty sessionScope.account}">  
                             <li class="list-inline-item" >
                                 <a  href="login">
@@ -719,7 +726,7 @@
                                     </svg>
                                 </i>
                             </a>
-                            
+
                             <form id="frm_product" action="search?index=1" method="post">
                                 <!--https://monatabluelight.com/san-pham.html-->
                                 <input type="text" name="search" value="" placeholder="Tìm kiếm...">
@@ -735,7 +742,9 @@
                                     </svg>
                                 </button>
                             </form>
+
                         </li>
+                        
                     </ul>
                 </div>
                 <div class="clearfix"></div>

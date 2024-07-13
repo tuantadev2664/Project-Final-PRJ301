@@ -45,7 +45,7 @@
                         <div class="title-form">
                             <h3 class="regular df"><b>Thông tin đơn hàng</b></h3>
                         </div><!--end: .title-form-->
-                        <h3 class="text-center">${orderId}</h3>
+                        <h3 class="text-center">Mã Đơn Hàng: ${orderId}</h3>
                         
                         <c:set var="o" value="${requestScope.listI}" />
                         <form id="frmUpdateCart" name="frmUpdateCart">

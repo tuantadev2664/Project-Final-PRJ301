@@ -10,17 +10,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import model.Account;
 
 /**
  *
- * @author DELL
+ * @author hadi
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "ManageProductDelete", urlPatterns = {"/deleteproduct"})
+public class ManageProductDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +37,10 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");
+            out.println("<title>Servlet ManageProductDelete</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManageProductDelete at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +58,14 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+         String id = request.getParameter("id");
+         System.out.println(id);
+        try{
+            LoginDAO dao = new LoginDAO();
+            dao.deleteProduct(id);
+            response.sendRedirect("manageaccount");
+    }catch(NumberFormatException e){     
+    }
     }
 
     /**
@@ -74,32 +79,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try {
-            String lastName = request.getParameter("lastName");
-            String firstName = request.getParameter("firstName");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            
-            String fullName = firstName + lastName;
-
-            LoginDAO dao = new LoginDAO();
-            if(dao.getAccountByUsername(username) != null){
-                request.setAttribute("error", "Username existed!!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            } else if (dao.getAccountByEmail(email) != null){
-                request.setAttribute("error", "Email existed!!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            } else {
-                Account a = new Account(username, password, fullName, email,phone,1);
-                dao.insertAccount(a);
-                request.setAttribute("notificationRegister", "Register successfully! Please login ");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-        }
+        processRequest(request, response);
     }
 
     /**
