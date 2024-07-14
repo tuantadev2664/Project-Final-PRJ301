@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.Category;
+import model.Order;
+import model.OrderDetail;
 import model.Product;
 import model.ProductColor;
 import model.ProductImgDetail;
@@ -718,7 +720,25 @@ public class DAO {
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        int sum = 0;
+//        int sum = 0;
+//        List<ProductImgDetail> image = dao.getProductImgDetails("MBL267");
+//        for (ProductImgDetail product : image) {
+//            System.out.println(product);
+//        }
+//List<Product> list = dao.getAllProduct();
+//        for (Product product : list) {
+//            System.out.println(product);
+//        }
+        Product p = dao.getProductByProductCode("MBL263");
+        System.out.println(p.getProductImagesOrigin().get(0));
+
+
+}
+}
+
+
+
+
 //        System.out.println(dao.getAllProductByCategory());
 
 //       for(Product product : dao.getASampleProductByProductCode("MBL267")){
@@ -766,11 +786,4 @@ public class DAO {
 //        }
         //System.out.println(dao.getProductDetailByProductCode("MBL267").getColorSizeStock("634.0"));
 //        System.out.println(dao.getQuantity("MBL267", "635", "S"));
-List<Product> list = dao.getAllProduct();
-        for (Product product : list) {
-            System.out.println(product);
-        }
-
-    }
-
-}
+    

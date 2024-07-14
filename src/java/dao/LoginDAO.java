@@ -14,6 +14,8 @@ import java.util.List;
 import model.Account;
 import model.Address;
 import model.Card;
+import model.Order;
+import model.OrderDetail;
 import model.Product;
 
 /**
@@ -280,7 +282,7 @@ public class LoginDAO {
 
     public void deleteAccount(int id) {
         String sql = "DELETE FROM Account\n" +
-"WHERE id=? CASCADE;;";
+"WHERE id=?;";
         try (Connection con = new DBContext().getConnect()) {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, id);
@@ -300,8 +302,61 @@ public class LoginDAO {
             System.out.println(e);
         }
     }
+     
+     public List<Order> getAllOrders() {
+        List<Order> orders = new ArrayList<>();
+        String sql = "SELECT * FROM [Order]";
+        Connection conn = new DBContext().getConnect();
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Order order = new Order();
+                order.setOrderId(rs.getString("orderId"));
+                order.setAccountId(rs.getString("accountId"));
+                order.setOrderDate(rs.getDate("orderDate"));
+                order.setName(rs.getString("name"));
+                order.setPhone(rs.getString("phone"));
+                order.setEmail(rs.getString("email"));
+                order.setCity(rs.getString("city"));
+                order.setDistrict(rs.getString("district"));
+                order.setWard(rs.getString("ward"));
+                order.setAddress(rs.getString("address"));
+                order.setQuantity(rs.getString("quantity"));
+                order.setTotal(rs.getString("total"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+     
+    
 
+    public List<OrderDetail> getOrderDetailsByOrderId(String orderId) {
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        String sql = "SELECT * FROM OrderDetail WHERE orderId = ?";
+        Connection conn = new DBContext().getConnect();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, orderId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.setOrderId(rs.getString("orderId"));
+                    orderDetail.setProductId(rs.getString("productId"));
+                    orderDetail.setColor(rs.getString("color"));
+                    orderDetail.setSize(rs.getString("size"));
+                    orderDetail.setQuantity(rs.getString("quantity"));
+                    orderDetails.add(orderDetail);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orderDetails;
+    }
 
+/*
     public static void main(String[] args) {
         LoginDAO loginDAO = new LoginDAO();
 
@@ -315,4 +370,38 @@ public class LoginDAO {
 //        loginDAO.addProduct("MBL900", "Áo Hadi", "100%", "Available", "500,000đ", "1,000,000đ", "https://monatabluelight.com/images/products/2024/06/06/large/ma%CC%A3%CC%86t-tru%CC%9Bo%CC%9B%CC%81c1717662717_1717662717.jpg", "C05");
     loginDAO.deleteProduct("MBL500");
     }
+    */
+    public static void main(String[] args) {
+        LoginDAO dao = new LoginDAO();
+
+        // Test getAllOrders
+        System.out.println("Testing getAllOrders():");
+        List<Order> orders = dao.getAllOrders();
+        for (Order order : orders) {
+            System.out.println("Order ID: " + order.getOrderId());
+            System.out.println("Account ID: " + order.getAccountId());
+            System.out.println("Order Date: " + order.getOrderDate());
+            System.out.println("Name: " + order.getName());
+            System.out.println("Email: " + order.getEmail());
+            System.out.println("Total: " + order.getTotal());
+            System.out.println("--------------------");
+        }
+
+        // Test getOrderDetailsByOrderId
+        if (!orders.isEmpty()) {
+            String firstOrderId = orders.get(0).getOrderId();
+            System.out.println("\nTesting getOrderDetailsByOrderId() for Order ID: " + firstOrderId);
+            List<OrderDetail> orderDetails = dao.getOrderDetailsByOrderId(firstOrderId);
+            for (OrderDetail detail : orderDetails) {
+                System.out.println("Product ID: " + detail.getProductId());
+                System.out.println("Color: " + detail.getColor());
+                System.out.println("Size: " + detail.getSize());
+                System.out.println("Quantity: " + detail.getQuantity());
+                System.out.println("--------------------");
+            }
+        } else {
+            System.out.println("No orders found to test getOrderDetailsByOrderId()");
+        }
+    }
+    
 }

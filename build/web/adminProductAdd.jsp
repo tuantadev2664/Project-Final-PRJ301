@@ -47,19 +47,22 @@
         .form-row input[type="submit"]{
             font-size: 16px;
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: black;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            border: 1px solid #4CAF50;
             margin-right: 10px;
             width: 100px; /* Set the width for both buttons */
         }
 
         .form-row .back-button {
             text-decoration: none;
-            color: red;
+            color: black;
+        }
+        .form-row input[type="submit"]:hover,
+        .form-row .back-button:hover {
+            transform: translateY(-2px);
         }
     </style>
 </head>

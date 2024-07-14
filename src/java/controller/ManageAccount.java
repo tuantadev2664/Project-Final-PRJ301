@@ -15,7 +15,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import model.Account;
+import model.Order;
+import model.OrderDetail;
 import model.Product;
 
 
@@ -34,10 +38,19 @@ public class ManageAccount extends HttpServlet {
         DAO daoo = new DAO();
         List<Account> list = dao.getAllAccount();
         List<Product> proList = new ArrayList<>();
+        List<Order> orders = dao.getAllOrders();
         proList = daoo.getAllProduct();
         System.out.println(list);
         request.setAttribute("allP", proList);
         request.setAttribute("data", list);
+        Map<String, List<OrderDetail>> orderDetailsMap = orders.stream()
+                .collect(Collectors.toMap(
+                        Order::getOrderId,
+                        order -> dao.getOrderDetailsByOrderId(order.getOrderId())
+                ));
+
+        request.setAttribute("orders", orders);
+        request.setAttribute("orderDetailsMap", orderDetailsMap);
         request.getRequestDispatcher("adminHome.jsp").forward(request, response);
     }
 
