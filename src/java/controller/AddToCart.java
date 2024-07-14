@@ -53,92 +53,96 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAO dao = new DAO();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("account") != null) {
+            DAO dao = new DAO();
 //        List<Product> listProduct = dao.getAllProductDetails();
-        Cookie[] arrCookie = request.getCookies();
-        String txt = "";
-        String txt1="";
-        
-        if (arrCookie != null) {
-            for (Cookie c : arrCookie) {
-                if (c.getName().equals("Cart")) {
-                    txt += c.getValue();
-                    c.setMaxAge(0);
+            Cookie[] arrCookie = request.getCookies();
+            String txt = "";
+            String txt1 = "";
+
+            if (arrCookie != null) {
+                for (Cookie c : arrCookie) {
+                    if (c.getName().equals("Cart")) {
+                        txt += c.getValue();
+                        c.setMaxAge(0);
+                        response.addCookie(c);
+                    }
                 }
             }
-        }
 
-        String productCode = request.getParameter("code");
-        String productColor = request.getParameter("color");
-        String productSize = request.getParameter("size").trim();
-        String productQuantity = request.getParameter("quantity");
+            String productCode = request.getParameter("code");
+            String productColor = request.getParameter("color");
+            String productSize = request.getParameter("size").trim();
+            String productQuantity = request.getParameter("quantity");
 
-        HttpSession session = request.getSession();
-  
-        if ("0".equals(productSize)) {
-            session.setAttribute("error", "Bạn vui lòng chọn size");
-            response.sendRedirect("detail?productCode=" + productCode);
-        } else {
-            if (dao.getQuantity(productCode, productColor, productSize) == 0) {
-                session.setAttribute("error", "Màu: " + dao.getColorName(productColor) + " Size: " + productSize + " Đã Soldout. Quý khách vui lòng chọn sản phẩm khác!");
+            
+
+            if ("0".equals(productSize)) {
+                session.setAttribute("error", "Bạn vui lòng chọn size");
                 response.sendRedirect("detail?productCode=" + productCode);
             } else {
-                if (Integer.parseInt(productQuantity) > dao.getQuantity(productCode, productColor, productSize)) {
-                    session.setAttribute("error", "Bạn vui lòng nhập số lương muốn mua nhỏ hơn hoặc bằng: " + dao.getQuantity(productCode, productColor, productSize));
+                if (dao.getQuantity(productCode, productColor, productSize) == 0) {
+                    session.setAttribute("error", "Màu: " + dao.getColorName(productColor) + " Size: " + productSize + " Đã Soldout. Quý khách vui lòng chọn sản phẩm khác!");
                     response.sendRedirect("detail?productCode=" + productCode);
                 } else {
-                    session.setAttribute("error", "bạn đã thêm vào giỏ hàng thành công");
-//                    System.out.println(productQuantity);
-                    if (productSize.equals("0")) {
-                        productSize = "2";
-                    }
-                    productColor = String.valueOf(Math.abs(Integer.parseInt(productColor)));
-                    System.out.println("ab," + productColor + "," + productSize + "," + productQuantity);
-                    if (txt.isEmpty()) {
-                        txt = productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                    if (Integer.parseInt(productQuantity) > dao.getQuantity(productCode, productColor, productSize)) {
+                        session.setAttribute("error", "Bạn vui lòng nhập số lương muốn mua nhỏ hơn hoặc bằng: " + dao.getQuantity(productCode, productColor, productSize));
+                        response.sendRedirect("detail?productCode=" + productCode);
                     } else {
-                        //txt += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
-                        //gop cookie neu trung key
-                        String[] arr = txt.split("/");
-                        
-                        //co
-                        boolean isDuplicateCookieCart = false;
-                        
-                        for (String item : arr) {
-                            String[] productArr = item.split(":");
-                            if (productArr.length == 4) {
-                                String id = productArr[0];
-                                String color = productArr[1];
-                                String size = productArr[2];
-                                String quan = productArr[3];
+                        session.setAttribute("error", "bạn đã thêm vào giỏ hàng thành công");
+//                    System.out.println(productQuantity);
+                        if (productSize.equals("0")) {
+                            productSize = "2";
+                        }
+                        productColor = String.valueOf(Math.abs(Integer.parseInt(productColor)));
+                        System.out.println("ab," + productColor + "," + productSize + "," + productQuantity);
+                        if (txt.isEmpty()) {
+                            txt = productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                        } else {
+                            //txt += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                            //gop cookie neu trung key
+                            String[] arr = txt.split("/");
 
-                                if (id.equals(productCode) && color.equals(productColor) && size.equals(productSize)) {
-                                    int quanOld = Integer.parseInt(quan);
-                                    quanOld += Integer.parseInt(productQuantity);
-                                    quan = quanOld + "";
-                                    isDuplicateCookieCart = true;
+                            //co
+                            boolean isDuplicateCookieCart = false;
+
+                            for (String item : arr) {
+                                String[] productArr = item.split(":");
+                                if (productArr.length == 4) {
+                                    String id = productArr[0];
+                                    String color = productArr[1];
+                                    String size = productArr[2];
+                                    String quan = productArr[3];
+
+                                    if (id.equals(productCode) && color.equals(productColor) && size.equals(productSize)) {
+                                        int quanOld = Integer.parseInt(quan);
+                                        quanOld += Integer.parseInt(productQuantity);
+                                        quan = quanOld + "";
+                                        isDuplicateCookieCart = true;
+                                    }
+                                    txt1 += "/" + id + ":" + color + ":" + size + ":" + quan;
                                 }
-                                txt1 += "/" + id + ":" + color + ":" + size + ":" + quan;
                             }
+                            if (!isDuplicateCookieCart) {
+                                txt1 += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
+                            }
+                            //set lai txt
+                            txt = "";
+                            txt = txt1;
                         }
-                        if(!isDuplicateCookieCart){
-                            txt1 += "/" + productCode + ":" + productColor + ":" + productSize + ":" + productQuantity;
-                        }
-                        //set lai txt
-                        txt = "";
-                        txt = txt1;
+
+                        Cookie c = new Cookie("Cart", txt);
+                        c.setMaxAge(30 * 24 * 60 * 60);
+                        response.addCookie(c);
+
+                        //caapj nhat soluong cart
+                        Cart cart = new Cart(txt, null);
+                        int size = cart.getListItem().size();
+                        session.setAttribute("sizeCart", size);
+
+                        request.getRequestDispatcher("detail?productCode=" + productCode).forward(request, response);
                     }
-                    
-                    Cookie c = new Cookie("Cart", txt);
-                    c.setMaxAge(30 * 24 * 60 * 60);
-                    response.addCookie(c);
-                    
-                    //caapj nhat soluong cart
-                    Cart cart = new Cart(txt, null);
-                    int size = cart.getListItem().size();
-                    session.setAttribute("sizeCart", size);
-                    
-                    request.getRequestDispatcher("detail?productCode=" + productCode).forward(request, response);
                 }
             }
         }
