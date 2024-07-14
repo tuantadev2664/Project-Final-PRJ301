@@ -50,6 +50,28 @@ public class Account {
         this.role = role;
     }
 
+    
+
+    public Account(String username, String password, String fullname, String email, String phone, int role) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.email = email;
+        this.phone = phone;
+        this.role = role;
+    }
+    
+    
+
+    public Account(int id, String username, String password, String fullname, String email, String phone, int role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.email = email;
+        this.phone = phone;
+        this.role = role;
+    }
     public int getId() {
         return id;
     }

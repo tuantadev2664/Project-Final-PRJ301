@@ -30,6 +30,40 @@ import model.Status;
  */
 public class DAO {
 
+    public List<Product> getAllProduct() {
+        List<Product> proList = new ArrayList<>();
+        String sql = "Select productCode, productName, productStatus, productPrice, productOldPrice, productImagesLarge from Product\n"
+                + "order by productCode DESC;";
+        try {
+            java.sql.Connection connection = new DBContext().getConnect();
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String imagesString = rs.getString(6);
+                String[] data = imagesString.split(",");
+                List<String> listImages = new ArrayList<>();
+                for (String string : data) {
+                    string = string.replaceAll("'", "");
+                    listImages.add(string);
+                }
+                if (listImages.size() == 1) {
+                    listImages.add(listImages.get(0));
+                }
+                proList.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        listImages));
+            }
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("e");
+        }
+        return proList;
+    }
+
     public int getNumberProduct() {
         String sql = "select count(*) from Product;";
         int total;
@@ -943,7 +977,7 @@ public class DAO {
 
     public void insertOrderDetail(String orderId, String productId, String colorid, String colorname, String size, String quantity) {
 //        String sql = "INSERT INTO OrderDetail (orderId, productId, color, size, quantity) VALUES (?, ?, ?, ?, ?)";
-        String sql="exec PlaceOrder ?, ?, ?, ?, ?, ?";
+        String sql = "exec PlaceOrder ?, ?, ?, ?, ?, ?";
         try {
 
             java.sql.Connection connection = new DBContext().getConnect();
@@ -961,16 +995,45 @@ public class DAO {
         }
     }
 
+    public List<String> numOfOrderEachMonth() {
+        List<String> listNum = new ArrayList<>();
+        String sql = "SELECT "
+                + "YEAR(orderDate) AS orderYear, "
+                + "MONTH(orderDate) AS orderMonth, "
+                + "COUNT(orderId) AS orderCount "
+                + "FROM [Project_Final_PRJ301].[dbo].[Order] "
+                + "WHERE orderDate >= DATEADD(month, -12, GETDATE()) "
+                + "GROUP BY YEAR(orderDate), MONTH(orderDate) "
+                + "ORDER BY orderYear, orderMonth";
+
+        try (java.sql.Connection connection = new DBContext().getConnect(); PreparedStatement statement = connection.prepareStatement(sql); ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int year = resultSet.getInt("orderYear");
+                int month = resultSet.getInt("orderMonth");
+                int count = resultSet.getInt("orderCount");
+                listNum.add(month + "." + year + "," + count );
+//                System.out.printf("%d  | %d   | %d%n", year, month, count);
+                
+            }
+            return listNum;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         DAO dao = new DAO();
-        System.out.println(dao.getQuantity("MBL267", "634", "S"));
-        System.out.println(dao.orderSize());
-        System.out.println(dao.createOrderId());
+//        System.out.println(dao.getQuantity("MBL267", "634", "S"));
+//        System.out.println(dao.orderSize());
+//        System.out.println(dao.createOrderId());
         //dao.insertOrderDetail("OR001", "MBL267", "635", "M", "2");
-         dao.insertOrder(dao.createOrderId(), "accountId", "12/7/2024", "name", "phone", "email", "city", "district", "ward", "address", "quantity", "total");
+//        dao.insertOrder(dao.createOrderId(), "accountId", "12/7/2024", "name", "phone", "email", "city", "district", "ward", "address", "quantity", "total");
 //         Product p = dao.getProductDetailsForCart("MBL267", "634", "S");
 //         System.out.println(p.getProductCode() + "\n" + p.getProductName() + "\n" + p.getProductColor()+ "\n" + p.getProductColorID()+ "\n" + p.getProductSize()+ "\n" + p.getProductPrice()+ "\n" + p.getProductImg()+ "\n" + p.getColorLink());
 //         
+        System.out.println(dao.numOfOrderEachMonth());
     }
 
 }
