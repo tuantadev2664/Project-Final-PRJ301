@@ -306,7 +306,7 @@
 //        document.getElementById('manage-product-btn').addEventListener('click', function () {
 //            window.location.href = 'manageproduct';
 //        });
-        
+
         function editAccount(id) {
             window.location.href = 'manageaccountupdate?id=' + id;
         }
@@ -316,7 +316,7 @@
                 window.location.href = 'manageaccountdelete?id=' + id;
             }
         }
-        
+
         function deleteProduct(id) {
             if (confirm("Are you sure you want to delete this product?")) {
                 window.location.href = 'deleteproduct?id=' + id;
@@ -326,11 +326,14 @@
         function addAccount() {
             window.location.href = 'manageaccountadd';
         }
-        
+
         function addProduct() {
             window.location.href = 'addproduct';
         }
-
+        
+        function showOrderDetails(orderId) {
+            window.location.href = 'manageorderdetail?id=' + orderId;
+        }
 
         var includeSectionVisible = false;
         function toggleIncludePage() {
@@ -424,19 +427,61 @@
                         <td>${pro.productOldPrice}</td>
                         <td style="text-align:center"><img src="${pro.productImagesLarge.get(0)}" alt="Product Image" style="width:50%; text-align: center"></td>
                         <td>
-                                <button class="function-button edit-button">Chỉnh sửa</button>
-                                <button class="function-button delete-button" onclick="deleteProduct('${pro.productCode}')">Xóa</button>
-                            </div>
+                            <button class="function-button edit-button">Edit</button>
+                            <button class="function-button delete-button" onclick="deleteProduct('${pro.productCode}')">Delete</button>
                         </td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>         
     </div>
+    
 
     <div class="content" id="manage-order">
-        <div>Chỉ xem đơn hàng</div>             
-    </div>
+            <h2>Danh sách đơn hàng</h2>
+            <table class="customer-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Account ID</th>
+                        <th>Order Date</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+<!--                        <th>Email</th>-->
+                        <th>City</th>
+                        <th>District</th>
+                        <th>Ward</th>
+                        <th>Address</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <c:forEach items="${requestScope.orders}" var="order">
+                        <tr>
+                            <td>${order.orderId}</td>
+                            <td>${order.accountId}</td>
+                            <td>${order.orderDate}</td>
+                            <td>${order.name}</td>
+                            <td>${order.phone}</td>
+<!--                            <td>${order.email}</td>-->
+                            <td>${order.city}</td>
+                            <td>${order.district}</td>
+                            <td>${order.ward}</td>
+                            <td>${order.address}</td>
+                            <td>${order.quantity}</td>
+                            <td>${order.total}</td>
+                            <td>
+                                <button class="function-button vieworder-button" onclick="showOrderDetails('${order.orderId}')">Chi tiết</button>
+                            </td>
+                        </tr>
+                    </c:forEach> 
+                        
+                </tbody>
+            </table>
+        </div>
 
     <div class="content" id="statistic">
         <div>Thống kê (làm nếu dư thời gian)</div>             
