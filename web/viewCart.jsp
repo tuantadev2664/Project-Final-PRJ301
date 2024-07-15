@@ -54,6 +54,11 @@
                 text-decoration: none;
                 margin-left: 10px;
             }
+            .delete-icon {
+                color: red;
+                font-size: 20px;
+                cursor: pointer;
+            }
         </style>
 
 
@@ -206,7 +211,7 @@
                                     <div>
                                         <label><input name="agree_mbl" type="checkbox"> Tôi đồng ý <a href="http://monatabluelight.com/chinh-sach-mua-hang-i4" target="_blank">Điều kiện - Điều khoản</a> &amp; <a href="http://monatabluelight.com/-i5" target="_blank">Chính sách bảo mật</a> của Monata Bluelight.</label>
                                     </div>
-                                    <button type="submit" class="btn-cart" href="" onclick=";" title="Hoàn thành đặt mua">Hoàn thành đặt mua</button>
+                                    <button type="submit" class="btn-cart" href="" onclick="" title="Hoàn thành đặt mua">Hoàn thành đặt mua</button>
                                 </div>
                             </div>
                             <input type="hidden" id="city_name" name="city_name" value="">
@@ -242,14 +247,14 @@
                                         <td class="name">
                                             <a class="df heading" href="detail?productCode=${i.product.productCode}" title="${i.product.productName}">
                                                 ${i.product.productName}
-                                            </a>
-                                            <a class="delete" href="">&nbsp;</a><br>
+                                            </a>                                            
+                                            <a class="delete-icon" href="ShowCart?param=${i.product.productCode};${i.product.productColorID.trim()};${i.product.productSize};0">&nbsp;&#10006;</a><br>
                                             <b style="color: #fb8a06">${i.product.productPrice}</b><input type="hidden" class="order-product-price" value="0"><br>
                                             <div>Color: <b>${i.product.productColor} <img style="width: 30px" src="${i.product.colorLink}"></b></div>
                                             <div>Size: <b>${i.product.productSize}</b></div>
                                             <div>Số lượng: 
                                                 <input style="width: 50px" onchange="validateUpdateCart('${i.product.productCode}', '${i.product.productColorID.trim()}', '${i.product.productSize}');" name="quantity${i.product.productCode}${i.product.productColorID.trim()}${i.product.productSize}" class="quantity-value" type="number" value="${i.quantity}" size="3">
-                                                <c:if test="${requestScope.error != null}">
+                                                <c:if test="${requestScope.error != null && requestScope.idError.equals(i.product.productName) && requestScope.colorError.equals(i.product.productColorID.trim()) && requestScope.sizeError.equals(i.product.productSize)}">
                                                     <div class="alert alert-danger" role="alert" style="margin-top: 10px">
                                                         ${requestScope.error}
                                                     </div>
