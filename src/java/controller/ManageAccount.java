@@ -135,6 +135,8 @@ public class ManageAccount extends HttpServlet {
         request.setAttribute("orders", orders);
         //request.setAttribute("orderDetailsMap", orderDetailsMap);
 
+        System.out.println(orders);
+
         request.getRequestDispatcher("adminHome.jsp").forward(request, response);
     
     }
@@ -145,4 +147,5 @@ public class ManageAccount extends HttpServlet {
 
     }
 
+    
 }

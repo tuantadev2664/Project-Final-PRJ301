@@ -83,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             
-            String fullName = firstName + lastName;
+            String fullName = firstName +" "+ lastName;
 
             LoginDAO dao = new LoginDAO();
             if(dao.getAccountByUsername(username) != null){

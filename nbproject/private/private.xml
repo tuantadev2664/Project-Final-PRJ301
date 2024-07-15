@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/web/adminHome.jsp</file>
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/src/java/controller/ManageAccount.java</file>
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/src/java/filter/AdminFilter.java</file>
@@ -11,6 +12,62 @@
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/src/java/dao/DAO.java</file>
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/src/java/dao/LoginDAO.java</file>
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fbff19ae375f3fe7e90b360030cecd8f648edef1
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/model/Account.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/viewCart.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/dao/LoginDAO.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/AddToCart.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ManageAccount.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/filter/AdminFilter.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/banner2.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/filter/HomeFilter.java</file>
+=======
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/list.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/address.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/login.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/dao/LoginDAO.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/AddToCart.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/header.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/LogoutServlet.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/LoginServlet.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/orderSuccessful.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/product-detail.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/RegisterServlet.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ManageAccountDelete.java</file>
+>>>>>>> 224ba0b7dec58087e3bd0cf6882b8e74803c240c
+<<<<<<< HEAD
+=======
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
+=======
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
+>>>>>>> af5526ec69609fd611a4a7e7c608a38f2a5e2199
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/model/Account.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/viewCart.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/dao/LoginDAO.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/AddToCart.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ManageAccount.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/filter/AdminFilter.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/banner2.jsp</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/filter/HomeFilter.java</file>
+<<<<<<< HEAD
+>>>>>>> 70da16f07dbdd608554396ad577504efaae29fe0
+=======
+>>>>>>> af5526ec69609fd611a4a7e7c608a38f2a5e2199
+=======
+>>>>>>> fbff19ae375f3fe7e90b360030cecd8f648edef1
+>>>>>>> eb1010fd9629c0c7cd82c02ae8e01f761738a141
         </group>
     </open-files>
 </project-private>

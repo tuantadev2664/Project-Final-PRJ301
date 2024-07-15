@@ -504,6 +504,8 @@
                         <td>
                             <button class="function-button edit-button">Edit</button>
                             <button class="function-button delete-button" onclick="deleteProduct('${pro.productCode}')">Delete</button>
+                            <button class="function-button edit-button">Edit</button>
+                            <button class="function-button delete-button" onclick="deleteProduct('${pro.productCode}')">Delete</button>
                         </td>
                     </tr>
                 </c:forEach>
@@ -522,7 +524,7 @@
                     <th>Order Date</th>
                     <th>Name</th>
                     <th>Phone</th>
-                    <!--                        <th>Email</th>-->
+            <!-- comment          <th>Email</th> -->
                     <th>City</th>
                     <th>District</th>
                     <th>Ward</th>
@@ -533,7 +535,7 @@
                 </tr>
             </thead>
             <tbody>
-
+           
                 <c:forEach items="${requestScope.orders}" var="order">
                     <tr>
                         <td>${order.orderId}</td>
@@ -541,7 +543,7 @@
                         <td>${order.orderDate}</td>
                         <td>${order.name}</td>
                         <td>${order.phone}</td>
-<!--                            <td>${order.email}</td>-->
+                        <!-- comment           <td>${order.email}</td> --> 
                         <td>${order.city}</td>
                         <td>${order.district}</td>
                         <td>${order.ward}</td>
@@ -553,7 +555,7 @@
                         </td>
                     </tr>
                 </c:forEach> 
-
+ 
             </tbody>
         </table>
     </div>
