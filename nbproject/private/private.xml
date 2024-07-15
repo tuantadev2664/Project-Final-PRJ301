@@ -6,6 +6,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fbff19ae375f3fe7e90b360030cecd8f648edef1
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/model/Account.java</file>
@@ -32,6 +35,7 @@
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/RegisterServlet.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ManageAccountDelete.java</file>
 >>>>>>> 224ba0b7dec58087e3bd0cf6882b8e74803c240c
+<<<<<<< HEAD
 =======
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
@@ -51,6 +55,8 @@
 >>>>>>> 70da16f07dbdd608554396ad577504efaae29fe0
 =======
 >>>>>>> af5526ec69609fd611a4a7e7c608a38f2a5e2199
+=======
+>>>>>>> fbff19ae375f3fe7e90b360030cecd8f648edef1
         </group>
     </open-files>
 </project-private>
