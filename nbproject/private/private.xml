@@ -6,6 +6,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/web/adminHome.jsp</file>
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/src/java/controller/ManageAccount.java</file>
@@ -23,6 +24,8 @@
 <<<<<<< HEAD
 =======
 >>>>>>> fbff19ae375f3fe7e90b360030cecd8f648edef1
+=======
+>>>>>>> 07d9af39f7433b5db15c5b203aa41197c63396f2
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/model/Account.java</file>
@@ -50,6 +53,7 @@
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ManageAccountDelete.java</file>
 >>>>>>> 224ba0b7dec58087e3bd0cf6882b8e74803c240c
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
@@ -64,6 +68,11 @@
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
 >>>>>>> 3ff24e5d8e5d12a43ddad70a3e7049065f7cb924
 >>>>>>> b0bebe604121e42d0f1f225221eb6e909884b503
+=======
+=======
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
+            <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
+>>>>>>> 07d9af39f7433b5db15c5b203aa41197c63396f2
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/model/Account.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/viewCart.jsp</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/dao/LoginDAO.java</file>
@@ -72,6 +81,7 @@
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/filter/AdminFilter.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/banner2.jsp</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/filter/HomeFilter.java</file>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -88,6 +98,9 @@
 =======
 >>>>>>> 3ff24e5d8e5d12a43ddad70a3e7049065f7cb924
 >>>>>>> b0bebe604121e42d0f1f225221eb6e909884b503
+=======
+>>>>>>> 70da16f07dbdd608554396ad577504efaae29fe0
+>>>>>>> 07d9af39f7433b5db15c5b203aa41197c63396f2
         </group>
     </open-files>
 </project-private>
