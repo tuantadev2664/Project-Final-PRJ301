@@ -10,11 +10,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        
+
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/modules/products/assets/css/cart.css?v=1720807400">
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/bootstrap.css?v=1720807400">
         <link rel="stylesheet" type="text/css" media="screen" href="https://monatabluelight.com/templates/default/css/style.css?v=1720807400">
-        
+
+        <script>
+            window.onload = function() {
+            alert('Bạn Đã Mua Hàng Thành Công!');
+            };
+        </script>
     </head>
     <body>
 
@@ -40,41 +45,63 @@
                                 </div><!--end: .payment-content-->
                             </div><!--end: .payment-info-->
                         </div><!--end: #payment-content-->
+                        
+                        <br/>
+                        <div id="payment-content">
+                            <div class="payment-info">
+                                <div class="title-form">
+                                    <h3 class="regular df"><b>Chính sách vận chuyển, thanh toán</b></h3>
+                                </div>
+                                <div class="payment-content">
+                                    <div>
+                                        <p><strong>Group 5</strong> sử dụng hai đơn vị&nbsp;vận chuyển chính: VIETTEL POST, và SPX cho&nbsp;một số đơn hàng. Thời gian vận chuyển trung bình cho mỗi đơn hàng là từ 2 đến 5 ngày tùy khu vực.&nbsp;<br>Hình thức thanh toán:</p>
+                                        <p>♦ Thanh toán chuyển khoản: sau khi đặt hàng, chuyển khoản tổng giá trị đơn hàng qua tài khoản ngân hàng.</p>
+                                        <p><strong>BIDV-Ngân Hàng Thương Mại Cổ Phần Đầu Tư Và Phát Triển Việt Nam&nbsp;</strong></p>
+                                        <p><strong>Chủ tài khoản: Trương Anh Tuấn</strong></p>
+                                        <p><strong>STK: 0848270604</strong></p>
+                                        <p><strong>Thông tin chuyển khoản: ${name} + ${phone} + ${orderId}</strong></p>
+                                        <p><strong><img alt="" src="images/QR.jpg" style="width: 300px; height: 329px;"></strong></p>
+                                        <p>*Lưu ý: để tiện cho quá trình xác nhận đơn, hãy ghi chú số điện thoại sử dụng để đặt hàng&nbsp;vào thông tin chuyển khoản.</p>
+                                        <p>♦ Thanh toán khi nhận hàng (Ship COD).</p>                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="title-form">
                             <h3 class="regular df"><b>Thông tin đơn hàng</b></h3>
                         </div><!--end: .title-form-->
                         <h3 class="text-center">Mã Đơn Hàng: ${orderId}</h3>
-                        
+
                         <c:set var="o" value="${requestScope.listI}" />
                         <form id="frmUpdateCart" name="frmUpdateCart">
                             <table id="simple-example-table" class="tbl-cart">
                                 <tbody>
                                     <c:forEach items="${o}" var="i">
-                                    <tr class="cart-item">
-                                        <td class="thumb" style="width: 60px; vertical-align: top;" >
-                                            <a class="df" href="detail?productCode=${i.product.productCode}" title="${i.product.productName}">
-                                                <img style="width: 200px" class="thumb img-responsive" alt="${i.product.productName}" src="${i.product.productImg}" onerror="this.src='https://monatabluelight.com/images/noimages.jpg'"/>
-                                            </a>
-                                        </td>
-                                        <td class="name">
-                                            <a class="df heading" href="detail?productCode=${i.product.productCode}" title="${i.product.productName}">
-                                                ${i.product.productName}                                    
-                                            </a><br>
-                                            
-                                            <b style="color: #fb8a06">${i.product.productPrice}</b><input type="hidden" class="order-product-price" value="390000"><br>
-                                            
-                                            <div>Color: 
-                                                <b>
-                                                    ${i.product.productColor} <img style="width: 30px" src="${i.product.colorLink}"></b>
-                                                </b>
-                                                
-                                            </div><b>
-                                                <div>Size: <b>${i.product.productSize}</b></div>                                    
-                                                <div>Số lượng: <b>${i.quantity}</b></div>
-                                            </b></td>
-                                    </tr>
+                                        <tr class="cart-item">
+                                            <td class="thumb" style="width: 60px; vertical-align: top;" >
+                                                <a class="df" href="detail?productCode=${i.product.productCode}" title="${i.product.productName}">
+                                                    <img style="width: 200px" class="thumb img-responsive" alt="${i.product.productName}" src="${i.product.productImg}" onerror="this.src='https://monatabluelight.com/images/noimages.jpg'"/>
+                                                </a>
+                                            </td>
+                                            <td class="name">
+                                                <a class="df heading" href="detail?productCode=${i.product.productCode}" title="${i.product.productName}">
+                                                    ${i.product.productName}                                    
+                                                </a><br>
+
+                                                <b style="color: #fb8a06">${i.product.productPrice}</b><input type="hidden" class="order-product-price" value="390000"><br>
+
+                                                <div>Color: 
+                                                    <b>
+                                                        ${i.product.productColor} <img style="width: 30px" src="${i.product.colorLink}"></b>
+                                                    </b>
+
+                                                </div><b>
+                                                    <div>Size: <b>${i.product.productSize}</b></div>                                    
+                                                    <div>Số lượng: <b>${i.quantity}</b></div>
+                                                </b></td>
+                                        </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
@@ -84,21 +111,21 @@
                                 <div>Phí giao hàng:<span class="order-value span_product_fee_ship">15,000đ</span></div>
                                 <p>Tổng giá trị đơn hàng:<span id="orderTotalFormatted" class="order-value span_product_total_amount"></span></p>
                             </div>
-                                
-                                
+
+
                             <script>
-                            // Function to format number with commas
-                            function formatNumberWithCommas(number) {
+                                // Function to format number with commas
+                                function formatNumberWithCommas(number) {
                                 return number.toLocaleString('en-US');
-                            }
+                                }
 
-                            // Get the sum value from the server or wherever it's defined
-                            var sum = ${sum}; // Ensure sum is properly assigned from your context
+                                // Get the sum value from the server or wherever it's defined
+                                var sum = ${sum}; // Ensure sum is properly assigned from your context
 
-                            // Update the HTML element with formatted value
-                            document.getElementById('orderTotal').textContent = formatNumberWithCommas(sum)+"đ";
-                            document.getElementById('orderTotalFormatted').textContent = formatNumberWithCommas(sum+15000)+"đ";
-                        </script>
+                                // Update the HTML element with formatted value
+                                document.getElementById('orderTotal').textContent = formatNumberWithCommas(sum) + "đ";
+                                document.getElementById('orderTotalFormatted').textContent = formatNumberWithCommas(sum + 15000) + "đ";
+                            </script>
                         </form>
                     </div>
                 </div>
