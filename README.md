@@ -1,13 +1,7 @@
 Tutorial:
-b1: http://localhost:8080/project-final-prj301/listsample //gọi đến ListSampleServlet
-b2: ListSampleServlet chuyển hướng đến home.jsp 
-b3: khi kích vào thanh sản phẩm thì sẽ gọi đến http://localhost:8080/project-final-prj301/list // gọi đến ListServlet
-b4: khi kích vào bất kì category thì nó sẽ chuyển đến  http://localhost:8080/project-final-prj301/category?categoryID=C01 // gọi đến CategoryServlet đc truyền cùng param là categoryID
+Lấy Databaste: https://github.com/tuantadev2664/Project-Final-PRJ301/blob/main/database/data_Project_VVIP_Final_update_7_9.xls import vào SQL để có data.
 
-
-
-LƯU Ý: file data ecexl đã up trong database. chỉ add vào 3 sheet là sheet1(Product), sheet2(Category), sheet 3(Status). 
-
+--DB: Order and Order Detai
 Use[Project_Final_PRJ301]
 CREATE TABLE [Order] (
     orderId nvarchar(20) NOT NULL PRIMARY KEY,
@@ -39,3 +33,44 @@ CREATE TABLE OrderDetail (
 );
 INSERT INTO OrderDetail (orderId, productId, color, size, quantity)
 VALUES ('ORD001', 'MBL267', '635', 'L', '2');
+
+
+
+--tao procedure cho update solg khi order
+CREATE PROCEDURE PlaceOrder
+	@orderId nvarchar(10),
+    @ProductID nvarchar(10),
+	@colorid nvarchar(10),
+	@colorName nvarchar(20),
+	@Productsize nvarchar(10),
+    @Quantity INT
+
+AS
+BEGIN
+    -- Kiểm tra số lượng tồn kho
+    DECLARE @StockQuantity INT
+    SELECT @StockQuantity = productStock
+    FROM ProductDetail
+    WHERE productCode = @ProductID and colorId = @colorid and productSize = @Productsize
+
+    IF @StockQuantity < @Quantity
+    BEGIN
+        RAISERROR('Sản phẩm không đủ số lượng tồn kho.', 16, 1)
+        RETURN
+    END
+
+    -- Thực hiện đặt hàng
+    BEGIN TRANSACTION
+
+    UPDATE ProductDetail
+    SET productStock = productStock - @Quantity
+    WHERE productCode = @ProductID and colorId = @colorid and productSize = @Productsize
+
+    -- Thêm mã đơn hàng vào bảng Orders
+	INSERT INTO OrderDetail (orderId, productId, color, size, quantity) 
+	VALUES (@orderId, @ProductID, @colorName, @Productsize, @Quantity)
+
+    COMMIT TRANSACTION
+
+    PRINT 'Đặt hàng thành công.'
+END
