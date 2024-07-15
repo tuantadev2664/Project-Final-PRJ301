@@ -211,7 +211,7 @@
                                     <div>
                                         <label><input name="agree_mbl" type="checkbox"> Tôi đồng ý <a href="http://monatabluelight.com/chinh-sach-mua-hang-i4" target="_blank">Điều kiện - Điều khoản</a> &amp; <a href="http://monatabluelight.com/-i5" target="_blank">Chính sách bảo mật</a> của Monata Bluelight.</label>
                                     </div>
-                                    <button type="submit" class="btn-cart" href="" onclick=";" title="Hoàn thành đặt mua">Hoàn thành đặt mua</button>
+                                    <button type="submit" class="btn-cart" href="" onclick="" title="Hoàn thành đặt mua">Hoàn thành đặt mua</button>
                                 </div>
                             </div>
                             <input type="hidden" id="city_name" name="city_name" value="">
