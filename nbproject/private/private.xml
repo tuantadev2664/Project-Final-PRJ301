@@ -5,6 +5,8 @@
         <group>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/web/adminHome.jsp</file>
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/src/java/controller/ManageAccount.java</file>
             <file>file:/C:/Users/ADMIN/OneDrive/Desktop/PRJ_Filnal/Project-Final-PRJ301/src/java/filter/AdminFilter.java</file>
@@ -16,6 +18,7 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+>>>>>>> b0bebe604121e42d0f1f225221eb6e909884b503
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -54,10 +57,13 @@
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
 >>>>>>> af5526ec69609fd611a4a7e7c608a38f2a5e2199
+<<<<<<< HEAD
+=======
 =======
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/controller/ShowCart.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/adminHome.jsp</file>
 >>>>>>> 3ff24e5d8e5d12a43ddad70a3e7049065f7cb924
+>>>>>>> b0bebe604121e42d0f1f225221eb6e909884b503
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/model/Account.java</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/web/viewCart.jsp</file>
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/dao/LoginDAO.java</file>
@@ -68,14 +74,20 @@
             <file>file:/C:/Users/FPTSHOP/OneDrive/Documents/NetBeansProjects/Project-Final-PRJ301/src/java/filter/HomeFilter.java</file>
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b0bebe604121e42d0f1f225221eb6e909884b503
 >>>>>>> 70da16f07dbdd608554396ad577504efaae29fe0
 =======
 >>>>>>> af5526ec69609fd611a4a7e7c608a38f2a5e2199
 =======
 >>>>>>> fbff19ae375f3fe7e90b360030cecd8f648edef1
+<<<<<<< HEAD
+=======
 >>>>>>> eb1010fd9629c0c7cd82c02ae8e01f761738a141
 =======
 >>>>>>> 3ff24e5d8e5d12a43ddad70a3e7049065f7cb924
+>>>>>>> b0bebe604121e42d0f1f225221eb6e909884b503
         </group>
     </open-files>
 </project-private>
