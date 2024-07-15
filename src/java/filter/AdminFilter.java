@@ -114,7 +114,7 @@ public class AdminFilter implements Filter {
         HttpSession session = req.getSession();
         
         Account a =  (Account)session.getAttribute("account");
-        if (session.getAttribute("account") == null || a.getRole() != 1) {          
+        if (a == null || a.getRole() != 1) {          
             res.sendRedirect("login");
         }
         
