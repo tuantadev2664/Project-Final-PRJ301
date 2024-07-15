@@ -57,26 +57,11 @@ public class AddToCart extends HttpServlet {
         if (session.getAttribute("account") != null) {
             DAO dao = new DAO();
 //        List<Product> listProduct = dao.getAllProductDetails();
-            Cookie[] arrCookie = request.getCookies();
-            String txt = "";
-            String txt1 = "";
-
-            if (arrCookie != null) {
-                for (Cookie c : arrCookie) {
-                    if (c.getName().equals("Cart")) {
-                        txt += c.getValue();
-                        c.setMaxAge(0);
-                        response.addCookie(c);
-                    }
-                }
-            }
 
             String productCode = request.getParameter("code");
             String productColor = request.getParameter("color");
             String productSize = request.getParameter("size").trim();
             String productQuantity = request.getParameter("quantity");
-
-            
 
             if ("0".equals(productSize)) {
                 session.setAttribute("error", "Bạn vui lòng chọn size");
@@ -91,6 +76,20 @@ public class AddToCart extends HttpServlet {
                         response.sendRedirect("detail?productCode=" + productCode);
                     } else {
                         session.setAttribute("error", "bạn đã thêm vào giỏ hàng thành công");
+                        Cookie[] arrCookie = request.getCookies();
+                        String txt = "";
+                        String txt1 = "";
+
+                        if (arrCookie != null) {
+                            for (Cookie c : arrCookie) {
+                                if (c.getName().equals("Cart")) {
+                                    txt += c.getValue();
+                                    c.setMaxAge(0);
+                                    response.addCookie(c);
+                                }
+                            }
+                        }
+
 //                    System.out.println(productQuantity);
                         if (productSize.equals("0")) {
                             productSize = "2";
