@@ -325,6 +325,8 @@ public class LoginDAO {
                 order.setTotal(rs.getString("total"));
                 orders.add(order);
             }
+            rs.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

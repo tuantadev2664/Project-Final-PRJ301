@@ -29,7 +29,7 @@ import model.Status;
  * @author FPTSHOP
  */
 public class DAO {
-    
+
     //hàm get show product for admin
     public List<Product> getAllProduct() {
         List<Product> proList = new ArrayList<>();
@@ -978,7 +978,7 @@ public class DAO {
 
     public void insertOrderDetail(String orderId, String productId, String colorid, String colorname, String size, String quantity) {
 //        String sql = "INSERT INTO OrderDetail (orderId, productId, color, size, quantity) VALUES (?, ?, ?, ?, ?)";
-        String sql="exec PlaceOrder ?, ?, ?, ?, ?, ?";
+        String sql = "exec PlaceOrder ?, ?, ?, ?, ?, ?";
         try {
 
             java.sql.Connection connection = new DBContext().getConnect();
@@ -996,13 +996,40 @@ public class DAO {
         }
     }
 
+    //hùng làm | trả về dạng tháng,năm,số đơn hàng | conflict orderDate: Tuấn dùng String, Hùng dùng Date
+    public List<String> numOfOrderEachMonth() {
+        List<String> listNum = new ArrayList<>();
+        String sql = "select [orderDate] from [dbo].[Order]";
+        Date curentDate= new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+        String now = dateFormat.format(curentDate);
+//        String dateOrder;
+        try (java.sql.Connection connection = new DBContext().getConnect(); PreparedStatement statement = connection.prepareStatement(sql); ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+//                int year = resultSet.getInt("orderYear");
+//                int month = resultSet.getInt("orderMonth");
+//                int count = resultSet.getInt("orderCount");
+                String dateOrder = resultSet.getString("orderDate");
+                listNum.add(dateOrder);
+//                System.out.printf("%d  | %d   | %d%n", year, month, count);
+
+            }
+            System.out.println("dao:"+listNum);
+            return listNum;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         DAO dao = new DAO();
-        System.out.println(dao.getQuantity("MBL267", "634", "S"));
-        System.out.println(dao.orderSize());
-        System.out.println(dao.createOrderId());
+//        System.out.println(dao.getQuantity("MBL267", "634", "S"));
+//        System.out.println(dao.numOfOrderEachMonth());
+//        System.out.println(dao.createOrderId());
         //dao.insertOrderDetail("OR001", "MBL267", "635", "M", "2");
-         dao.insertOrder(dao.createOrderId(), "accountId", "12/7/2024", "name", "phone", "email", "city", "district", "ward", "address", "quantity", "total");
+//        dao.insertOrder(dao.createOrderId(), "accountId", "12/7/2024", "name", "phone", "email", "city", "district", "ward", "address", "quantity", "total");
 //         Product p = dao.getProductDetailsForCart("MBL267", "634", "S");
 //         System.out.println(p.getProductCode() + "\n" + p.getProductName() + "\n" + p.getProductColor()+ "\n" + p.getProductColorID()+ "\n" + p.getProductSize()+ "\n" + p.getProductPrice()+ "\n" + p.getProductImg()+ "\n" + p.getColorLink());
 //         
