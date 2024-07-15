@@ -102,6 +102,9 @@ public class ShowCart extends HttpServlet {
                         }
                     }else if(Integer.parseInt(quan) > dao.getQuantity(id, color, size)){
                         request.setAttribute("error", "Số lượng sản phần đã tối đa");
+                        request.setAttribute("idError", id);
+                        request.setAttribute("colorError", color);
+                        request.setAttribute("sizeError", size);
                         if (txt.isEmpty()) {
                             txt1 = id + ":" + color + ":" + size + ":" + temp;
                         } else {
