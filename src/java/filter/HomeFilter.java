@@ -119,12 +119,14 @@ public class HomeFilter implements Filter {
         
         doAfterProcessing(request, response);
         
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
+        HttpServletRequest req = (HttpServletRequest)request;
+        HttpServletResponse res = (HttpServletResponse)response;
         String url = req.getServletPath();
         if (url.endsWith(".jsp")) {
             res.sendRedirect("listsample");
         }
+        
+        
 
         // If there was a problem, we want to rethrow it if it is
         // a known type, otherwise log it.

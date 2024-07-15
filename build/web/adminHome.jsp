@@ -13,6 +13,81 @@
         import ="java.util.ArrayList"%>
 
 <head>
+    <!-- Phần của hùng -->
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+        window.onload = function () {
+            var dataPoints = [
+                {x: 1, y: ${sessionScope.t1}},
+                {x: 2, y: ${sessionScope.t2}},
+                {x: 3, y: ${sessionScope.t3}},
+                {x: 4, y: ${sessionScope.t4}},
+                {x: 5, y: ${sessionScope.t5}},
+                {x: 6, y: ${sessionScope.t6}},
+                {x: 7, y: ${sessionScope.t7}},
+                {x: 8, y: ${sessionScope.t8}},
+                {x: 9, y: ${sessionScope.t9}},
+                {x: 10, y: ${sessionScope.t10}},
+                {x: 11, y: ${sessionScope.t11}},
+                {x: 12, y: ${sessionScope.t12}}
+            ];
+
+            // Find the maximum y value and its index
+            var maxIndex = 0;
+            var maxValue = dataPoints[0].y;
+            for (var i = 1; i < dataPoints.length; i++) {
+                if (dataPoints[i].y > maxValue) {
+                    maxValue = dataPoints[i].y;
+                    maxIndex = i;
+                }
+            }
+
+            // Set properties for the highest point
+            dataPoints[maxIndex].indexLabel = "\u2191 cao nhất"; // Unicode for ↑
+            dataPoints[maxIndex].markerColor = "red";
+            dataPoints[maxIndex].markerType = "triangle";
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Thống kê kết quả kinh doanh năm ${sessionScope.now}"
+                },
+                axisX: {
+                    title: "Tháng",
+                    interval: 1,
+                    minimum: 1,
+                    maximum: 12
+                },
+                axisY: {
+                    title: "Số lượng đơn hàng"
+                },
+                data: [{
+                        type: "line",
+                        indexLabelFontSize: 16,
+                        dataPoints: dataPoints
+                    }]
+            });
+
+            chart.render();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("statistic-btn").addEventListener("click", function () {
+                // Send a GET request to the servlet
+                fetch('/statistical')
+                        .then(response => response.text())
+                        .then(data => {
+                            // Process the response data
+                            console.log(data);
+                            // You can also update the DOM to display the result
+                        })
+                        .catch(error => console.error('Error:', error));
+            });
+        });
+
+    </script>
+
     <title>Giao diện quản lí bán hàng</title>
     <style>
         body {
@@ -330,7 +405,7 @@
         function addProduct() {
             window.location.href = 'addproduct';
         }
-        
+
         function showOrderDetails(orderId) {
             window.location.href = 'manageorderdetail?id=' + orderId;
         }
@@ -363,7 +438,7 @@
             <li><button id="manage-product-btn" class="nav-button">Quản lý sản phẩm</button></li>
             <li><button id="manage-order-btn" class="nav-button">Quản lý đơn hàng</button></li>
             <li><button id="statistic-btn" class="nav-button">Thống kê</button></li>
-            <li><button id="statistic-btn" class="nav-button"><a href="listsample" style="color:white; text-decoration: none">Trang chủ</a></button></li>
+            <li><button id="statistic-btn" class="nav-button"><a href="listsample"style="color:white; text-decoration: none">Trang chủ</a></button></li>
         </ul>
     </nav>
 
@@ -435,57 +510,59 @@
             </tbody>
         </table>         
     </div>
-    
+
 
     <div class="content" id="manage-order">
-            <h2>Danh sách đơn hàng</h2>
-            <table class="customer-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Account ID</th>
-                        <th>Order Date</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-<!--                        <th>Email</th>-->
-                        <th>City</th>
-                        <th>District</th>
-                        <th>Ward</th>
-                        <th>Address</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <c:forEach items="${requestScope.orders}" var="order">
-                        <tr>
-                            <td>${order.orderId}</td>
-                            <td>${order.accountId}</td>
-                            <td>${order.orderDate}</td>
-                            <td>${order.name}</td>
-                            <td>${order.phone}</td>
-<!--                            <td>${order.email}</td>-->
-                            <td>${order.city}</td>
-                            <td>${order.district}</td>
-                            <td>${order.ward}</td>
-                            <td>${order.address}</td>
-                            <td>${order.quantity}</td>
-                            <td>${order.total}</td>
-                            <td>
-                                <button class="function-button vieworder-button" onclick="showOrderDetails('${order.orderId}')">Chi tiết</button>
-                            </td>
-                        </tr>
-                    </c:forEach> 
-                        
-                </tbody>
-            </table>
-        </div>
+        <h2>Danh sách đơn hàng</h2>
+        <table class="customer-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Account ID</th>
+                    <th>Order Date</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <!--                        <th>Email</th>-->
+                    <th>City</th>
+                    <th>District</th>
+                    <th>Ward</th>
+                    <th>Address</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
 
-    <div class="content" id="statistic">
-        <div>Thống kê (làm nếu dư thời gian)</div>             
+                <c:forEach items="${requestScope.orders}" var="order">
+                    <tr>
+                        <td>${order.orderId}</td>
+                        <td>${order.accountId}</td>
+                        <td>${order.orderDate}</td>
+                        <td>${order.name}</td>
+                        <td>${order.phone}</td>
+<!--                            <td>${order.email}</td>-->
+                        <td>${order.city}</td>
+                        <td>${order.district}</td>
+                        <td>${order.ward}</td>
+                        <td>${order.address}</td>
+                        <td>${order.quantity}</td>
+                        <td>${order.total}</td>
+                        <td>
+                            <button class="function-button vieworder-button" onclick="showOrderDetails('${order.orderId}')">Chi tiết</button>
+                        </td>
+                    </tr>
+                </c:forEach> 
+
+            </tbody>
+        </table>
     </div>
+
+    
+    <div class="content" id="statistic">
+        <h2>Thống kê</h2>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    </div><!--
 
     <!--<div id="includeSection" style="display: none;">
     <jsp:include page="adminAccountAdd.jsp" />
